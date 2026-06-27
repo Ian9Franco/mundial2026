@@ -15,6 +15,7 @@ interface BracketViewProps {
   koWinners: Record<string, Team>;
   onSelectKoWinner: (matchId: string, winner: Team, loser: Team) => void;
   compareData?: { username: string; predictions: any } | null;
+  readOnly?: boolean;
 }
 
 type RoundTab = "r32" | "r16" | "qf" | "sf" | "final";
@@ -30,6 +31,7 @@ export default function BracketView({
   koWinners,
   onSelectKoWinner,
   compareData,
+  readOnly = false,
 }: BracketViewProps) {
   const [activeRound, setActiveRound] = useState<RoundTab>("r32");
 
@@ -301,10 +303,10 @@ export default function BracketView({
         
         {/* Team 1 */}
         <div 
-          onClick={() => !isT1Placeholder && onSelectKoWinner(matchId, t1, t2)}
+          onClick={() => !readOnly && !isT1Placeholder && onSelectKoWinner(matchId, t1, t2)}
           className={`matchup-team-row ${isT1Winner ? "matchup-team-row-winner" : ""}`}
-          style={{ opacity: isT1Placeholder ? 0.45 : 1, cursor: isT1Placeholder ? "default" : "pointer" }}
-          onMouseEnter={() => !isT1Placeholder && setHoveredTeam(t1.id)}
+          style={{ opacity: isT1Placeholder ? 0.45 : 1, cursor: (readOnly || isT1Placeholder) ? "default" : "pointer" }}
+          onMouseEnter={() => !readOnly && !isT1Placeholder && setHoveredTeam(t1.id)}
           onMouseLeave={() => setHoveredTeam(null)}
         >
           <div className="flex items-center gap-2 min-w-0">
@@ -330,10 +332,10 @@ export default function BracketView({
 
         {/* Team 2 */}
         <div 
-          onClick={() => !isT2Placeholder && onSelectKoWinner(matchId, t2, t1)}
+          onClick={() => !readOnly && !isT2Placeholder && onSelectKoWinner(matchId, t2, t1)}
           className={`matchup-team-row ${isT2Winner ? "matchup-team-row-winner" : ""}`}
-          style={{ opacity: isT2Placeholder ? 0.45 : 1, cursor: isT2Placeholder ? "default" : "pointer" }}
-          onMouseEnter={() => !isT2Placeholder && setHoveredTeam(t2.id)}
+          style={{ opacity: isT2Placeholder ? 0.45 : 1, cursor: (readOnly || isT2Placeholder) ? "default" : "pointer" }}
+          onMouseEnter={() => !readOnly && !isT2Placeholder && setHoveredTeam(t2.id)}
           onMouseLeave={() => setHoveredTeam(null)}
         >
           <div className="flex items-center gap-2 min-w-0">
@@ -377,15 +379,27 @@ export default function BracketView({
   return (
     <div className="flex flex-col gap-4">
       {/* Banner explicativo */}
-      <div className="glass-panel" style={{ padding: "1.25rem" }}>
-        <h2 className="flex items-center gap-2" style={{ fontSize: "1.3rem", fontWeight: "800", color: "#fff" }}>
-          <Flame className="w-5 h-5 text-indigo-400 animate-pulse" />
-          El Cuadro de Eliminación Directa
-        </h2>
-        <p style={{ fontSize: "0.8rem", color: "var(--text-secondary)", marginTop: "0.3rem" }}>
-          Se termina el margen de error. Hacé clic sobre la selección que creas que ganará cada duelo para avanzarla a la siguiente ronda. De dieciseisavos a la gran final: vos decidís quién escribe la historia.
-        </p>
-      </div>
+      {readOnly ? (
+        <div className="glass-panel" style={{ padding: "1.25rem", border: "1px solid rgba(245, 158, 11, 0.3)", background: "rgba(245, 158, 11, 0.03)" }}>
+          <h2 className="flex items-center gap-2" style={{ fontSize: "1.2rem", fontWeight: "800", color: "#fbbf24" }}>
+            <Award className="w-5 h-5 text-amber-400" />
+            Predicción Guardada (Solo Lectura)
+          </h2>
+          <p style={{ fontSize: "0.8rem", color: "var(--text-secondary)", marginTop: "0.3rem" }}>
+            Estás visualizando las elecciones de este usuario para la fase eliminatoria directa. Las pestañas de ronda siguen siendo interactivas.
+          </p>
+        </div>
+      ) : (
+        <div className="glass-panel" style={{ padding: "1.25rem" }}>
+          <h2 className="flex items-center gap-2" style={{ fontSize: "1.3rem", fontWeight: "800", color: "#fff" }}>
+            <Flame className="w-5 h-5 text-indigo-400 animate-pulse" />
+            El Cuadro de Eliminación Directa
+          </h2>
+          <p style={{ fontSize: "0.8rem", color: "var(--text-secondary)", marginTop: "0.3rem" }}>
+            Se termina el margen de error. Hacé clic sobre la selección que creas que ganará cada duelo para avanzarla a la siguiente ronda. De dieciseisavos a la gran final: vos decidís quién escribe la historia.
+          </p>
+        </div>
+      )}
 
       {/* Champion Podium Display */}
       {champion && (

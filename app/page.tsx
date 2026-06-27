@@ -68,6 +68,7 @@ export default function Home() {
   const [showProfileModal, setShowProfileModal] = useState(false);
   const [allPredictions, setAllPredictions] = useState<any[]>([]);
   const [selectedCompareUser, setSelectedCompareUser] = useState("");
+  const [viewingUserBracket, setViewingUserBracket] = useState<any | null>(null);
   const [isSaving, setIsSaving] = useState(false);
   const [saveMessage, setSaveMessage] = useState<{ text: string; type: "success" | "error" } | null>(null);
 
@@ -724,6 +725,23 @@ export default function Home() {
       .map(t => t.team.id);
   }, [matches, manualStandings, gdTweaks, gfTweaks]);
 
+  // Reconstruct matches for viewing user bracket
+  const viewingUserBracketMatches = useMemo(() => {
+    if (!viewingUserBracket) return {};
+    const baseMatches = getPreloadedMatches();
+    const savedMatches = viewingUserBracket.predictions?.matches || {};
+    
+    // Update match results
+    Object.keys(baseMatches).forEach(groupId => {
+      baseMatches[groupId] = baseMatches[groupId].map(m => ({
+        ...m,
+        result: savedMatches[m.id] !== undefined ? savedMatches[m.id] : null
+      }));
+    });
+    
+    return baseMatches;
+  }, [viewingUserBracket]);
+
   return (
     <main className="app-container">
       {/* Premium Header */}
@@ -1173,18 +1191,53 @@ export default function Home() {
                           className="btn btn-primary"
                           style={{ 
                             flex: 1, 
-                            fontSize: "0.75rem", 
-                            padding: "0.35rem", 
+                            fontSize: "0.72rem", 
+                            padding: "0.35rem 0.5rem", 
                             height: "auto", 
+                            whiteSpace: "nowrap",
                             background: selectedCompareUser === p.id ? "linear-gradient(135deg, #10b981, #059669)" : undefined 
                           }}
                         >
-                          {selectedCompareUser === p.id ? "Comparando" : "Comparar Fixture"}
+                          {selectedCompareUser === p.id ? "Comparando" : "Comparar"}
+                        </button>
+                        <button 
+                          onClick={() => {
+                            setViewingUserBracket(p);
+                          }}
+                          className="btn btn-secondary flex items-center justify-center gap-1"
+                          style={{ 
+                            flex: 1, 
+                            fontSize: "0.72rem", 
+                            padding: "0.35rem 0.5rem", 
+                            height: "auto",
+                            whiteSpace: "nowrap"
+                          }}
+                        >
+                          <Flame className="w-3.5 h-3.5" style={{ flexShrink: 0 }} />
+                          <span>Ver Cruces</span>
                         </button>
                       </div>
                     ) : (
-                      <div className="text-center text-xs" style={{ color: "var(--text-secondary)", fontStyle: "italic", marginTop: "0.25rem" }}>
-                        Tu predicción actual activa
+                      <div className="flex flex-col gap-2" style={{ marginTop: "0.25rem", width: "100%" }}>
+                        <button 
+                          onClick={() => {
+                            setViewingUserBracket(p);
+                          }}
+                          className="btn btn-secondary flex items-center justify-center gap-1"
+                          style={{ 
+                            width: "100%", 
+                            fontSize: "0.72rem", 
+                            padding: "0.35rem 0.5rem", 
+                            height: "auto",
+                            whiteSpace: "nowrap"
+                          }}
+                        >
+                          <Flame className="w-3.5 h-3.5" style={{ flexShrink: 0 }} />
+                          <span>Ver mis Cruces</span>
+                        </button>
+                        <div className="text-center text-xs" style={{ color: "var(--text-secondary)", fontStyle: "italic" }}>
+                          Tu predicción actual activa
+                        </div>
                       </div>
                     )}
                   </div>
@@ -1564,6 +1617,56 @@ export default function Home() {
                 Aceptar
               </button>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* Pop-up view for another user's knockout prediction bracket */}
+      {viewingUserBracket && (
+        <div className="modal-overlay" style={{ zIndex: 1100 }}>
+          <div className="modal-content" style={{ maxWidth: "1000px", width: "95vw", maxHeight: "90vh", overflowY: "auto", padding: "1.5rem" }}>
+            {/* Header */}
+            <div className="flex justify-between items-center" style={{ marginBottom: "1.5rem", borderBottom: "1px solid rgba(255,255,255,0.08)", paddingBottom: "1.0rem" }}>
+              <div className="flex items-center gap-3">
+                {viewingUserBracket.avatar ? (
+                  <img src={viewingUserBracket.avatar} className="w-12 h-12 rounded-full object-cover border-2 border-indigo-500/50" />
+                ) : (
+                  <div className="w-12 h-12 rounded-full bg-slate-800 flex items-center justify-center border-2 border-slate-700">
+                    <User className="w-6 h-6 text-slate-400" />
+                  </div>
+                )}
+                <div>
+                  <h2 className="modal-title" style={{ margin: 0, fontSize: "1.3rem", fontWeight: "800" }}>
+                    Duelos de {viewingUserBracket.username}
+                  </h2>
+                  <span style={{ fontSize: "0.75rem", color: "var(--text-secondary)" }}>
+                    Predicción guardada el {new Date(viewingUserBracket.updated_at).toLocaleDateString()} a las {new Date(viewingUserBracket.updated_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                  </span>
+                </div>
+              </div>
+              <button 
+                onClick={() => setViewingUserBracket(null)} 
+                className="btn btn-secondary flex items-center justify-center" 
+                style={{ padding: 0, borderRadius: "50%", width: "32px", height: "32px" }}
+                title="Cerrar modal"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* Read-Only Bracket View */}
+            <BracketView
+              groups={GROUPS}
+              allMatches={viewingUserBracketMatches}
+              manualStandings={viewingUserBracket.predictions?.manualStandings || {}}
+              gdTweaks={viewingUserBracket.predictions?.gdTweaks || {}}
+              gfTweaks={viewingUserBracket.predictions?.gfTweaks || {}}
+              hoveredTeam={hoveredTeam}
+              setHoveredTeam={setHoveredTeam}
+              koWinners={viewingUserBracket.predictions?.koWinners || {}}
+              onSelectKoWinner={() => {}} // Read-only, no-op
+              readOnly={true}
+            />
           </div>
         </div>
       )}
