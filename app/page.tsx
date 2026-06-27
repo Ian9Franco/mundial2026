@@ -69,6 +69,7 @@ export default function Home() {
   const [allPredictions, setAllPredictions] = useState<any[]>([]);
   const [selectedCompareUser, setSelectedCompareUser] = useState("");
   const [viewingUserBracket, setViewingUserBracket] = useState<any | null>(null);
+  const [isBracketSimulated, setIsBracketSimulated] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [saveMessage, setSaveMessage] = useState<{ text: string; type: "success" | "error" } | null>(null);
 
@@ -216,6 +217,9 @@ export default function Home() {
             if (myData.predictions.gdTweaks) setGdTweaks(myData.predictions.gdTweaks);
             if (myData.predictions.gfTweaks) setGfTweaks(myData.predictions.gfTweaks);
             if (myData.predictions.koWinners) setKoWinners(myData.predictions.koWinners);
+            if (myData.predictions.isBracketSimulated !== undefined) {
+              setIsBracketSimulated(myData.predictions.isBracketSimulated);
+            }
           }
         } else {
           const cachedName = localStorage.getItem("wc_username");
@@ -271,7 +275,8 @@ export default function Home() {
       koWinners: Object.keys(koWinners).reduce((acc, mId) => {
         acc[mId] = koWinners[mId];
         return acc;
-      }, {} as Record<string, Team>)
+      }, {} as Record<string, Team>),
+      isBracketSimulated
     };
 
     try {
@@ -431,6 +436,7 @@ export default function Home() {
     });
     // Invalidate knockout bracket downstream when group stages change
     setKoWinners({});
+    setIsBracketSimulated(false);
   };
 
   // Toggle Mode (Automatic Match Sim vs Manual Ordering)
@@ -455,6 +461,7 @@ export default function Home() {
       }
     });
     setKoWinners({});
+    setIsBracketSimulated(false);
   };
 
   // Swap Teams in Manual Mode
@@ -487,6 +494,7 @@ export default function Home() {
         [groupId]: newOrder
       }));
       setKoWinners({});
+      setIsBracketSimulated(false);
     }
   };
 
@@ -497,6 +505,7 @@ export default function Home() {
       [teamId]: (prev[teamId] || 0) + delta
     }));
     setKoWinners({});
+    setIsBracketSimulated(false);
   };
 
   // Tweak Goals For (GF)
@@ -506,6 +515,7 @@ export default function Home() {
       [teamId]: (prev[teamId] || 0) + delta
     }));
     setKoWinners({});
+    setIsBracketSimulated(false);
   };
 
   // Action: Clear all matches
@@ -523,6 +533,7 @@ export default function Home() {
     setGdTweaks({});
     setGfTweaks({});
     setKoWinners({});
+    setIsBracketSimulated(false);
   };
 
   // Action: Preload the scenario from detalles.txt
@@ -532,11 +543,13 @@ export default function Home() {
     setGdTweaks({});
     setGfTweaks({});
     setKoWinners({});
+    setIsBracketSimulated(false);
   };
 
   // Action: Select Winner in Knockout Match
   const handleSelectKoWinner = (matchId: string, winner: Team, loser: Team) => {
     triggerSimulationComment(winner, loser, winner.id, true);
+    setIsBracketSimulated(false);
     setKoWinners(prev => {
       const next = { ...prev, [matchId]: winner };
       
@@ -697,6 +710,7 @@ export default function Home() {
     simulatedKo[`F-1`] = simulateKnockoutMatch(sf1Winner, sf2Winner);
 
     setKoWinners(simulatedKo);
+    setIsBracketSimulated(true);
   };
 
   // Compute Total Progress Stats
@@ -1178,6 +1192,18 @@ export default function Home() {
                           <span style={{ color: "var(--text-secondary)", fontStyle: "italic" }}>Sin definir</span>
                         )}
                       </div>
+                      <div className="flex justify-between items-center">
+                        <span style={{ color: "var(--text-muted)" }}>Método de Cruces:</span>
+                        {p.predictions?.isBracketSimulated ? (
+                          <span className="badge flex items-center gap-1" style={{ fontSize: "0.6rem", padding: "1px 6px", background: "rgba(99, 102, 241, 0.15)", borderColor: "rgba(99, 102, 241, 0.3)", color: "#a5b4fc", border: "1px solid" }}>
+                            <Zap className="w-2.5 h-2.5" /> Simulador
+                          </span>
+                        ) : (
+                          <span className="badge flex items-center gap-1" style={{ fontSize: "0.6rem", padding: "1px 6px", background: "rgba(245, 158, 11, 0.15)", borderColor: "rgba(245, 158, 11, 0.3)", color: "#fcd34d", border: "1px solid" }}>
+                            <User className="w-2.5 h-2.5" /> Manual
+                          </span>
+                        )}
+                      </div>
                     </div>
 
                     {/* Action button */}
@@ -1636,9 +1662,20 @@ export default function Home() {
                   </div>
                 )}
                 <div>
-                  <h2 className="modal-title" style={{ margin: 0, fontSize: "1.3rem", fontWeight: "800" }}>
-                    Duelos de {viewingUserBracket.username}
-                  </h2>
+                  <div className="flex items-center gap-2">
+                    <h2 className="modal-title" style={{ margin: 0, fontSize: "1.3rem", fontWeight: "800" }}>
+                      Duelos de {viewingUserBracket.username}
+                    </h2>
+                    {viewingUserBracket.predictions?.isBracketSimulated ? (
+                      <span className="badge flex items-center gap-1" style={{ fontSize: "0.65rem", padding: "2px 8px", background: "rgba(99, 102, 241, 0.15)", borderColor: "rgba(99, 102, 241, 0.4)", color: "#a5b4fc", border: "1px solid" }}>
+                        <Zap className="w-3 h-3" style={{ flexShrink: 0 }} /> Simulador
+                      </span>
+                    ) : (
+                      <span className="badge flex items-center gap-1" style={{ fontSize: "0.65rem", padding: "2px 8px", background: "rgba(245, 158, 11, 0.15)", borderColor: "rgba(245, 158, 11, 0.4)", color: "#fcd34d", border: "1px solid" }}>
+                        <User className="w-3 h-3" style={{ flexShrink: 0 }} /> Manual
+                      </span>
+                    )}
+                  </div>
                   <span style={{ fontSize: "0.75rem", color: "var(--text-secondary)" }}>
                     Predicción guardada el {new Date(viewingUserBracket.updated_at).toLocaleDateString()} a las {new Date(viewingUserBracket.updated_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                   </span>
