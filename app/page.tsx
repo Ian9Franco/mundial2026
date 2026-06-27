@@ -836,21 +836,48 @@ export default function Home() {
               style={{ 
                 display: "inline-flex", 
                 alignItems: "center", 
-                gap: "8px", 
+                gap: "10px", 
                 cursor: "pointer",
-                padding: "0.25rem 0.5rem",
-                borderRadius: "20px",
-                background: "rgba(255,255,255,0.03)",
-                border: "1px solid rgba(255,255,255,0.05)"
+                padding: "4px 16px 4px 4px",
+                borderRadius: "30px",
+                background: "rgba(255,255,255,0.05)",
+                border: "1px solid rgba(255,255,255,0.1)",
+                backdropFilter: "blur(10px)",
+                transition: "all 0.2s ease"
               }}
               title="Configurar perfil"
             >
               {avatar ? (
-                <img src={avatar} className="w-5 h-5 rounded-full object-cover border border-primary-light" />
+                <img 
+                  src={avatar} 
+                  style={{ 
+                    width: "36px", 
+                    height: "36px", 
+                    borderRadius: "50%", 
+                    objectFit: "cover", 
+                    border: "2px solid var(--primary)",
+                    boxShadow: "0 0 8px rgba(99, 102, 241, 0.4)",
+                    flexShrink: 0
+                  }} 
+                />
               ) : (
-                <User className="w-3.5 h-3.5 text-primary" />
+                <div 
+                  style={{ 
+                    width: "36px", 
+                    height: "36px", 
+                    borderRadius: "50%", 
+                    background: "rgba(99, 102, 241, 0.15)", 
+                    border: "2px solid rgba(99, 102, 241, 0.4)",
+                    display: "flex", 
+                    alignItems: "center", 
+                    justifyContent: "center",
+                    flexShrink: 0
+                  }}
+                >
+                  <User className="w-5 h-5 text-primary" style={{ width: "18px", height: "18px" }} />
+                </div>
               )}
-              <span>{username}</span>
+              <span style={{ fontWeight: "700", color: "#fff", fontSize: "0.95rem" }}>{username}</span>
             </div>
           )}
         </div>
@@ -1035,10 +1062,32 @@ export default function Home() {
           <span className="comparison-banner-text" style={{ display: "inline-flex", alignItems: "center", gap: "8px" }}>
             <Users className="w-4 h-4 text-amber-400" />
             {compareData.avatar ? (
-              <img src={compareData.avatar} className="w-5 h-5 rounded-full object-cover border border-amber-400/30" />
+              <img 
+                src={compareData.avatar} 
+                style={{ 
+                  width: "28px", 
+                  height: "28px", 
+                  borderRadius: "50%", 
+                  objectFit: "cover", 
+                  border: "1px solid rgba(255,255,255,0.2)",
+                  flexShrink: 0 
+                }} 
+              />
             ) : (
-              <div className="w-5 h-5 rounded-full bg-slate-800 flex items-center justify-center border border-slate-700">
-                <User className="w-2.5 h-2.5 text-slate-400" />
+              <div 
+                style={{ 
+                  width: "28px", 
+                  height: "28px", 
+                  borderRadius: "50%", 
+                  background: "rgba(255,255,255,0.05)", 
+                  border: "1px solid rgba(255,255,255,0.1)",
+                  display: "flex", 
+                  alignItems: "center", 
+                  justifyContent: "center",
+                  flexShrink: 0 
+                }}
+              >
+                <User style={{ width: "14px", height: "14px", color: "var(--text-secondary)" }} />
               </div>
             )}
             Comparando tu fixture con el de <strong>{compareData.username}</strong>
@@ -1224,10 +1273,32 @@ export default function Home() {
                     {/* User info header */}
                     <div className="flex items-center gap-3">
                       {p.avatar ? (
-                        <img src={p.avatar} className="w-10 h-10 rounded-full object-cover border border-slate-700" />
+                        <img 
+                          src={p.avatar} 
+                          style={{ 
+                            width: "44px", 
+                            height: "44px", 
+                            borderRadius: "50%", 
+                            objectFit: "cover", 
+                            border: "1px solid rgba(255,255,255,0.15)",
+                            flexShrink: 0 
+                          }} 
+                        />
                       ) : (
-                        <div className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center border border-slate-700">
-                          <User className="w-5 h-5 text-slate-400" />
+                        <div 
+                          style={{ 
+                            width: "44px", 
+                            height: "44px", 
+                            borderRadius: "50%", 
+                            background: "rgba(255,255,255,0.05)", 
+                            border: "1px solid rgba(255,255,255,0.1)",
+                            display: "flex", 
+                            alignItems: "center", 
+                            justifyContent: "center",
+                            flexShrink: 0 
+                          }}
+                        >
+                          <User style={{ width: "20px", height: "20px", color: "var(--text-secondary)" }} />
                         </div>
                       )}
                       <div style={{ display: "flex", flexDirection: "column" }}>
@@ -1400,10 +1471,33 @@ export default function Home() {
               <div className="flex flex-col items-center gap-2" style={{ marginBottom: "1.25rem" }}>
                 <div style={{ position: "relative", cursor: "pointer" }} onClick={() => document.getElementById("login-avatar-file-input")?.click()}>
                   {avatar ? (
-                    <img src={avatar} className="w-20 h-20 rounded-full object-cover border-2 border-primary" style={{ boxShadow: "0 0 10px rgba(99, 102, 241, 0.4)" }} />
+                    <img 
+                      src={avatar} 
+                      style={{ 
+                        width: "80px", 
+                        height: "80px", 
+                        borderRadius: "50%", 
+                        objectFit: "cover", 
+                        border: "2.5px solid var(--primary)",
+                        boxShadow: "0 0 12px rgba(99, 102, 241, 0.4)",
+                        flexShrink: 0 
+                      }} 
+                    />
                   ) : (
-                    <div className="w-20 h-20 rounded-full bg-slate-800 border-2 border-slate-700 flex items-center justify-center">
-                      <User className="w-8 h-8 text-slate-400" />
+                    <div 
+                      style={{ 
+                        width: "80px", 
+                        height: "80px", 
+                        borderRadius: "50%", 
+                        background: "rgba(255,255,255,0.05)", 
+                        border: "2px solid rgba(255,255,255,0.1)",
+                        display: "flex", 
+                        alignItems: "center", 
+                        justifyContent: "center",
+                        flexShrink: 0 
+                      }}
+                    >
+                      <User style={{ width: "36px", height: "36px", color: "var(--text-secondary)" }} />
                     </div>
                   )}
                   <div className="avatar-edit-badge" style={{ position: "absolute", bottom: 0, right: 0, background: "var(--primary)", borderRadius: "50%", padding: "0.25rem", border: "2px solid #0b0f19" }}>
@@ -1527,10 +1621,33 @@ export default function Home() {
               <div className="flex flex-col items-center gap-2" style={{ marginBottom: "1.25rem" }}>
                 <div style={{ position: "relative", cursor: "pointer" }} onClick={() => document.getElementById("avatar-file-input")?.click()}>
                   {avatar ? (
-                    <img src={avatar} className="w-20 h-20 rounded-full object-cover border-2 border-primary" style={{ boxShadow: "0 0 10px rgba(99, 102, 241, 0.4)" }} />
+                    <img 
+                      src={avatar} 
+                      style={{ 
+                        width: "80px", 
+                        height: "80px", 
+                        borderRadius: "50%", 
+                        objectFit: "cover", 
+                        border: "2.5px solid var(--primary)",
+                        boxShadow: "0 0 12px rgba(99, 102, 241, 0.4)",
+                        flexShrink: 0 
+                      }} 
+                    />
                   ) : (
-                    <div className="w-20 h-20 rounded-full bg-slate-800 border-2 border-slate-700 flex items-center justify-center">
-                      <User className="w-8 h-8 text-slate-400" />
+                    <div 
+                      style={{ 
+                        width: "80px", 
+                        height: "80px", 
+                        borderRadius: "50%", 
+                        background: "rgba(255,255,255,0.05)", 
+                        border: "2px solid rgba(255,255,255,0.1)",
+                        display: "flex", 
+                        alignItems: "center", 
+                        justifyContent: "center",
+                        flexShrink: 0 
+                      }}
+                    >
+                      <User style={{ width: "36px", height: "36px", color: "var(--text-secondary)" }} />
                     </div>
                   )}
                   <div className="avatar-edit-badge" style={{ position: "absolute", bottom: 0, right: 0, background: "var(--primary)", borderRadius: "50%", padding: "0.25rem", border: "2px solid #0b0f19" }}>
@@ -1720,10 +1837,33 @@ export default function Home() {
             <div className="flex justify-between items-center" style={{ marginBottom: "1.5rem", borderBottom: "1px solid rgba(255,255,255,0.08)", paddingBottom: "1.0rem" }}>
               <div className="flex items-center gap-3">
                 {viewingUserBracket.avatar ? (
-                  <img src={viewingUserBracket.avatar} className="w-12 h-12 rounded-full object-cover border-2 border-indigo-500/50" />
+                  <img 
+                    src={viewingUserBracket.avatar} 
+                    style={{ 
+                      width: "48px", 
+                      height: "48px", 
+                      borderRadius: "50%", 
+                      objectFit: "cover", 
+                      border: "2px solid var(--primary)",
+                      boxShadow: "0 0 10px rgba(99, 102, 241, 0.3)",
+                      flexShrink: 0 
+                    }} 
+                  />
                 ) : (
-                  <div className="w-12 h-12 rounded-full bg-slate-800 flex items-center justify-center border-2 border-slate-700">
-                    <User className="w-6 h-6 text-slate-400" />
+                  <div 
+                    style={{ 
+                      width: "48px", 
+                      height: "48px", 
+                      borderRadius: "50%", 
+                      background: "rgba(255,255,255,0.05)", 
+                      border: "2px solid rgba(255,255,255,0.1)",
+                      display: "flex", 
+                      alignItems: "center", 
+                      justifyContent: "center",
+                      flexShrink: 0 
+                    }}
+                  >
+                    <User style={{ width: "24px", height: "24px", color: "var(--text-secondary)" }} />
                   </div>
                 )}
                 <div>
