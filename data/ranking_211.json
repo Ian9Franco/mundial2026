@@ -1,0 +1,1479 @@
+[
+  {
+    "rank": 1,
+    "id": "ARG",
+    "team": "Argentina",
+    "change": 1,
+    "points": 1877.27
+  },
+  {
+    "rank": 2,
+    "id": "ESP",
+    "team": "Spain",
+    "change": 0,
+    "points": 1874.71
+  },
+  {
+    "rank": 3,
+    "id": "FRA",
+    "team": "France",
+    "change": -2,
+    "points": 1870.7
+  },
+  {
+    "rank": 4,
+    "id": "ENG",
+    "team": "England",
+    "change": 0,
+    "points": 1828.02
+  },
+  {
+    "rank": 5,
+    "id": "POR",
+    "team": "Portugal",
+    "change": 0,
+    "points": 1767.85
+  },
+  {
+    "rank": 6,
+    "id": "BRA",
+    "team": "Brazil",
+    "change": 0,
+    "points": 1765.86
+  },
+  {
+    "rank": 7,
+    "id": "MAR",
+    "team": "Morocco",
+    "change": 1,
+    "points": 1755.1
+  },
+  {
+    "rank": 8,
+    "id": "NED",
+    "team": "Netherlands",
+    "change": -1,
+    "points": 1753.57
+  },
+  {
+    "rank": 9,
+    "id": "BEL",
+    "team": "Belgium",
+    "change": 0,
+    "points": 1742.24
+  },
+  {
+    "rank": 10,
+    "id": "GER",
+    "team": "Germany",
+    "change": 0,
+    "points": 1735.77
+  },
+  {
+    "rank": 11,
+    "id": "CRO",
+    "team": "Croatia",
+    "change": 0,
+    "points": 1714.87
+  },
+  {
+    "rank": 12,
+    "id": "ITA",
+    "team": "Italy",
+    "change": 0,
+    "points": 1704.73
+  },
+  {
+    "rank": 13,
+    "id": "COL",
+    "team": "Colombia",
+    "change": 0,
+    "points": 1698.35
+  },
+  {
+    "rank": 14,
+    "id": "MEX",
+    "team": "Mexico",
+    "change": 1,
+    "points": 1687.48
+  },
+  {
+    "rank": 15,
+    "id": "SEN",
+    "team": "Senegal",
+    "change": -1,
+    "points": 1684.07
+  },
+  {
+    "rank": 16,
+    "id": "URU",
+    "team": "Uruguay",
+    "change": 1,
+    "points": 1673.07
+  },
+  {
+    "rank": 17,
+    "id": "USA",
+    "team": "USA",
+    "change": -1,
+    "points": 1671.23
+  },
+  {
+    "rank": 18,
+    "id": "JPN",
+    "team": "Japan",
+    "change": 0,
+    "points": 1661.58
+  },
+  {
+    "rank": 19,
+    "id": "SUI",
+    "team": "Switzerland",
+    "change": 0,
+    "points": 1650.06
+  },
+  {
+    "rank": 20,
+    "id": "IRN",
+    "team": "IR Iran",
+    "change": 1,
+    "points": 1619.58
+  },
+  {
+    "rank": 21,
+    "id": "DEN",
+    "team": "Denmark",
+    "change": -1,
+    "points": 1619.47
+  },
+  {
+    "rank": 22,
+    "id": "TUR",
+    "team": "Türkiye",
+    "change": 0,
+    "points": 1605.73
+  },
+  {
+    "rank": 23,
+    "id": "ECU",
+    "team": "Ecuador",
+    "change": 0,
+    "points": 1598.52
+  },
+  {
+    "rank": 24,
+    "id": "AUT",
+    "team": "Austria",
+    "change": 0,
+    "points": 1597.4
+  },
+  {
+    "rank": 25,
+    "id": "KOR",
+    "team": "Korea Republic",
+    "change": 0,
+    "points": 1591.63
+  },
+  {
+    "rank": 26,
+    "id": "NGA",
+    "team": "Nigeria",
+    "change": 0,
+    "points": 1585.02
+  },
+  {
+    "rank": 27,
+    "id": "AUS",
+    "team": "Australia",
+    "change": 0,
+    "points": 1579.34
+  },
+  {
+    "rank": 28,
+    "id": "ALG",
+    "team": "Algeria",
+    "change": 0,
+    "points": 1571.03
+  },
+  {
+    "rank": 29,
+    "id": "EGY",
+    "team": "Egypt",
+    "change": 0,
+    "points": 1562.37
+  },
+  {
+    "rank": 30,
+    "id": "CAN",
+    "team": "Canada",
+    "change": 0,
+    "points": 1559.48
+  },
+  {
+    "rank": 31,
+    "id": "NOR",
+    "team": "Norway",
+    "change": 0,
+    "points": 1557.44
+  },
+  {
+    "rank": 32,
+    "id": "UKR",
+    "team": "Ukraine",
+    "change": 0,
+    "points": 1549.29
+  },
+  {
+    "rank": 33,
+    "id": "CIV",
+    "team": "Côte d'Ivoire",
+    "change": 1,
+    "points": 1540.87
+  },
+  {
+    "rank": 34,
+    "id": "PAN",
+    "team": "Panama",
+    "change": -1,
+    "points": 1539.16
+  },
+  {
+    "rank": 35,
+    "id": "RUS",
+    "team": "Russia",
+    "change": 1,
+    "points": 1529.6
+  },
+  {
+    "rank": 36,
+    "id": "POL",
+    "team": "Poland",
+    "change": -1,
+    "points": 1526.18
+  },
+  {
+    "rank": 37,
+    "id": "WAL",
+    "team": "Wales",
+    "change": 0,
+    "points": 1516.95
+  },
+  {
+    "rank": 38,
+    "id": "SWE",
+    "team": "Sweden",
+    "change": 0,
+    "points": 1509.79
+  },
+  {
+    "rank": 39,
+    "id": "HUN",
+    "team": "Hungary",
+    "change": 3,
+    "points": 1506.39
+  },
+  {
+    "rank": 40,
+    "id": "CZE",
+    "team": "Czechia",
+    "change": 1,
+    "points": 1505.74
+  },
+  {
+    "rank": 41,
+    "id": "PAR",
+    "team": "Paraguay",
+    "change": -1,
+    "points": 1505.35
+  },
+  {
+    "rank": 42,
+    "id": "SCO",
+    "team": "Scotland",
+    "change": 1,
+    "points": 1503.34
+  },
+  {
+    "rank": 43,
+    "id": "SRB",
+    "team": "Serbia",
+    "change": -4,
+    "points": 1502.13
+  },
+  {
+    "rank": 44,
+    "id": "CMR",
+    "team": "Cameroon",
+    "change": 1,
+    "points": 1481.24
+  },
+  {
+    "rank": 45,
+    "id": "TUN",
+    "team": "Tunisia",
+    "change": -1,
+    "points": 1476.41
+  },
+  {
+    "rank": 46,
+    "id": "COD",
+    "team": "Congo DR",
+    "change": 0,
+    "points": 1474.43
+  },
+  {
+    "rank": 47,
+    "id": "SVK",
+    "team": "Slovakia",
+    "change": 1,
+    "points": 1473.66
+  },
+  {
+    "rank": 48,
+    "id": "GRE",
+    "team": "Greece",
+    "change": -1,
+    "points": 1473.19
+  },
+  {
+    "rank": 49,
+    "id": "VEN",
+    "team": "Venezuela",
+    "change": 0,
+    "points": 1469.18
+  },
+  {
+    "rank": 50,
+    "id": "UZB",
+    "team": "Uzbekistan",
+    "change": 0,
+    "points": 1458.73
+  },
+  {
+    "rank": 51,
+    "id": "CHI",
+    "team": "Chile",
+    "change": 3,
+    "points": 1458.2
+  },
+  {
+    "rank": 52,
+    "id": "PER",
+    "team": "Peru",
+    "change": 1,
+    "points": 1457.69
+  },
+  {
+    "rank": 53,
+    "id": "CRC",
+    "team": "Costa Rica",
+    "change": -2,
+    "points": 1456.03
+  },
+  {
+    "rank": 54,
+    "id": "ROU",
+    "team": "Romania",
+    "change": 2,
+    "points": 1455.89
+  },
+  {
+    "rank": 55,
+    "id": "MLI",
+    "team": "Mali",
+    "change": -3,
+    "points": 1455.59
+  },
+  {
+    "rank": 56,
+    "id": "QAT",
+    "team": "Qatar",
+    "change": -1,
+    "points": 1450.31
+  },
+  {
+    "rank": 57,
+    "id": "IRQ",
+    "team": "Iraq",
+    "change": 0,
+    "points": 1446.28
+  },
+  {
+    "rank": 58,
+    "id": "IRL",
+    "team": "Republic of Ireland",
+    "change": 1,
+    "points": 1441.1
+  },
+  {
+    "rank": 59,
+    "id": "SVN",
+    "team": "Slovenia",
+    "change": -1,
+    "points": 1441.09
+  },
+  {
+    "rank": 60,
+    "id": "RSA",
+    "team": "South Africa",
+    "change": 0,
+    "points": 1428.38
+  },
+  {
+    "rank": 61,
+    "id": "KSA",
+    "team": "Saudi Arabia",
+    "change": 0,
+    "points": 1423.88
+  },
+  {
+    "rank": 62,
+    "id": "BFA",
+    "team": "Burkina Faso",
+    "change": 0,
+    "points": 1406.99
+  },
+  {
+    "rank": 63,
+    "id": "JOR",
+    "team": "Jordan",
+    "change": 0,
+    "points": 1387.74
+  },
+  {
+    "rank": 64,
+    "id": "BIH",
+    "team": "Bosnia and Herzegovina",
+    "change": 1,
+    "points": 1387.22
+  },
+  {
+    "rank": 65,
+    "id": "HON",
+    "team": "Honduras",
+    "change": 1,
+    "points": 1378.97
+  },
+  {
+    "rank": 66,
+    "id": "ALB",
+    "team": "Albania",
+    "change": -2,
+    "points": 1376.03
+  },
+  {
+    "rank": 67,
+    "id": "CPV",
+    "team": "Cabo Verde",
+    "change": 2,
+    "points": 1371.11
+  },
+  {
+    "rank": 68,
+    "id": "UAE",
+    "team": "United Arab Emirates",
+    "change": 0,
+    "points": 1370.47
+  },
+  {
+    "rank": 69,
+    "id": "MKD",
+    "team": "North Macedonia",
+    "change": -2,
+    "points": 1369.16
+  },
+  {
+    "rank": 70,
+    "id": "NIR",
+    "team": "Northern Ireland",
+    "change": 0,
+    "points": 1365.3
+  },
+  {
+    "rank": 71,
+    "id": "JAM",
+    "team": "Jamaica",
+    "change": 0,
+    "points": 1357.84
+  },
+  {
+    "rank": 72,
+    "id": "GEO",
+    "team": "Georgia",
+    "change": 0,
+    "points": 1355.26
+  },
+  {
+    "rank": 73,
+    "id": "GHA",
+    "team": "Ghana",
+    "change": 1,
+    "points": 1346.88
+  },
+  {
+    "rank": 74,
+    "id": "ISL",
+    "team": "Iceland",
+    "change": 1,
+    "points": 1342.77
+  },
+  {
+    "rank": 75,
+    "id": "FIN",
+    "team": "Finland",
+    "change": -2,
+    "points": 1341.92
+  },
+  {
+    "rank": 76,
+    "id": "ISR",
+    "team": "Israel",
+    "change": 1,
+    "points": 1333.9
+  },
+  {
+    "rank": 77,
+    "id": "BOL",
+    "team": "Bolivia",
+    "change": -1,
+    "points": 1326.0
+  },
+  {
+    "rank": 78,
+    "id": "KOS",
+    "team": "Kosovo",
+    "change": 0,
+    "points": 1319.12
+  },
+  {
+    "rank": 79,
+    "id": "OMA",
+    "team": "Oman",
+    "change": 0,
+    "points": 1306.9
+  },
+  {
+    "rank": 80,
+    "id": "MNE",
+    "team": "Montenegro",
+    "change": 1,
+    "points": 1301.98
+  },
+  {
+    "rank": 81,
+    "id": "GUI",
+    "team": "Guinea",
+    "change": -1,
+    "points": 1295.6
+  },
+  {
+    "rank": 82,
+    "id": "CUW",
+    "team": "Curaçao",
+    "change": 0,
+    "points": 1294.77
+  },
+  {
+    "rank": 83,
+    "id": "HAI",
+    "team": "Haiti",
+    "change": 0,
+    "points": 1293.1
+  },
+  {
+    "rank": 84,
+    "id": "SYR",
+    "team": "Syria",
+    "change": 0,
+    "points": 1283.05
+  },
+  {
+    "rank": 85,
+    "id": "NZL",
+    "team": "Aotearoa New Zealand",
+    "change": 0,
+    "points": 1275.58
+  },
+  {
+    "rank": 86,
+    "id": "GAB",
+    "team": "Gabon",
+    "change": 1,
+    "points": 1272.51
+  },
+  {
+    "rank": 87,
+    "id": "BUL",
+    "team": "Bulgaria",
+    "change": -1,
+    "points": 1271.68
+  },
+  {
+    "rank": 88,
+    "id": "ANG",
+    "team": "Angola",
+    "change": 1,
+    "points": 1265.58
+  },
+  {
+    "rank": 89,
+    "id": "UGA",
+    "team": "Uganda",
+    "change": -1,
+    "points": 1264.09
+  },
+  {
+    "rank": 90,
+    "id": "ZAM",
+    "team": "Zambia",
+    "change": 2,
+    "points": 1255.82
+  },
+  {
+    "rank": 91,
+    "id": "CHN",
+    "team": "China PR",
+    "change": 3,
+    "points": 1254.81
+  },
+  {
+    "rank": 92,
+    "id": "BHR",
+    "team": "Bahrain",
+    "change": -1,
+    "points": 1254.41
+  },
+  {
+    "rank": 93,
+    "id": "BEN",
+    "team": "Benin",
+    "change": -3,
+    "points": 1252.17
+  },
+  {
+    "rank": 94,
+    "id": "THA",
+    "team": "Thailand",
+    "change": -1,
+    "points": 1250.8
+  },
+  {
+    "rank": 95,
+    "id": "PLE",
+    "team": "Palestine",
+    "change": 0,
+    "points": 1243.71
+  },
+  {
+    "rank": 96,
+    "id": "BLR",
+    "team": "Belarus",
+    "change": 1,
+    "points": 1242.88
+  },
+  {
+    "rank": 97,
+    "id": "GUA",
+    "team": "Guatemala",
+    "change": -1,
+    "points": 1238.74
+  },
+  {
+    "rank": 98,
+    "id": "LUX",
+    "team": "Luxembourg",
+    "change": 0,
+    "points": 1232.82
+  },
+  {
+    "rank": 99,
+    "id": "VIE",
+    "team": "Vietnam",
+    "change": 0,
+    "points": 1225.68
+  },
+  {
+    "rank": 100,
+    "id": "SLV",
+    "team": "El Salvador",
+    "change": 0,
+    "points": 1225.34
+  },
+  {
+    "rank": 101,
+    "id": "TJK",
+    "team": "Tajikistan",
+    "change": 2,
+    "points": 1224.19
+  },
+  {
+    "rank": 102,
+    "id": "TRI",
+    "team": "Trinidad and Tobago",
+    "change": 0,
+    "points": 1219.59
+  },
+  {
+    "rank": 103,
+    "id": "MOZ",
+    "team": "Mozambique",
+    "change": -2,
+    "points": 1218.62
+  },
+  {
+    "rank": 104,
+    "id": "MAD",
+    "team": "Madagascar",
+    "change": 0,
+    "points": 1202.69
+  },
+  {
+    "rank": 105,
+    "id": "EQG",
+    "team": "Equatorial Guinea",
+    "change": 0,
+    "points": 1195.2
+  },
+  {
+    "rank": 106,
+    "id": "KGZ",
+    "team": "Kyrgyz Republic",
+    "change": 1,
+    "points": 1192.16
+  },
+  {
+    "rank": 107,
+    "id": "ARM",
+    "team": "Armenia",
+    "change": -1,
+    "points": 1189.63
+  },
+  {
+    "rank": 108,
+    "id": "COM",
+    "team": "Comoros",
+    "change": 1,
+    "points": 1187.91
+  },
+  {
+    "rank": 109,
+    "id": "KEN",
+    "team": "Kenya",
+    "change": 2,
+    "points": 1185.08
+  },
+  {
+    "rank": 110,
+    "id": "LBY",
+    "team": "Libya",
+    "change": 2,
+    "points": 1182.08
+  },
+  {
+    "rank": 111,
+    "id": "KAZ",
+    "team": "Kazakhstan",
+    "change": -1,
+    "points": 1180.78
+  },
+  {
+    "rank": 112,
+    "id": "TAN",
+    "team": "Tanzania",
+    "change": 1,
+    "points": 1180.27
+  },
+  {
+    "rank": 113,
+    "id": "MTN",
+    "team": "Mauritania",
+    "change": 2,
+    "points": 1176.68
+  },
+  {
+    "rank": 114,
+    "id": "NIG",
+    "team": "Niger",
+    "change": 0,
+    "points": 1175.33
+  },
+  {
+    "rank": 115,
+    "id": "LBN",
+    "team": "Lebanon",
+    "change": -7,
+    "points": 1172.22
+  },
+  {
+    "rank": 116,
+    "id": "GAM",
+    "team": "The Gambia",
+    "change": 0,
+    "points": 1159.64
+  },
+  {
+    "rank": 117,
+    "id": "SDN",
+    "team": "Sudan",
+    "change": 0,
+    "points": 1157.22
+  },
+  {
+    "rank": 118,
+    "id": "IDN",
+    "team": "Indonesia",
+    "change": 1,
+    "points": 1157.14
+  },
+  {
+    "rank": 119,
+    "id": "TOG",
+    "team": "Togo",
+    "change": 2,
+    "points": 1152.76
+  },
+  {
+    "rank": 120,
+    "id": "PRK",
+    "team": "Korea DPR",
+    "change": -2,
+    "points": 1151.05
+  },
+  {
+    "rank": 121,
+    "id": "NAM",
+    "team": "Namibia",
+    "change": -1,
+    "points": 1148.84
+  },
+  {
+    "rank": 122,
+    "id": "SLE",
+    "team": "Sierra Leone",
+    "change": -3,
+    "points": 1147.56
+  },
+  {
+    "rank": 123,
+    "id": "FRO",
+    "team": "Faroe Islands",
+    "change": 0,
+    "points": 1136.59
+  },
+  {
+    "rank": 124,
+    "id": "CYP",
+    "team": "Cyprus",
+    "change": 2,
+    "points": 1133.25
+  },
+  {
+    "rank": 125,
+    "id": "SUR",
+    "team": "Suriname",
+    "change": 0,
+    "points": 1132.43
+  },
+  {
+    "rank": 126,
+    "id": "AZE",
+    "team": "Azerbaijan",
+    "change": -2,
+    "points": 1132.0
+  },
+  {
+    "rank": 127,
+    "id": "EST",
+    "team": "Estonia",
+    "change": 2,
+    "points": 1130.64
+  },
+  {
+    "rank": 128,
+    "id": "RWA",
+    "team": "Rwanda",
+    "change": 0,
+    "points": 1126.62
+  },
+  {
+    "rank": 129,
+    "id": "MWI",
+    "team": "Malawi",
+    "change": -2,
+    "points": 1122.05
+  },
+  {
+    "rank": 130,
+    "id": "ZIM",
+    "team": "Zimbabwe",
+    "change": 0,
+    "points": 1119.78
+  },
+  {
+    "rank": 131,
+    "id": "NCA",
+    "team": "Nicaragua",
+    "change": 0,
+    "points": 1114.63
+  },
+  {
+    "rank": 132,
+    "id": "GNB",
+    "team": "Guinea-Bissau",
+    "change": 0,
+    "points": 1108.38
+  },
+  {
+    "rank": 133,
+    "id": "KUW",
+    "team": "Kuwait",
+    "change": 1,
+    "points": 1106.47
+  },
+  {
+    "rank": 134,
+    "id": "CGO",
+    "team": "Congo",
+    "change": -1,
+    "points": 1105.96
+  },
+  {
+    "rank": 135,
+    "id": "PHI",
+    "team": "Philippines",
+    "change": 0,
+    "points": 1100.95
+  },
+  {
+    "rank": 136,
+    "id": "MAS",
+    "team": "Malaysia",
+    "change": 2,
+    "points": 1086.22
+  },
+  {
+    "rank": 137,
+    "id": "LVA",
+    "team": "Latvia",
+    "change": 0,
+    "points": 1085.66
+  },
+  {
+    "rank": 138,
+    "id": "IND",
+    "team": "India",
+    "change": -2,
+    "points": 1084.93
+  },
+  {
+    "rank": 139,
+    "id": "CTA",
+    "team": "Central African Republic",
+    "change": 0,
+    "points": 1080.82
+  },
+  {
+    "rank": 140,
+    "id": "LBR",
+    "team": "Liberia",
+    "change": 0,
+    "points": 1080.44
+  },
+  {
+    "rank": 141,
+    "id": "TKM",
+    "team": "Turkmenistan",
+    "change": 0,
+    "points": 1078.65
+  },
+  {
+    "rank": 142,
+    "id": "BDI",
+    "team": "Burundi",
+    "change": 0,
+    "points": 1078.01
+  },
+  {
+    "rank": 143,
+    "id": "ETH",
+    "team": "Ethiopia",
+    "change": 1,
+    "points": 1077.52
+  },
+  {
+    "rank": 144,
+    "id": "DOM",
+    "team": "Dominican Republic",
+    "change": -1,
+    "points": 1076.5
+  },
+  {
+    "rank": 145,
+    "id": "YEM",
+    "team": "Yemen",
+    "change": 4,
+    "points": 1065.24
+  },
+  {
+    "rank": 146,
+    "id": "LES",
+    "team": "Lesotho",
+    "change": -1,
+    "points": 1064.29
+  },
+  {
+    "rank": 147,
+    "id": "BOT",
+    "team": "Botswana",
+    "change": -1,
+    "points": 1063.63
+  },
+  {
+    "rank": 148,
+    "id": "SGP",
+    "team": "Singapore",
+    "change": -1,
+    "points": 1057.95
+  },
+  {
+    "rank": 149,
+    "id": "LTU",
+    "team": "Lithuania",
+    "change": -1,
+    "points": 1056.85
+  },
+  {
+    "rank": 150,
+    "id": "GUY",
+    "team": "Guyana",
+    "change": 0,
+    "points": 1049.32
+  },
+  {
+    "rank": 151,
+    "id": "NCL",
+    "team": "New Caledonia",
+    "change": 0,
+    "points": 1036.95
+  },
+  {
+    "rank": 152,
+    "id": "SKN",
+    "team": "St Kitts and Nevis",
+    "change": 0,
+    "points": 1036.33
+  },
+  {
+    "rank": 153,
+    "id": "SOL",
+    "team": "Solomon Islands",
+    "change": 0,
+    "points": 1031.89
+  },
+  {
+    "rank": 154,
+    "id": "PUR",
+    "team": "Puerto Rico",
+    "change": 2,
+    "points": 1024.3
+  },
+  {
+    "rank": 155,
+    "id": "FIJ",
+    "team": "Fiji",
+    "change": -1,
+    "points": 1024.17
+  },
+  {
+    "rank": 156,
+    "id": "HKG",
+    "team": "Hong Kong, China",
+    "change": -1,
+    "points": 1024.16
+  },
+  {
+    "rank": 157,
+    "id": "TAH",
+    "team": "Tahiti",
+    "change": 0,
+    "points": 1019.04
+  },
+  {
+    "rank": 158,
+    "id": "MYA",
+    "team": "Myanmar",
+    "change": 0,
+    "points": 1010.91
+  },
+  {
+    "rank": 159,
+    "id": "MDA",
+    "team": "Moldova",
+    "change": 0,
+    "points": 1008.24
+  },
+  {
+    "rank": 160,
+    "id": "VAN",
+    "team": "Vanuatu",
+    "change": 0,
+    "points": 1002.53
+  },
+  {
+    "rank": 161,
+    "id": "MLT",
+    "team": "Malta",
+    "change": 0,
+    "points": 992.79
+  },
+  {
+    "rank": 162,
+    "id": "ATG",
+    "team": "Antigua and Barbuda",
+    "change": 0,
+    "points": 986.58
+  },
+  {
+    "rank": 163,
+    "id": "GRN",
+    "team": "Grenada",
+    "change": 0,
+    "points": 981.82
+  },
+  {
+    "rank": 164,
+    "id": "CUB",
+    "team": "Cuba",
+    "change": 0,
+    "points": 981.42
+  },
+  {
+    "rank": 165,
+    "id": "SWZ",
+    "team": "Eswatini",
+    "change": 0,
+    "points": 979.01
+  },
+  {
+    "rank": 166,
+    "id": "LCA",
+    "team": "St Lucia",
+    "change": 1,
+    "points": 976.71
+  },
+  {
+    "rank": 167,
+    "id": "BER",
+    "team": "Bermuda",
+    "change": -1,
+    "points": 975.05
+  },
+  {
+    "rank": 168,
+    "id": "PNG",
+    "team": "Papua New Guinea",
+    "change": 0,
+    "points": 974.9
+  },
+  {
+    "rank": 169,
+    "id": "SSD",
+    "team": "South Sudan",
+    "change": 1,
+    "points": 970.94
+  },
+  {
+    "rank": 170,
+    "id": "VIN",
+    "team": "St Vincent and the Grenadines",
+    "change": 1,
+    "points": 968.27
+  },
+  {
+    "rank": 171,
+    "id": "AFG",
+    "team": "Afghanistan",
+    "change": -2,
+    "points": 968.07
+  },
+  {
+    "rank": 172,
+    "id": "AND",
+    "team": "Andorra",
+    "change": 1,
+    "points": 946.43
+  },
+  {
+    "rank": 173,
+    "id": "MDV",
+    "team": "Maldives",
+    "change": -1,
+    "points": 943.92
+  },
+  {
+    "rank": 174,
+    "id": "TPE",
+    "team": "Chinese Taipei",
+    "change": 0,
+    "points": 923.78
+  },
+  {
+    "rank": 175,
+    "id": "CAM",
+    "team": "Cambodia",
+    "change": 2,
+    "points": 922.32
+  },
+  {
+    "rank": 176,
+    "id": "MSR",
+    "team": "Montserrat",
+    "change": -1,
+    "points": 916.75
+  },
+  {
+    "rank": 177,
+    "id": "NEP",
+    "team": "Nepal",
+    "change": -1,
+    "points": 914.54
+  },
+  {
+    "rank": 178,
+    "id": "MRI",
+    "team": "Mauritius",
+    "change": 0,
+    "points": 911.49
+  },
+  {
+    "rank": 179,
+    "id": "BRB",
+    "team": "Barbados",
+    "change": 0,
+    "points": 909.89
+  },
+  {
+    "rank": 180,
+    "id": "BLZ",
+    "team": "Belize",
+    "change": 0,
+    "points": 907.0
+  },
+  {
+    "rank": 181,
+    "id": "BAN",
+    "team": "Bangladesh",
+    "change": 0,
+    "points": 902.93
+  },
+  {
+    "rank": 182,
+    "id": "DMA",
+    "team": "Dominica",
+    "change": 0,
+    "points": 897.69
+  },
+  {
+    "rank": 183,
+    "id": "CHA",
+    "team": "Chad",
+    "change": 0,
+    "points": 896.65
+  },
+  {
+    "rank": 184,
+    "id": "ERI",
+    "team": "Eritrea",
+    "change": 0,
+    "points": 887.06
+  },
+  {
+    "rank": 185,
+    "id": "LAO",
+    "team": "Laos",
+    "change": 0,
+    "points": 885.03
+  },
+  {
+    "rank": 186,
+    "id": "COK",
+    "team": "Cook Islands",
+    "change": 2,
+    "points": 877.53
+  },
+  {
+    "rank": 187,
+    "id": "SRI",
+    "team": "Sri Lanka",
+    "change": 4,
+    "points": 876.86
+  },
+  {
+    "rank": 188,
+    "id": "SAM",
+    "team": "Samoa",
+    "change": 2,
+    "points": 876.41
+  },
+  {
+    "rank": 189,
+    "id": "ARU",
+    "team": "Aruba",
+    "change": 0,
+    "points": 875.61
+  },
+  {
+    "rank": 190,
+    "id": "MNG",
+    "team": "Mongolia",
+    "change": -3,
+    "points": 874.47
+  },
+  {
+    "rank": 191,
+    "id": "ASA",
+    "team": "American Samoa",
+    "change": 1,
+    "points": 871.61
+  },
+  {
+    "rank": 192,
+    "id": "BHU",
+    "team": "Bhutan",
+    "change": -6,
+    "points": 870.81
+  },
+  {
+    "rank": 193,
+    "id": "MAC",
+    "team": "Macau",
+    "change": 1,
+    "points": 858.03
+  },
+  {
+    "rank": 194,
+    "id": "BRU",
+    "team": "Brunei Darussalam",
+    "change": -1,
+    "points": 857.73
+  },
+  {
+    "rank": 195,
+    "id": "STP",
+    "team": "São Tomé and Príncipe",
+    "change": 1,
+    "points": 855.44
+  },
+  {
+    "rank": 196,
+    "id": "DJI",
+    "team": "Djibouti",
+    "change": 1,
+    "points": 853.58
+  },
+  {
+    "rank": 197,
+    "id": "CAY",
+    "team": "Cayman Islands",
+    "change": -2,
+    "points": 850.06
+  },
+  {
+    "rank": 198,
+    "id": "PAK",
+    "team": "Pakistan",
+    "change": 4,
+    "points": 840.28
+  },
+  {
+    "rank": 199,
+    "id": "SOM",
+    "team": "Somalia",
+    "change": -1,
+    "points": 839.17
+  },
+  {
+    "rank": 200,
+    "id": "TGA",
+    "team": "Tonga",
+    "change": -1,
+    "points": 835.64
+  },
+  {
+    "rank": 201,
+    "id": "TLS",
+    "team": "Timor-Leste",
+    "change": -1,
+    "points": 831.0
+  },
+  {
+    "rank": 202,
+    "id": "GIB",
+    "team": "Gibraltar",
+    "change": 1,
+    "points": 820.26
+  },
+  {
+    "rank": 203,
+    "id": "GUM",
+    "team": "Guam",
+    "change": -1,
+    "points": 819.54
+  },
+  {
+    "rank": 204,
+    "id": "SEY",
+    "team": "Seychelles",
+    "change": 0,
+    "points": 804.16
+  },
+  {
+    "rank": 205,
+    "id": "TCA",
+    "team": "Turks and Caicos Islands",
+    "change": 0,
+    "points": 803.98
+  },
+  {
+    "rank": 206,
+    "id": "LIE",
+    "team": "Liechtenstein",
+    "change": 0,
+    "points": 797.7
+  },
+  {
+    "rank": 207,
+    "id": "BAH",
+    "team": "Bahamas",
+    "change": 0,
+    "points": 786.82
+  },
+  {
+    "rank": 208,
+    "id": "VIR",
+    "team": "US Virgin Islands",
+    "change": 1,
+    "points": 779.76
+  },
+  {
+    "rank": 209,
+    "id": "VGB",
+    "team": "British Virgin Islands",
+    "change": -1,
+    "points": 777.41
+  },
+  {
+    "rank": 210,
+    "id": "AIA",
+    "team": "Anguilla",
+    "change": 0,
+    "points": 760.25
+  },
+  {
+    "rank": 211,
+    "id": "SMR",
+    "team": "San Marino",
+    "change": 0,
+    "points": 721.2
+  }
+]

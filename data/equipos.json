@@ -1,0 +1,340 @@
+{
+  "equipos": [
+    {
+      "id": "KOR",
+      "nombre": "Corea del Sur",
+      "grupo": "A",
+      "puntos_fifa": 1592,
+      "forma_reciente": 0
+    },
+    {
+      "id": "MEX",
+      "nombre": "México",
+      "grupo": "A",
+      "puntos_fifa": 1687,
+      "forma_reciente": 3
+    },
+    {
+      "id": "CZE",
+      "nombre": "República Checa",
+      "grupo": "A",
+      "puntos_fifa": 1506,
+      "forma_reciente": 10
+    },
+    {
+      "id": "RSA",
+      "nombre": "Sudáfrica",
+      "grupo": "A",
+      "puntos_fifa": 1428,
+      "forma_reciente": 2
+    },
+    {
+      "id": "BIH",
+      "nombre": "Bosnia y Herzegovina",
+      "grupo": "B",
+      "puntos_fifa": 1387,
+      "forma_reciente": 10
+    },
+    {
+      "id": "CAN",
+      "nombre": "Canadá",
+      "grupo": "B",
+      "puntos_fifa": 1559,
+      "forma_reciente": 2
+    },
+    {
+      "id": "QAT",
+      "nombre": "Qatar",
+      "grupo": "B",
+      "puntos_fifa": 1450,
+      "forma_reciente": -3
+    },
+    {
+      "id": "SUI",
+      "nombre": "Suiza",
+      "grupo": "B",
+      "puntos_fifa": 1650,
+      "forma_reciente": 2
+    },
+    {
+      "id": "BRA",
+      "nombre": "Brasil",
+      "grupo": "C",
+      "puntos_fifa": 1766,
+      "forma_reciente": 10
+    },
+    {
+      "id": "SCO",
+      "nombre": "Escocia",
+      "grupo": "C",
+      "puntos_fifa": 1503,
+      "forma_reciente": 7
+    },
+    {
+      "id": "HAI",
+      "nombre": "Haití",
+      "grupo": "C",
+      "puntos_fifa": 1293,
+      "forma_reciente": 5
+    },
+    {
+      "id": "MAR",
+      "nombre": "Marruecos",
+      "grupo": "C",
+      "puntos_fifa": 1755,
+      "forma_reciente": 6
+    },
+    {
+      "id": "AUS",
+      "nombre": "Australia",
+      "grupo": "D",
+      "puntos_fifa": 1579,
+      "forma_reciente": 2
+    },
+    {
+      "id": "USA",
+      "nombre": "Estados Unidos",
+      "grupo": "D",
+      "puntos_fifa": 1671,
+      "forma_reciente": -2
+    },
+    {
+      "id": "PAR",
+      "nombre": "Paraguay",
+      "grupo": "D",
+      "puntos_fifa": 1505,
+      "forma_reciente": 2
+    },
+    {
+      "id": "TUR",
+      "nombre": "Turquía",
+      "grupo": "D",
+      "puntos_fifa": 1606,
+      "forma_reciente": 3
+    },
+    {
+      "id": "GER",
+      "nombre": "Alemania",
+      "grupo": "E",
+      "puntos_fifa": 1736,
+      "forma_reciente": 10
+    },
+    {
+      "id": "CIV",
+      "nombre": "Costa de Marfil",
+      "grupo": "E",
+      "puntos_fifa": 1541,
+      "forma_reciente": 6
+    },
+    {
+      "id": "CUW",
+      "nombre": "Curazao",
+      "grupo": "E",
+      "puntos_fifa": 1295,
+      "forma_reciente": 10
+    },
+    {
+      "id": "ECU",
+      "nombre": "Ecuador",
+      "grupo": "E",
+      "puntos_fifa": 1599,
+      "forma_reciente": 8
+    },
+    {
+      "id": "JPN",
+      "nombre": "Japón",
+      "grupo": "F",
+      "puntos_fifa": 1662,
+      "forma_reciente": 1
+    },
+    {
+      "id": "NED",
+      "nombre": "Países Bajos",
+      "grupo": "F",
+      "puntos_fifa": 1754,
+      "forma_reciente": 5
+    },
+    {
+      "id": "SWE",
+      "nombre": "Suecia",
+      "grupo": "F",
+      "puntos_fifa": 1510,
+      "forma_reciente": 1
+    },
+    {
+      "id": "TUN",
+      "nombre": "Túnez",
+      "grupo": "F",
+      "puntos_fifa": 1476,
+      "forma_reciente": -3
+    },
+    {
+      "id": "BEL",
+      "nombre": "Bélgica",
+      "grupo": "G",
+      "puntos_fifa": 1742,
+      "forma_reciente": 7
+    },
+    {
+      "id": "EGY",
+      "nombre": "Egipto",
+      "grupo": "G",
+      "puntos_fifa": 1562,
+      "forma_reciente": 9
+    },
+    {
+      "id": "IRN",
+      "nombre": "Irán",
+      "grupo": "G",
+      "puntos_fifa": 1620,
+      "forma_reciente": 4
+    },
+    {
+      "id": "NZL",
+      "nombre": "Nueva Zelanda",
+      "grupo": "G",
+      "puntos_fifa": 1276,
+      "forma_reciente": 6
+    },
+    {
+      "id": "KSA",
+      "nombre": "Arabia Saudita",
+      "grupo": "H",
+      "puntos_fifa": 1424,
+      "forma_reciente": 3
+    },
+    {
+      "id": "CPV",
+      "nombre": "Cabo Verde",
+      "grupo": "H",
+      "puntos_fifa": 1371,
+      "forma_reciente": 16
+    },
+    {
+      "id": "ESP",
+      "nombre": "España",
+      "grupo": "H",
+      "puntos_fifa": 1875,
+      "forma_reciente": 2
+    },
+    {
+      "id": "URU",
+      "nombre": "Uruguay",
+      "grupo": "H",
+      "puntos_fifa": 1673,
+      "forma_reciente": 9
+    },
+    {
+      "id": "FRA",
+      "nombre": "Francia",
+      "grupo": "I",
+      "puntos_fifa": 1871,
+      "forma_reciente": 2
+    },
+    {
+      "id": "IRQ",
+      "nombre": "Irak",
+      "grupo": "I",
+      "puntos_fifa": 1446,
+      "forma_reciente": 5
+    },
+    {
+      "id": "NOR",
+      "nombre": "Noruega",
+      "grupo": "I",
+      "puntos_fifa": 1557,
+      "forma_reciente": 7
+    },
+    {
+      "id": "SEN",
+      "nombre": "Senegal",
+      "grupo": "I",
+      "puntos_fifa": 1684,
+      "forma_reciente": -3
+    },
+    {
+      "id": "DZA",
+      "nombre": "Argelia",
+      "grupo": "J",
+      "puntos_fifa": 1571,
+      "forma_reciente": 8
+    },
+    {
+      "id": "ARG",
+      "nombre": "Argentina",
+      "grupo": "J",
+      "puntos_fifa": 1877,
+      "forma_reciente": 13
+    },
+    {
+      "id": "AUT",
+      "nombre": "Austria",
+      "grupo": "J",
+      "puntos_fifa": 1597,
+      "forma_reciente": 5
+    },
+    {
+      "id": "JOR",
+      "nombre": "Jordania",
+      "grupo": "J",
+      "puntos_fifa": 1388,
+      "forma_reciente": 1
+    },
+    {
+      "id": "COL",
+      "nombre": "Colombia",
+      "grupo": "K",
+      "puntos_fifa": 1698,
+      "forma_reciente": 9
+    },
+    {
+      "id": "POR",
+      "nombre": "Portugal",
+      "grupo": "K",
+      "puntos_fifa": 1768,
+      "forma_reciente": 6
+    },
+    {
+      "id": "COD",
+      "nombre": "República Democrática del Congo",
+      "grupo": "K",
+      "puntos_fifa": 1474,
+      "forma_reciente": 3
+    },
+    {
+      "id": "UZB",
+      "nombre": "Uzbekistán",
+      "grupo": "K",
+      "puntos_fifa": 1459,
+      "forma_reciente": 8
+    },
+    {
+      "id": "CRO",
+      "nombre": "Croacia",
+      "grupo": "L",
+      "puntos_fifa": 1715,
+      "forma_reciente": 9
+    },
+    {
+      "id": "GHA",
+      "nombre": "Ghana",
+      "grupo": "L",
+      "puntos_fifa": 1347,
+      "forma_reciente": 4
+    },
+    {
+      "id": "ENG",
+      "nombre": "Inglaterra",
+      "grupo": "L",
+      "puntos_fifa": 1828,
+      "forma_reciente": 3
+    },
+    {
+      "id": "PAN",
+      "nombre": "Panamá",
+      "grupo": "L",
+      "puntos_fifa": 1539,
+      "forma_reciente": 0
+    }
+  ]
+}

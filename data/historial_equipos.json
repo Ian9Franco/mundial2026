@@ -1,0 +1,4738 @@
+{
+  "FRA": {
+    "win_rate": 0.63,
+    "gd_average": 1.301,
+    "strength_of_schedule": 1.107,
+    "h2h": {
+      "BIH": {
+        "played": 2,
+        "won": 1,
+        "drawn": 1,
+        "lost": 0
+      },
+      "GER": {
+        "played": 4,
+        "won": 2,
+        "drawn": 0,
+        "lost": 2
+      },
+      "POR": {
+        "played": 2,
+        "won": 0,
+        "drawn": 2,
+        "lost": 0
+      },
+      "SUI": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "BEL": {
+        "played": 4,
+        "won": 4,
+        "drawn": 0,
+        "lost": 0
+      },
+      "ESP": {
+        "played": 3,
+        "won": 1,
+        "drawn": 0,
+        "lost": 2
+      },
+      "CIV": {
+        "played": 2,
+        "won": 1,
+        "drawn": 0,
+        "lost": 1
+      },
+      "RSA": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "CRO": {
+        "played": 4,
+        "won": 1,
+        "drawn": 1,
+        "lost": 2
+      },
+      "AUT": {
+        "played": 3,
+        "won": 2,
+        "drawn": 1,
+        "lost": 0
+      },
+      "AUS": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "TUN": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "ENG": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "MAR": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "ARG": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "NED": {
+        "played": 3,
+        "won": 2,
+        "drawn": 1,
+        "lost": 0
+      },
+      "SCO": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "CAN": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "BRA": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "COL": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "SEN": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "IRQ": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      }
+    }
+  },
+  "ESP": {
+    "win_rate": 0.649,
+    "gd_average": 1.568,
+    "strength_of_schedule": 1.097,
+    "h2h": {
+      "POR": {
+        "played": 4,
+        "won": 1,
+        "drawn": 3,
+        "lost": 0
+      },
+      "SWE": {
+        "played": 3,
+        "won": 1,
+        "drawn": 1,
+        "lost": 1
+      },
+      "CRO": {
+        "played": 3,
+        "won": 2,
+        "drawn": 1,
+        "lost": 0
+      },
+      "SUI": {
+        "played": 5,
+        "won": 3,
+        "drawn": 1,
+        "lost": 1
+      },
+      "FRA": {
+        "played": 3,
+        "won": 2,
+        "drawn": 0,
+        "lost": 1
+      },
+      "CZE": {
+        "played": 2,
+        "won": 1,
+        "drawn": 1,
+        "lost": 0
+      },
+      "JOR": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "GER": {
+        "played": 2,
+        "won": 1,
+        "drawn": 1,
+        "lost": 0
+      },
+      "JPN": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "MAR": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "NOR": {
+        "played": 2,
+        "won": 2,
+        "drawn": 0,
+        "lost": 0
+      },
+      "SCO": {
+        "played": 2,
+        "won": 1,
+        "drawn": 0,
+        "lost": 1
+      },
+      "COL": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "BRA": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "ENG": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "NED": {
+        "played": 2,
+        "won": 0,
+        "drawn": 2,
+        "lost": 0
+      },
+      "TUR": {
+        "played": 2,
+        "won": 1,
+        "drawn": 1,
+        "lost": 0
+      },
+      "EGY": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "IRQ": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "CPV": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "KSA": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      }
+    }
+  },
+  "RSA": {
+    "win_rate": 0.461,
+    "gd_average": 0.539,
+    "strength_of_schedule": 0.907,
+    "h2h": {
+      "GHA": {
+        "played": 3,
+        "won": 1,
+        "drawn": 1,
+        "lost": 1
+      },
+      "SEN": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "FRA": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "MAR": {
+        "played": 3,
+        "won": 2,
+        "drawn": 0,
+        "lost": 1
+      },
+      "COD": {
+        "played": 2,
+        "won": 1,
+        "drawn": 1,
+        "lost": 0
+      },
+      "CIV": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "TUN": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "CPV": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "EGY": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "PAN": {
+        "played": 2,
+        "won": 0,
+        "drawn": 1,
+        "lost": 1
+      },
+      "MEX": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "CZE": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      }
+    }
+  },
+  "POR": {
+    "win_rate": 0.662,
+    "gd_average": 1.648,
+    "strength_of_schedule": 1.069,
+    "h2h": {
+      "ESP": {
+        "played": 4,
+        "won": 0,
+        "drawn": 3,
+        "lost": 1
+      },
+      "GER": {
+        "played": 2,
+        "won": 1,
+        "drawn": 0,
+        "lost": 1
+      },
+      "FRA": {
+        "played": 2,
+        "won": 0,
+        "drawn": 2,
+        "lost": 0
+      },
+      "BEL": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "QAT": {
+        "played": 2,
+        "won": 2,
+        "drawn": 0,
+        "lost": 0
+      },
+      "TUR": {
+        "played": 2,
+        "won": 2,
+        "drawn": 0,
+        "lost": 0
+      },
+      "SUI": {
+        "played": 3,
+        "won": 2,
+        "drawn": 0,
+        "lost": 1
+      },
+      "CZE": {
+        "played": 3,
+        "won": 3,
+        "drawn": 0,
+        "lost": 0
+      },
+      "GHA": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "URU": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "MAR": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "BIH": {
+        "played": 2,
+        "won": 2,
+        "drawn": 0,
+        "lost": 0
+      },
+      "SWE": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "CRO": {
+        "played": 3,
+        "won": 1,
+        "drawn": 1,
+        "lost": 1
+      },
+      "SCO": {
+        "played": 2,
+        "won": 1,
+        "drawn": 1,
+        "lost": 0
+      },
+      "MEX": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "USA": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "COD": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "UZB": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      }
+    }
+  },
+  "KOR": {
+    "win_rate": 0.5,
+    "gd_average": 0.0,
+    "strength_of_schedule": 1.0,
+    "h2h": {}
+  },
+  "IRN": {
+    "win_rate": 0.5,
+    "gd_average": 0.0,
+    "strength_of_schedule": 1.0,
+    "h2h": {}
+  },
+  "SCO": {
+    "win_rate": 0.446,
+    "gd_average": 0.2,
+    "strength_of_schedule": 1.057,
+    "h2h": {
+      "AUT": {
+        "played": 3,
+        "won": 1,
+        "drawn": 2,
+        "lost": 0
+      },
+      "NED": {
+        "played": 2,
+        "won": 0,
+        "drawn": 1,
+        "lost": 1
+      },
+      "CZE": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "ENG": {
+        "played": 2,
+        "won": 0,
+        "drawn": 1,
+        "lost": 1
+      },
+      "CRO": {
+        "played": 3,
+        "won": 1,
+        "drawn": 0,
+        "lost": 2
+      },
+      "TUR": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "ESP": {
+        "played": 2,
+        "won": 1,
+        "drawn": 0,
+        "lost": 1
+      },
+      "NOR": {
+        "played": 2,
+        "won": 1,
+        "drawn": 1,
+        "lost": 0
+      },
+      "FRA": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "GER": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "SUI": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "POR": {
+        "played": 2,
+        "won": 0,
+        "drawn": 1,
+        "lost": 1
+      },
+      "JPN": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "CIV": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "CUW": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "HAI": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "MAR": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "BRA": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      }
+    }
+  },
+  "CPV": {
+    "win_rate": 0.45,
+    "gd_average": 0.267,
+    "strength_of_schedule": 0.918,
+    "h2h": {
+      "SEN": {
+        "played": 2,
+        "won": 0,
+        "drawn": 0,
+        "lost": 2
+      },
+      "ECU": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "MAR": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "TUN": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "GHA": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "EGY": {
+        "played": 4,
+        "won": 0,
+        "drawn": 3,
+        "lost": 1
+      },
+      "RSA": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "ESP": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "URU": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      }
+    }
+  },
+  "UZB": {
+    "win_rate": 0.569,
+    "gd_average": 0.784,
+    "strength_of_schedule": 0.955,
+    "h2h": {
+      "JOR": {
+        "played": 3,
+        "won": 1,
+        "drawn": 1,
+        "lost": 1
+      },
+      "IRQ": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "KSA": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "SWE": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "USA": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "MEX": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "AUS": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "QAT": {
+        "played": 3,
+        "won": 1,
+        "drawn": 1,
+        "lost": 1
+      },
+      "URU": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "EGY": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "CAN": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "NED": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "COL": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "POR": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      }
+    }
+  },
+  "AUT": {
+    "win_rate": 0.531,
+    "gd_average": 0.781,
+    "strength_of_schedule": 1.033,
+    "h2h": {
+      "SCO": {
+        "played": 3,
+        "won": 0,
+        "drawn": 2,
+        "lost": 1
+      },
+      "ENG": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "NED": {
+        "played": 2,
+        "won": 1,
+        "drawn": 0,
+        "lost": 1
+      },
+      "CRO": {
+        "played": 2,
+        "won": 1,
+        "drawn": 0,
+        "lost": 1
+      },
+      "FRA": {
+        "played": 3,
+        "won": 0,
+        "drawn": 1,
+        "lost": 2
+      },
+      "BEL": {
+        "played": 2,
+        "won": 0,
+        "drawn": 1,
+        "lost": 1
+      },
+      "SWE": {
+        "played": 2,
+        "won": 2,
+        "drawn": 0,
+        "lost": 0
+      },
+      "GER": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "TUR": {
+        "played": 2,
+        "won": 1,
+        "drawn": 0,
+        "lost": 1
+      },
+      "SUI": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "NOR": {
+        "played": 2,
+        "won": 1,
+        "drawn": 0,
+        "lost": 1
+      },
+      "BIH": {
+        "played": 2,
+        "won": 1,
+        "drawn": 1,
+        "lost": 0
+      },
+      "GHA": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "TUN": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "JOR": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "ARG": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      }
+    }
+  },
+  "GER": {
+    "win_rate": 0.563,
+    "gd_average": 1.225,
+    "strength_of_schedule": 1.099,
+    "h2h": {
+      "FRA": {
+        "played": 4,
+        "won": 2,
+        "drawn": 0,
+        "lost": 2
+      },
+      "POR": {
+        "played": 2,
+        "won": 1,
+        "drawn": 0,
+        "lost": 1
+      },
+      "ENG": {
+        "played": 3,
+        "won": 0,
+        "drawn": 2,
+        "lost": 1
+      },
+      "NED": {
+        "played": 4,
+        "won": 2,
+        "drawn": 2,
+        "lost": 0
+      },
+      "JPN": {
+        "played": 2,
+        "won": 0,
+        "drawn": 0,
+        "lost": 2
+      },
+      "ESP": {
+        "played": 2,
+        "won": 0,
+        "drawn": 1,
+        "lost": 1
+      },
+      "BEL": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "COL": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "USA": {
+        "played": 2,
+        "won": 2,
+        "drawn": 0,
+        "lost": 0
+      },
+      "MEX": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "TUR": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "AUT": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "SCO": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "SUI": {
+        "played": 2,
+        "won": 1,
+        "drawn": 1,
+        "lost": 0
+      },
+      "BIH": {
+        "played": 2,
+        "won": 2,
+        "drawn": 0,
+        "lost": 0
+      },
+      "GHA": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "CUW": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "CIV": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "ECU": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      }
+    }
+  },
+  "SEN": {
+    "win_rate": 0.613,
+    "gd_average": 1.038,
+    "strength_of_schedule": 0.939,
+    "h2h": {
+      "CPV": {
+        "played": 2,
+        "won": 2,
+        "drawn": 0,
+        "lost": 0
+      },
+      "RSA": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "EGY": {
+        "played": 4,
+        "won": 2,
+        "drawn": 1,
+        "lost": 1
+      },
+      "NED": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "QAT": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "ECU": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "ENG": {
+        "played": 2,
+        "won": 1,
+        "drawn": 0,
+        "lost": 1
+      },
+      "BRA": {
+        "played": 2,
+        "won": 1,
+        "drawn": 0,
+        "lost": 1
+      },
+      "CIV": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "COD": {
+        "played": 3,
+        "won": 1,
+        "drawn": 2,
+        "lost": 0
+      },
+      "MAR": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "USA": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "KSA": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "FRA": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "NOR": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      }
+    }
+  },
+  "JOR": {
+    "win_rate": 0.48,
+    "gd_average": 0.347,
+    "strength_of_schedule": 0.957,
+    "h2h": {
+      "UZB": {
+        "played": 3,
+        "won": 1,
+        "drawn": 1,
+        "lost": 1
+      },
+      "AUS": {
+        "played": 2,
+        "won": 0,
+        "drawn": 0,
+        "lost": 2
+      },
+      "HAI": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "KSA": {
+        "played": 5,
+        "won": 3,
+        "drawn": 0,
+        "lost": 2
+      },
+      "MAR": {
+        "played": 2,
+        "won": 0,
+        "drawn": 0,
+        "lost": 2
+      },
+      "EGY": {
+        "played": 2,
+        "won": 1,
+        "drawn": 0,
+        "lost": 1
+      },
+      "ESP": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "NOR": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "QAT": {
+        "played": 2,
+        "won": 1,
+        "drawn": 0,
+        "lost": 1
+      },
+      "JPN": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "IRQ": {
+        "played": 4,
+        "won": 2,
+        "drawn": 1,
+        "lost": 1
+      },
+      "TUN": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "SUI": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "COL": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "AUT": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      }
+    }
+  },
+  "PAN": {
+    "win_rate": 0.442,
+    "gd_average": 0.256,
+    "strength_of_schedule": 0.998,
+    "h2h": {
+      "CUW": {
+        "played": 3,
+        "won": 2,
+        "drawn": 1,
+        "lost": 0
+      },
+      "MEX": {
+        "played": 8,
+        "won": 0,
+        "drawn": 1,
+        "lost": 7
+      },
+      "QAT": {
+        "played": 3,
+        "won": 1,
+        "drawn": 1,
+        "lost": 1
+      },
+      "USA": {
+        "played": 6,
+        "won": 3,
+        "drawn": 1,
+        "lost": 2
+      },
+      "CAN": {
+        "played": 4,
+        "won": 1,
+        "drawn": 0,
+        "lost": 3
+      },
+      "URU": {
+        "played": 2,
+        "won": 0,
+        "drawn": 0,
+        "lost": 2
+      },
+      "KSA": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "ARG": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "PAR": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "COL": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "RSA": {
+        "played": 2,
+        "won": 1,
+        "drawn": 1,
+        "lost": 0
+      },
+      "BRA": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "BIH": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "GHA": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "CRO": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      }
+    }
+  },
+  "SWE": {
+    "win_rate": 0.523,
+    "gd_average": 0.415,
+    "strength_of_schedule": 1.035,
+    "h2h": {
+      "ESP": {
+        "played": 3,
+        "won": 1,
+        "drawn": 1,
+        "lost": 1
+      },
+      "UZB": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "CZE": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "NOR": {
+        "played": 3,
+        "won": 0,
+        "drawn": 0,
+        "lost": 3
+      },
+      "MEX": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "BEL": {
+        "played": 2,
+        "won": 0,
+        "drawn": 1,
+        "lost": 1
+      },
+      "AUT": {
+        "played": 2,
+        "won": 0,
+        "drawn": 0,
+        "lost": 2
+      },
+      "POR": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "SUI": {
+        "played": 2,
+        "won": 0,
+        "drawn": 0,
+        "lost": 2
+      },
+      "TUN": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "NED": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "JPN": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      }
+    }
+  },
+  "MEX": {
+    "win_rate": 0.515,
+    "gd_average": 0.604,
+    "strength_of_schedule": 1.06,
+    "h2h": {
+      "USA": {
+        "played": 9,
+        "won": 2,
+        "drawn": 2,
+        "lost": 5
+      },
+      "PAN": {
+        "played": 8,
+        "won": 7,
+        "drawn": 1,
+        "lost": 0
+      },
+      "CAN": {
+        "played": 5,
+        "won": 2,
+        "drawn": 2,
+        "lost": 1
+      },
+      "ECU": {
+        "played": 4,
+        "won": 0,
+        "drawn": 3,
+        "lost": 1
+      },
+      "URU": {
+        "played": 3,
+        "won": 0,
+        "drawn": 1,
+        "lost": 2
+      },
+      "PAR": {
+        "played": 2,
+        "won": 0,
+        "drawn": 0,
+        "lost": 2
+      },
+      "COL": {
+        "played": 3,
+        "won": 0,
+        "drawn": 0,
+        "lost": 3
+      },
+      "IRQ": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "SWE": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "ARG": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "KSA": {
+        "played": 2,
+        "won": 2,
+        "drawn": 0,
+        "lost": 0
+      },
+      "HAI": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "QAT": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "AUS": {
+        "played": 2,
+        "won": 1,
+        "drawn": 1,
+        "lost": 0
+      },
+      "UZB": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "GHA": {
+        "played": 2,
+        "won": 2,
+        "drawn": 0,
+        "lost": 0
+      },
+      "GER": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "BRA": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "SUI": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "TUR": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "JPN": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "POR": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "BEL": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "RSA": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "CZE": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      }
+    }
+  },
+  "USA": {
+    "win_rate": 0.549,
+    "gd_average": 0.923,
+    "strength_of_schedule": 1.066,
+    "h2h": {
+      "SUI": {
+        "played": 2,
+        "won": 0,
+        "drawn": 0,
+        "lost": 2
+      },
+      "MEX": {
+        "played": 9,
+        "won": 5,
+        "drawn": 2,
+        "lost": 2
+      },
+      "HAI": {
+        "played": 2,
+        "won": 2,
+        "drawn": 0,
+        "lost": 0
+      },
+      "CAN": {
+        "played": 7,
+        "won": 2,
+        "drawn": 2,
+        "lost": 3
+      },
+      "QAT": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "PAN": {
+        "played": 6,
+        "won": 2,
+        "drawn": 1,
+        "lost": 3
+      },
+      "BIH": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "MAR": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "URU": {
+        "played": 3,
+        "won": 1,
+        "drawn": 1,
+        "lost": 1
+      },
+      "JPN": {
+        "played": 2,
+        "won": 1,
+        "drawn": 0,
+        "lost": 1
+      },
+      "KSA": {
+        "played": 2,
+        "won": 1,
+        "drawn": 1,
+        "lost": 0
+      },
+      "ENG": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "NED": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "COL": {
+        "played": 2,
+        "won": 0,
+        "drawn": 1,
+        "lost": 1
+      },
+      "UZB": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "GER": {
+        "played": 2,
+        "won": 0,
+        "drawn": 0,
+        "lost": 2
+      },
+      "GHA": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "BRA": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "TUR": {
+        "played": 2,
+        "won": 0,
+        "drawn": 0,
+        "lost": 2
+      },
+      "ECU": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "AUS": {
+        "played": 2,
+        "won": 2,
+        "drawn": 0,
+        "lost": 0
+      },
+      "PAR": {
+        "played": 2,
+        "won": 2,
+        "drawn": 0,
+        "lost": 0
+      },
+      "BEL": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "POR": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "SEN": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      }
+    }
+  },
+  "CRO": {
+    "win_rate": 0.535,
+    "gd_average": 0.746,
+    "strength_of_schedule": 1.083,
+    "h2h": {
+      "BEL": {
+        "played": 3,
+        "won": 0,
+        "drawn": 1,
+        "lost": 2
+      },
+      "ENG": {
+        "played": 2,
+        "won": 0,
+        "drawn": 0,
+        "lost": 2
+      },
+      "CZE": {
+        "played": 3,
+        "won": 1,
+        "drawn": 2,
+        "lost": 0
+      },
+      "SCO": {
+        "played": 3,
+        "won": 2,
+        "drawn": 0,
+        "lost": 1
+      },
+      "ESP": {
+        "played": 3,
+        "won": 0,
+        "drawn": 1,
+        "lost": 2
+      },
+      "AUT": {
+        "played": 2,
+        "won": 1,
+        "drawn": 0,
+        "lost": 1
+      },
+      "FRA": {
+        "played": 4,
+        "won": 2,
+        "drawn": 1,
+        "lost": 1
+      },
+      "KSA": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "MAR": {
+        "played": 2,
+        "won": 1,
+        "drawn": 1,
+        "lost": 0
+      },
+      "CAN": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "JPN": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "BRA": {
+        "played": 2,
+        "won": 0,
+        "drawn": 1,
+        "lost": 1
+      },
+      "ARG": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "TUR": {
+        "played": 2,
+        "won": 1,
+        "drawn": 0,
+        "lost": 1
+      },
+      "NED": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "TUN": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "EGY": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "POR": {
+        "played": 3,
+        "won": 1,
+        "drawn": 1,
+        "lost": 1
+      },
+      "COL": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "PAN": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      }
+    }
+  },
+  "NOR": {
+    "win_rate": 0.596,
+    "gd_average": 1.316,
+    "strength_of_schedule": 1.006,
+    "h2h": {
+      "TUR": {
+        "played": 2,
+        "won": 0,
+        "drawn": 1,
+        "lost": 1
+      },
+      "NED": {
+        "played": 3,
+        "won": 0,
+        "drawn": 1,
+        "lost": 2
+      },
+      "SWE": {
+        "played": 3,
+        "won": 3,
+        "drawn": 0,
+        "lost": 0
+      },
+      "ESP": {
+        "played": 2,
+        "won": 0,
+        "drawn": 0,
+        "lost": 2
+      },
+      "SCO": {
+        "played": 2,
+        "won": 0,
+        "drawn": 1,
+        "lost": 1
+      },
+      "JOR": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "CZE": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "AUT": {
+        "played": 2,
+        "won": 1,
+        "drawn": 0,
+        "lost": 1
+      },
+      "SUI": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "MAR": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "IRQ": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "SEN": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      }
+    }
+  },
+  "BEL": {
+    "win_rate": 0.544,
+    "gd_average": 1.221,
+    "strength_of_schedule": 1.066,
+    "h2h": {
+      "CZE": {
+        "played": 2,
+        "won": 1,
+        "drawn": 1,
+        "lost": 0
+      },
+      "CRO": {
+        "played": 3,
+        "won": 2,
+        "drawn": 1,
+        "lost": 0
+      },
+      "POR": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "FRA": {
+        "played": 4,
+        "won": 0,
+        "drawn": 0,
+        "lost": 4
+      },
+      "NED": {
+        "played": 2,
+        "won": 0,
+        "drawn": 0,
+        "lost": 2
+      },
+      "EGY": {
+        "played": 2,
+        "won": 0,
+        "drawn": 1,
+        "lost": 1
+      },
+      "CAN": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "MAR": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "SWE": {
+        "played": 2,
+        "won": 1,
+        "drawn": 1,
+        "lost": 0
+      },
+      "GER": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "AUT": {
+        "played": 2,
+        "won": 1,
+        "drawn": 1,
+        "lost": 0
+      },
+      "ENG": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "USA": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "MEX": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "TUN": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      }
+    }
+  },
+  "TUR": {
+    "win_rate": 0.559,
+    "gd_average": 0.529,
+    "strength_of_schedule": 1.024,
+    "h2h": {
+      "NED": {
+        "played": 3,
+        "won": 1,
+        "drawn": 0,
+        "lost": 2
+      },
+      "NOR": {
+        "played": 2,
+        "won": 1,
+        "drawn": 1,
+        "lost": 0
+      },
+      "SUI": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "POR": {
+        "played": 2,
+        "won": 0,
+        "drawn": 0,
+        "lost": 2
+      },
+      "SCO": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "CZE": {
+        "played": 2,
+        "won": 2,
+        "drawn": 0,
+        "lost": 0
+      },
+      "CRO": {
+        "played": 2,
+        "won": 1,
+        "drawn": 0,
+        "lost": 1
+      },
+      "JPN": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "GER": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "AUT": {
+        "played": 2,
+        "won": 1,
+        "drawn": 0,
+        "lost": 1
+      },
+      "USA": {
+        "played": 2,
+        "won": 2,
+        "drawn": 0,
+        "lost": 0
+      },
+      "MEX": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "ESP": {
+        "played": 2,
+        "won": 0,
+        "drawn": 1,
+        "lost": 1
+      },
+      "AUS": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "PAR": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      }
+    }
+  },
+  "CUW": {
+    "win_rate": 0.333,
+    "gd_average": 0.133,
+    "strength_of_schedule": 0.9,
+    "h2h": {
+      "PAN": {
+        "played": 3,
+        "won": 0,
+        "drawn": 1,
+        "lost": 2
+      },
+      "CAN": {
+        "played": 3,
+        "won": 0,
+        "drawn": 1,
+        "lost": 2
+      },
+      "ARG": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "HAI": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "AUS": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "SCO": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "GER": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "ECU": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "CIV": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      }
+    }
+  },
+  "CZE": {
+    "win_rate": 0.455,
+    "gd_average": 0.561,
+    "strength_of_schedule": 1.016,
+    "h2h": {
+      "BEL": {
+        "played": 2,
+        "won": 0,
+        "drawn": 1,
+        "lost": 1
+      },
+      "SCO": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "CRO": {
+        "played": 3,
+        "won": 0,
+        "drawn": 2,
+        "lost": 1
+      },
+      "ENG": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "NED": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "SWE": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "SUI": {
+        "played": 2,
+        "won": 1,
+        "drawn": 0,
+        "lost": 1
+      },
+      "ESP": {
+        "played": 2,
+        "won": 0,
+        "drawn": 1,
+        "lost": 1
+      },
+      "POR": {
+        "played": 3,
+        "won": 0,
+        "drawn": 0,
+        "lost": 3
+      },
+      "TUR": {
+        "played": 2,
+        "won": 0,
+        "drawn": 0,
+        "lost": 2
+      },
+      "NOR": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "KSA": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "RSA": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "MEX": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      }
+    }
+  },
+  "COL": {
+    "win_rate": 0.529,
+    "gd_average": 0.853,
+    "strength_of_schedule": 1.128,
+    "h2h": {
+      "ARG": {
+        "played": 6,
+        "won": 1,
+        "drawn": 3,
+        "lost": 2
+      },
+      "ECU": {
+        "played": 4,
+        "won": 1,
+        "drawn": 2,
+        "lost": 1
+      },
+      "BRA": {
+        "played": 6,
+        "won": 1,
+        "drawn": 2,
+        "lost": 3
+      },
+      "URU": {
+        "played": 5,
+        "won": 1,
+        "drawn": 3,
+        "lost": 1
+      },
+      "PAR": {
+        "played": 6,
+        "won": 3,
+        "drawn": 3,
+        "lost": 0
+      },
+      "KSA": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "MEX": {
+        "played": 3,
+        "won": 3,
+        "drawn": 0,
+        "lost": 0
+      },
+      "USA": {
+        "played": 2,
+        "won": 1,
+        "drawn": 1,
+        "lost": 0
+      },
+      "JPN": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "IRQ": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "GER": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "ESP": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "PAN": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "CAN": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "AUS": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "CRO": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "FRA": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "JOR": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "UZB": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "COD": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      }
+    }
+  },
+  "IRQ": {
+    "win_rate": 0.5,
+    "gd_average": 0.426,
+    "strength_of_schedule": 0.934,
+    "h2h": {
+      "UZB": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "QAT": {
+        "played": 3,
+        "won": 1,
+        "drawn": 1,
+        "lost": 1
+      },
+      "MEX": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "ECU": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "KSA": {
+        "played": 3,
+        "won": 1,
+        "drawn": 1,
+        "lost": 1
+      },
+      "COL": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "JPN": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "JOR": {
+        "played": 4,
+        "won": 1,
+        "drawn": 1,
+        "lost": 2
+      },
+      "ESP": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "NOR": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "FRA": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      }
+    }
+  },
+  "BRA": {
+    "win_rate": 0.576,
+    "gd_average": 1.045,
+    "strength_of_schedule": 1.131,
+    "h2h": {
+      "ECU": {
+        "played": 5,
+        "won": 2,
+        "drawn": 3,
+        "lost": 0
+      },
+      "PAR": {
+        "played": 5,
+        "won": 4,
+        "drawn": 0,
+        "lost": 1
+      },
+      "COL": {
+        "played": 6,
+        "won": 3,
+        "drawn": 2,
+        "lost": 1
+      },
+      "ARG": {
+        "played": 4,
+        "won": 0,
+        "drawn": 1,
+        "lost": 3
+      },
+      "URU": {
+        "played": 4,
+        "won": 1,
+        "drawn": 2,
+        "lost": 1
+      },
+      "JPN": {
+        "played": 2,
+        "won": 1,
+        "drawn": 0,
+        "lost": 1
+      },
+      "GHA": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "TUN": {
+        "played": 2,
+        "won": 1,
+        "drawn": 1,
+        "lost": 0
+      },
+      "SUI": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "CRO": {
+        "played": 2,
+        "won": 1,
+        "drawn": 1,
+        "lost": 0
+      },
+      "MAR": {
+        "played": 2,
+        "won": 0,
+        "drawn": 1,
+        "lost": 1
+      },
+      "SEN": {
+        "played": 2,
+        "won": 1,
+        "drawn": 0,
+        "lost": 1
+      },
+      "ENG": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "ESP": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "MEX": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "USA": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "FRA": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "PAN": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "EGY": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "HAI": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "SCO": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      }
+    }
+  },
+  "ARG": {
+    "win_rate": 0.767,
+    "gd_average": 1.726,
+    "strength_of_schedule": 1.078,
+    "h2h": {
+      "COL": {
+        "played": 6,
+        "won": 2,
+        "drawn": 3,
+        "lost": 1
+      },
+      "URU": {
+        "played": 5,
+        "won": 4,
+        "drawn": 0,
+        "lost": 1
+      },
+      "PAR": {
+        "played": 4,
+        "won": 2,
+        "drawn": 1,
+        "lost": 1
+      },
+      "ECU": {
+        "played": 6,
+        "won": 3,
+        "drawn": 2,
+        "lost": 1
+      },
+      "BRA": {
+        "played": 4,
+        "won": 3,
+        "drawn": 1,
+        "lost": 0
+      },
+      "KSA": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "MEX": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "AUS": {
+        "played": 2,
+        "won": 2,
+        "drawn": 0,
+        "lost": 0
+      },
+      "NED": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "CRO": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "FRA": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "PAN": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "CUW": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "CAN": {
+        "played": 2,
+        "won": 2,
+        "drawn": 0,
+        "lost": 0
+      },
+      "AUT": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      }
+    }
+  },
+  "NZL": {
+    "win_rate": 0.5,
+    "gd_average": 0.0,
+    "strength_of_schedule": 1.0,
+    "h2h": {}
+  },
+  "HAI": {
+    "win_rate": 0.46,
+    "gd_average": 0.66,
+    "strength_of_schedule": 0.885,
+    "h2h": {
+      "CAN": {
+        "played": 3,
+        "won": 0,
+        "drawn": 0,
+        "lost": 3
+      },
+      "USA": {
+        "played": 2,
+        "won": 0,
+        "drawn": 0,
+        "lost": 2
+      },
+      "JOR": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "QAT": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "MEX": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "CUW": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "KSA": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "TUN": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "SCO": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "BRA": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "MAR": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      }
+    }
+  },
+  "CIV": {
+    "win_rate": 0.615,
+    "gd_average": 1.031,
+    "strength_of_schedule": 0.941,
+    "h2h": {
+      "GHA": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "EGY": {
+        "played": 2,
+        "won": 0,
+        "drawn": 1,
+        "lost": 1
+      },
+      "FRA": {
+        "played": 2,
+        "won": 1,
+        "drawn": 0,
+        "lost": 1
+      },
+      "ENG": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "MAR": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "RSA": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "SEN": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "COD": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "URU": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "CAN": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "KSA": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "SCO": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "ECU": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "GER": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "CUW": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      }
+    }
+  },
+  "ENG": {
+    "win_rate": 0.644,
+    "gd_average": 1.562,
+    "strength_of_schedule": 1.053,
+    "h2h": {
+      "AUT": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "CRO": {
+        "played": 2,
+        "won": 2,
+        "drawn": 0,
+        "lost": 0
+      },
+      "SCO": {
+        "played": 2,
+        "won": 1,
+        "drawn": 1,
+        "lost": 0
+      },
+      "CZE": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "GER": {
+        "played": 3,
+        "won": 1,
+        "drawn": 2,
+        "lost": 0
+      },
+      "SUI": {
+        "played": 2,
+        "won": 1,
+        "drawn": 1,
+        "lost": 0
+      },
+      "CIV": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "USA": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "SEN": {
+        "played": 2,
+        "won": 1,
+        "drawn": 0,
+        "lost": 1
+      },
+      "FRA": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "AUS": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "BRA": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "BEL": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "BIH": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "NED": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "ESP": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "URU": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "JPN": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "GHA": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      }
+    }
+  },
+  "CAN": {
+    "win_rate": 0.5,
+    "gd_average": 0.949,
+    "strength_of_schedule": 1.045,
+    "h2h": {
+      "HAI": {
+        "played": 3,
+        "won": 3,
+        "drawn": 0,
+        "lost": 0
+      },
+      "USA": {
+        "played": 7,
+        "won": 3,
+        "drawn": 2,
+        "lost": 2
+      },
+      "MEX": {
+        "played": 5,
+        "won": 1,
+        "drawn": 2,
+        "lost": 2
+      },
+      "PAN": {
+        "played": 4,
+        "won": 3,
+        "drawn": 0,
+        "lost": 1
+      },
+      "CUW": {
+        "played": 3,
+        "won": 2,
+        "drawn": 1,
+        "lost": 0
+      },
+      "QAT": {
+        "played": 2,
+        "won": 2,
+        "drawn": 0,
+        "lost": 0
+      },
+      "URU": {
+        "played": 2,
+        "won": 0,
+        "drawn": 1,
+        "lost": 1
+      },
+      "JPN": {
+        "played": 2,
+        "won": 1,
+        "drawn": 0,
+        "lost": 1
+      },
+      "BEL": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "CRO": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "MAR": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "NED": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "FRA": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "ARG": {
+        "played": 2,
+        "won": 0,
+        "drawn": 0,
+        "lost": 2
+      },
+      "CIV": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "AUS": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "COL": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "ECU": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "TUN": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "UZB": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "BIH": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "SUI": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      }
+    }
+  },
+  "NED": {
+    "win_rate": 0.611,
+    "gd_average": 1.458,
+    "strength_of_schedule": 1.063,
+    "h2h": {
+      "TUR": {
+        "played": 3,
+        "won": 2,
+        "drawn": 0,
+        "lost": 1
+      },
+      "SCO": {
+        "played": 2,
+        "won": 1,
+        "drawn": 1,
+        "lost": 0
+      },
+      "AUT": {
+        "played": 2,
+        "won": 1,
+        "drawn": 0,
+        "lost": 1
+      },
+      "CZE": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "NOR": {
+        "played": 3,
+        "won": 2,
+        "drawn": 1,
+        "lost": 0
+      },
+      "GER": {
+        "played": 4,
+        "won": 0,
+        "drawn": 2,
+        "lost": 2
+      },
+      "BEL": {
+        "played": 2,
+        "won": 2,
+        "drawn": 0,
+        "lost": 0
+      },
+      "SEN": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "ECU": {
+        "played": 2,
+        "won": 0,
+        "drawn": 2,
+        "lost": 0
+      },
+      "QAT": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "USA": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "ARG": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "FRA": {
+        "played": 3,
+        "won": 0,
+        "drawn": 1,
+        "lost": 2
+      },
+      "CRO": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "CAN": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "ENG": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "BIH": {
+        "played": 2,
+        "won": 1,
+        "drawn": 1,
+        "lost": 0
+      },
+      "ESP": {
+        "played": 2,
+        "won": 0,
+        "drawn": 2,
+        "lost": 0
+      },
+      "UZB": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "JPN": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "SWE": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "TUN": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      }
+    }
+  },
+  "DZA": {
+    "win_rate": 0.5,
+    "gd_average": 0.0,
+    "strength_of_schedule": 1.0,
+    "h2h": {}
+  },
+  "BIH": {
+    "win_rate": 0.281,
+    "gd_average": -0.404,
+    "strength_of_schedule": 1.017,
+    "h2h": {
+      "FRA": {
+        "played": 2,
+        "won": 0,
+        "drawn": 1,
+        "lost": 1
+      },
+      "USA": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "POR": {
+        "played": 2,
+        "won": 0,
+        "drawn": 0,
+        "lost": 2
+      },
+      "ENG": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "NED": {
+        "played": 2,
+        "won": 0,
+        "drawn": 1,
+        "lost": 1
+      },
+      "GER": {
+        "played": 2,
+        "won": 0,
+        "drawn": 0,
+        "lost": 2
+      },
+      "AUT": {
+        "played": 2,
+        "won": 0,
+        "drawn": 1,
+        "lost": 1
+      },
+      "PAN": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "CAN": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "SUI": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "QAT": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      }
+    }
+  },
+  "KSA": {
+    "win_rate": 0.41,
+    "gd_average": 0.181,
+    "strength_of_schedule": 1.001,
+    "h2h": {
+      "UZB": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "JPN": {
+        "played": 4,
+        "won": 1,
+        "drawn": 1,
+        "lost": 2
+      },
+      "AUS": {
+        "played": 4,
+        "won": 1,
+        "drawn": 2,
+        "lost": 1
+      },
+      "JOR": {
+        "played": 5,
+        "won": 2,
+        "drawn": 0,
+        "lost": 3
+      },
+      "MAR": {
+        "played": 2,
+        "won": 0,
+        "drawn": 0,
+        "lost": 2
+      },
+      "COL": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "ECU": {
+        "played": 2,
+        "won": 0,
+        "drawn": 1,
+        "lost": 1
+      },
+      "USA": {
+        "played": 2,
+        "won": 0,
+        "drawn": 1,
+        "lost": 1
+      },
+      "PAN": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "CRO": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "ARG": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "MEX": {
+        "played": 2,
+        "won": 0,
+        "drawn": 0,
+        "lost": 2
+      },
+      "IRQ": {
+        "played": 3,
+        "won": 1,
+        "drawn": 1,
+        "lost": 1
+      },
+      "HAI": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "CZE": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "CIV": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "EGY": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "SEN": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "URU": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "ESP": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      }
+    }
+  },
+  "JPN": {
+    "win_rate": 0.672,
+    "gd_average": 1.984,
+    "strength_of_schedule": 1.023,
+    "h2h": {
+      "KSA": {
+        "played": 4,
+        "won": 2,
+        "drawn": 1,
+        "lost": 1
+      },
+      "AUS": {
+        "played": 4,
+        "won": 2,
+        "drawn": 1,
+        "lost": 1
+      },
+      "PAR": {
+        "played": 2,
+        "won": 1,
+        "drawn": 1,
+        "lost": 0
+      },
+      "BRA": {
+        "played": 2,
+        "won": 1,
+        "drawn": 0,
+        "lost": 1
+      },
+      "GHA": {
+        "played": 2,
+        "won": 2,
+        "drawn": 0,
+        "lost": 0
+      },
+      "TUN": {
+        "played": 2,
+        "won": 1,
+        "drawn": 0,
+        "lost": 1
+      },
+      "USA": {
+        "played": 2,
+        "won": 1,
+        "drawn": 0,
+        "lost": 1
+      },
+      "ECU": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "CAN": {
+        "played": 2,
+        "won": 1,
+        "drawn": 0,
+        "lost": 1
+      },
+      "GER": {
+        "played": 2,
+        "won": 2,
+        "drawn": 0,
+        "lost": 0
+      },
+      "ESP": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "CRO": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "URU": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "COL": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "TUR": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "JOR": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "IRQ": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "MEX": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "SCO": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "ENG": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "NED": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "SWE": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      }
+    }
+  },
+  "ECU": {
+    "win_rate": 0.375,
+    "gd_average": 0.278,
+    "strength_of_schedule": 1.115,
+    "h2h": {
+      "BRA": {
+        "played": 5,
+        "won": 0,
+        "drawn": 3,
+        "lost": 2
+      },
+      "COL": {
+        "played": 4,
+        "won": 1,
+        "drawn": 2,
+        "lost": 1
+      },
+      "ARG": {
+        "played": 6,
+        "won": 1,
+        "drawn": 2,
+        "lost": 3
+      },
+      "PAR": {
+        "played": 4,
+        "won": 1,
+        "drawn": 2,
+        "lost": 1
+      },
+      "URU": {
+        "played": 3,
+        "won": 1,
+        "drawn": 1,
+        "lost": 1
+      },
+      "MEX": {
+        "played": 4,
+        "won": 1,
+        "drawn": 3,
+        "lost": 0
+      },
+      "CPV": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "KSA": {
+        "played": 2,
+        "won": 1,
+        "drawn": 1,
+        "lost": 0
+      },
+      "JPN": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "IRQ": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "QAT": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "NED": {
+        "played": 2,
+        "won": 0,
+        "drawn": 2,
+        "lost": 0
+      },
+      "SEN": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "AUS": {
+        "played": 2,
+        "won": 1,
+        "drawn": 0,
+        "lost": 1
+      },
+      "USA": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "CAN": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "MAR": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "CIV": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "CUW": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "GER": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      }
+    }
+  },
+  "EGY": {
+    "win_rate": 0.553,
+    "gd_average": 0.895,
+    "strength_of_schedule": 0.946,
+    "h2h": {
+      "JOR": {
+        "played": 2,
+        "won": 1,
+        "drawn": 0,
+        "lost": 1
+      },
+      "TUN": {
+        "played": 2,
+        "won": 0,
+        "drawn": 0,
+        "lost": 2
+      },
+      "QAT": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "CIV": {
+        "played": 2,
+        "won": 1,
+        "drawn": 1,
+        "lost": 0
+      },
+      "MAR": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "SEN": {
+        "played": 4,
+        "won": 1,
+        "drawn": 1,
+        "lost": 2
+      },
+      "BEL": {
+        "played": 2,
+        "won": 1,
+        "drawn": 1,
+        "lost": 0
+      },
+      "GHA": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "CPV": {
+        "played": 4,
+        "won": 1,
+        "drawn": 3,
+        "lost": 0
+      },
+      "COD": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "CRO": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "UZB": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "RSA": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "KSA": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "ESP": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "BRA": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      }
+    }
+  },
+  "PAR": {
+    "win_rate": 0.317,
+    "gd_average": -0.283,
+    "strength_of_schedule": 1.128,
+    "h2h": {
+      "URU": {
+        "played": 5,
+        "won": 1,
+        "drawn": 2,
+        "lost": 2
+      },
+      "BRA": {
+        "played": 5,
+        "won": 1,
+        "drawn": 0,
+        "lost": 4
+      },
+      "ARG": {
+        "played": 4,
+        "won": 1,
+        "drawn": 1,
+        "lost": 2
+      },
+      "ECU": {
+        "played": 4,
+        "won": 1,
+        "drawn": 2,
+        "lost": 1
+      },
+      "COL": {
+        "played": 6,
+        "won": 0,
+        "drawn": 3,
+        "lost": 3
+      },
+      "JPN": {
+        "played": 2,
+        "won": 0,
+        "drawn": 1,
+        "lost": 1
+      },
+      "MEX": {
+        "played": 2,
+        "won": 2,
+        "drawn": 0,
+        "lost": 0
+      },
+      "MAR": {
+        "played": 2,
+        "won": 0,
+        "drawn": 1,
+        "lost": 1
+      },
+      "PAN": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "USA": {
+        "played": 2,
+        "won": 0,
+        "drawn": 0,
+        "lost": 2
+      },
+      "TUR": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "AUS": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      }
+    }
+  },
+  "AUS": {
+    "win_rate": 0.537,
+    "gd_average": 0.889,
+    "strength_of_schedule": 1.01,
+    "h2h": {
+      "JOR": {
+        "played": 2,
+        "won": 2,
+        "drawn": 0,
+        "lost": 0
+      },
+      "JPN": {
+        "played": 4,
+        "won": 1,
+        "drawn": 1,
+        "lost": 2
+      },
+      "KSA": {
+        "played": 4,
+        "won": 1,
+        "drawn": 2,
+        "lost": 1
+      },
+      "FRA": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "TUN": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "ARG": {
+        "played": 2,
+        "won": 0,
+        "drawn": 0,
+        "lost": 2
+      },
+      "ECU": {
+        "played": 2,
+        "won": 1,
+        "drawn": 0,
+        "lost": 1
+      },
+      "MEX": {
+        "played": 2,
+        "won": 0,
+        "drawn": 1,
+        "lost": 1
+      },
+      "ENG": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "UZB": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "CAN": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "USA": {
+        "played": 2,
+        "won": 0,
+        "drawn": 0,
+        "lost": 2
+      },
+      "COL": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "CUW": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "SUI": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "TUR": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "PAR": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      }
+    }
+  },
+  "TUN": {
+    "win_rate": 0.532,
+    "gd_average": 0.61,
+    "strength_of_schedule": 0.965,
+    "h2h": {
+      "COD": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "EGY": {
+        "played": 2,
+        "won": 2,
+        "drawn": 0,
+        "lost": 0
+      },
+      "JPN": {
+        "played": 2,
+        "won": 1,
+        "drawn": 0,
+        "lost": 1
+      },
+      "BRA": {
+        "played": 2,
+        "won": 0,
+        "drawn": 1,
+        "lost": 1
+      },
+      "AUS": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "FRA": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "CPV": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "RSA": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "CRO": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "MAR": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "JOR": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "QAT": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "HAI": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "CAN": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "AUT": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "BEL": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "SWE": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "NED": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      }
+    }
+  },
+  "COD": {
+    "win_rate": 0.435,
+    "gd_average": 0.403,
+    "strength_of_schedule": 0.947,
+    "h2h": {
+      "TUN": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "MAR": {
+        "played": 3,
+        "won": 0,
+        "drawn": 2,
+        "lost": 1
+      },
+      "RSA": {
+        "played": 2,
+        "won": 0,
+        "drawn": 1,
+        "lost": 1
+      },
+      "EGY": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "CIV": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "SEN": {
+        "played": 3,
+        "won": 0,
+        "drawn": 2,
+        "lost": 1
+      },
+      "POR": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "COL": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      }
+    }
+  },
+  "QAT": {
+    "win_rate": 0.39,
+    "gd_average": -0.098,
+    "strength_of_schedule": 0.967,
+    "h2h": {
+      "PAN": {
+        "played": 3,
+        "won": 1,
+        "drawn": 1,
+        "lost": 1
+      },
+      "USA": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "POR": {
+        "played": 2,
+        "won": 0,
+        "drawn": 0,
+        "lost": 2
+      },
+      "IRQ": {
+        "played": 3,
+        "won": 1,
+        "drawn": 1,
+        "lost": 1
+      },
+      "EGY": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "CAN": {
+        "played": 2,
+        "won": 0,
+        "drawn": 0,
+        "lost": 2
+      },
+      "ECU": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "SEN": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "NED": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "HAI": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "MEX": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "JOR": {
+        "played": 2,
+        "won": 1,
+        "drawn": 0,
+        "lost": 1
+      },
+      "UZB": {
+        "played": 3,
+        "won": 1,
+        "drawn": 1,
+        "lost": 1
+      },
+      "TUN": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "SUI": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "BIH": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      }
+    }
+  },
+  "MAR": {
+    "win_rate": 0.727,
+    "gd_average": 1.557,
+    "strength_of_schedule": 0.966,
+    "h2h": {
+      "GHA": {
+        "played": 2,
+        "won": 2,
+        "drawn": 0,
+        "lost": 0
+      },
+      "JOR": {
+        "played": 2,
+        "won": 2,
+        "drawn": 0,
+        "lost": 0
+      },
+      "KSA": {
+        "played": 2,
+        "won": 2,
+        "drawn": 0,
+        "lost": 0
+      },
+      "EGY": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "COD": {
+        "played": 3,
+        "won": 1,
+        "drawn": 2,
+        "lost": 0
+      },
+      "USA": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "RSA": {
+        "played": 3,
+        "won": 1,
+        "drawn": 0,
+        "lost": 2
+      },
+      "PAR": {
+        "played": 2,
+        "won": 1,
+        "drawn": 1,
+        "lost": 0
+      },
+      "CRO": {
+        "played": 2,
+        "won": 0,
+        "drawn": 1,
+        "lost": 1
+      },
+      "BEL": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "CAN": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "ESP": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "POR": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "FRA": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "BRA": {
+        "played": 2,
+        "won": 1,
+        "drawn": 1,
+        "lost": 0
+      },
+      "CPV": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "CIV": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "TUN": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "SEN": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "ECU": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "NOR": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "SCO": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "HAI": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      }
+    }
+  },
+  "GHA": {
+    "win_rate": 0.339,
+    "gd_average": 0.016,
+    "strength_of_schedule": 0.974,
+    "h2h": {
+      "RSA": {
+        "played": 3,
+        "won": 1,
+        "drawn": 1,
+        "lost": 1
+      },
+      "MAR": {
+        "played": 2,
+        "won": 0,
+        "drawn": 0,
+        "lost": 2
+      },
+      "CIV": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "JPN": {
+        "played": 2,
+        "won": 0,
+        "drawn": 0,
+        "lost": 2
+      },
+      "BRA": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "SUI": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "POR": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "URU": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "MEX": {
+        "played": 2,
+        "won": 0,
+        "drawn": 0,
+        "lost": 2
+      },
+      "USA": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "CPV": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "EGY": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "AUT": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "GER": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "PAN": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "ENG": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      }
+    }
+  },
+  "SUI": {
+    "win_rate": 0.458,
+    "gd_average": 0.694,
+    "strength_of_schedule": 1.069,
+    "h2h": {
+      "USA": {
+        "played": 2,
+        "won": 2,
+        "drawn": 0,
+        "lost": 0
+      },
+      "TUR": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "FRA": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "ESP": {
+        "played": 5,
+        "won": 1,
+        "drawn": 1,
+        "lost": 3
+      },
+      "ENG": {
+        "played": 2,
+        "won": 0,
+        "drawn": 1,
+        "lost": 1
+      },
+      "CZE": {
+        "played": 2,
+        "won": 1,
+        "drawn": 0,
+        "lost": 1
+      },
+      "POR": {
+        "played": 3,
+        "won": 1,
+        "drawn": 0,
+        "lost": 2
+      },
+      "GHA": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "BRA": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "AUT": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "SCO": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "GER": {
+        "played": 2,
+        "won": 0,
+        "drawn": 1,
+        "lost": 1
+      },
+      "MEX": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "SWE": {
+        "played": 2,
+        "won": 2,
+        "drawn": 0,
+        "lost": 0
+      },
+      "NOR": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "JOR": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "AUS": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "QAT": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "BIH": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "CAN": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      }
+    }
+  },
+  "URU": {
+    "win_rate": 0.422,
+    "gd_average": 0.547,
+    "strength_of_schedule": 1.103,
+    "h2h": {
+      "PAR": {
+        "played": 5,
+        "won": 2,
+        "drawn": 2,
+        "lost": 1
+      },
+      "ARG": {
+        "played": 5,
+        "won": 1,
+        "drawn": 0,
+        "lost": 4
+      },
+      "COL": {
+        "played": 5,
+        "won": 1,
+        "drawn": 3,
+        "lost": 1
+      },
+      "ECU": {
+        "played": 3,
+        "won": 1,
+        "drawn": 1,
+        "lost": 1
+      },
+      "BRA": {
+        "played": 4,
+        "won": 1,
+        "drawn": 2,
+        "lost": 1
+      },
+      "MEX": {
+        "played": 3,
+        "won": 2,
+        "drawn": 1,
+        "lost": 0
+      },
+      "USA": {
+        "played": 3,
+        "won": 1,
+        "drawn": 1,
+        "lost": 1
+      },
+      "PAN": {
+        "played": 2,
+        "won": 2,
+        "drawn": 0,
+        "lost": 0
+      },
+      "CAN": {
+        "played": 2,
+        "won": 1,
+        "drawn": 1,
+        "lost": 0
+      },
+      "POR": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "GHA": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "JPN": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "CIV": {
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1
+      },
+      "UZB": {
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0
+      },
+      "ENG": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "KSA": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      },
+      "CPV": {
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0
+      }
+    }
+  }
+}
