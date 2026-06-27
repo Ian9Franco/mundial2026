@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { motion } from "framer-motion";
 import { Team, TeamStats, GROUPS, Match, getBestThirds, getTeamFlagUrl } from "../data/teams";
 import { Trophy, CheckCircle2, XCircle } from "lucide-react";
 
@@ -24,7 +25,13 @@ export default function BestThirdsTable({
   const thirds = getBestThirds(GROUPS, allMatches, manualStandings, gdTweaks, gfTweaks);
 
   return (
-    <div className="glass-panel" style={{ padding: "1.25rem" }}>
+    <motion.section
+      className="glass-panel"
+      style={{ padding: "1.25rem" }}
+      initial={{ opacity: 0, y: 18 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+    >
       {/* Title */}
       <div className="thirds-header">
         <div>
@@ -151,6 +158,6 @@ export default function BestThirdsTable({
           </tbody>
         </table>
       </div>
-    </div>
+    </motion.section>
   );
 }

@@ -1,8 +1,10 @@
 "use client";
 
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 import { Group, Match, Team, getBestThirds, computeGroupStandings, getTeamFlagUrl } from "../data/teams";
-import { Swords, Trophy, CheckCircle, Clock, Award, Globe, Users, Flame } from "lucide-react";
+import { KnockoutMatchDetail, TeamCondition } from "../data/players";
+import { Trophy, CheckCircle, Clock, Award, Globe, Users, Flame, Sparkles } from "lucide-react";
 
 interface BracketViewProps {
   groups: Group[];
@@ -13,12 +15,54 @@ interface BracketViewProps {
   hoveredTeam: string | null;
   setHoveredTeam: (teamId: string | null) => void;
   koWinners: Record<string, Team>;
+  koMatchDetails: Record<string, KnockoutMatchDetail>;
+  teamConditions: Record<string, TeamCondition>;
   onSelectKoWinner: (matchId: string, winner: Team, loser: Team) => void;
+  onSetKoScore: (matchId: string, homeTeam: Team, awayTeam: Team, homeGoals: number, awayGoals: number, chungoWinner: boolean) => void;
   compareData?: { username: string; predictions: any } | null;
   readOnly?: boolean;
 }
 
 type RoundTab = "r32" | "r16" | "qf" | "sf" | "final";
+type TeamWithSource = Team & { source: string };
+
+const placeholderTeam = (id: string, name: string, source = name): TeamWithSource => ({
+  id,
+  name,
+  flag: "placeholder",
+  fifaRank: 99,
+  source,
+});
+
+const R32_BRACKET = [
+  { matchNo: 73, home: { type: "runner" as const, group: "A" }, away: { type: "runner" as const, group: "B" } },
+  { matchNo: 74, home: { type: "winner" as const, group: "E" }, away: { type: "third" as const, slot: "M74", allowed: ["A", "B", "C", "D", "F"] } },
+  { matchNo: 75, home: { type: "winner" as const, group: "F" }, away: { type: "runner" as const, group: "C" } },
+  { matchNo: 76, home: { type: "winner" as const, group: "C" }, away: { type: "runner" as const, group: "F" } },
+  { matchNo: 77, home: { type: "winner" as const, group: "I" }, away: { type: "third" as const, slot: "M77", allowed: ["C", "D", "F", "G", "H"] } },
+  { matchNo: 78, home: { type: "runner" as const, group: "E" }, away: { type: "runner" as const, group: "I" } },
+  { matchNo: 79, home: { type: "winner" as const, group: "A" }, away: { type: "third" as const, slot: "M79", allowed: ["C", "E", "F", "H", "I"] } },
+  { matchNo: 80, home: { type: "winner" as const, group: "L" }, away: { type: "third" as const, slot: "M80", allowed: ["E", "H", "I", "J", "K"] } },
+  { matchNo: 81, home: { type: "winner" as const, group: "D" }, away: { type: "third" as const, slot: "M81", allowed: ["B", "E", "F", "I", "J"] } },
+  { matchNo: 82, home: { type: "winner" as const, group: "G" }, away: { type: "third" as const, slot: "M82", allowed: ["A", "E", "H", "I", "J"] } },
+  { matchNo: 83, home: { type: "runner" as const, group: "K" }, away: { type: "runner" as const, group: "L" } },
+  { matchNo: 84, home: { type: "winner" as const, group: "H" }, away: { type: "runner" as const, group: "J" } },
+  { matchNo: 85, home: { type: "winner" as const, group: "B" }, away: { type: "third" as const, slot: "M85", allowed: ["E", "F", "G", "I", "J"] } },
+  { matchNo: 86, home: { type: "winner" as const, group: "J" }, away: { type: "runner" as const, group: "H" } },
+  { matchNo: 87, home: { type: "winner" as const, group: "K" }, away: { type: "third" as const, slot: "M87", allowed: ["D", "E", "I", "J", "L"] } },
+  { matchNo: 88, home: { type: "runner" as const, group: "D" }, away: { type: "runner" as const, group: "G" } },
+] as const;
+
+const R16_PAIRINGS = [
+  [1, 3],
+  [2, 5],
+  [4, 6],
+  [7, 8],
+  [11, 12],
+  [9, 10],
+  [14, 16],
+  [13, 15],
+] as const;
 
 export default function BracketView({
   groups,
@@ -29,11 +73,15 @@ export default function BracketView({
   hoveredTeam,
   setHoveredTeam,
   koWinners,
+  koMatchDetails,
+  teamConditions,
   onSelectKoWinner,
+  onSetKoScore,
   compareData,
   readOnly = false,
 }: BracketViewProps) {
   const [activeRound, setActiveRound] = useState<RoundTab>("r32");
+  const [scoreDrafts, setScoreDrafts] = useState<Record<string, { home: string; away: string; chungo: boolean }>>({});
 
   // Compute winners, runners-up, and best thirds from Group Stage
   const winners: Record<string, Team> = {};
@@ -50,165 +98,91 @@ export default function BracketView({
   const thirds = getBestThirds(groups, allMatches, manualStandings, gdTweaks, gfTweaks);
   const topThirds = thirds.slice(0, 8);
 
-  // Helper to fetch group phase qualifiers
-  const getGroupWinner = (gid: string) => winners[gid];
-  const getGroupRunnerUp = (gid: string) => runnersUp[gid];
-  const getGroupThird = (rankIdx: number) => {
-    if (topThirds[rankIdx]) {
-      return {
-        ...topThirds[rankIdx].team,
-        source: `3º Grupo ${topThirds[rankIdx].group} (${rankIdx + 1}º)`
-      };
+  const thirdSlots = R32_BRACKET
+    .flatMap(match => [match.home, match.away])
+    .filter((entry): entry is Extract<typeof R32_BRACKET[number]["home" | "away"], { type: "third" }> => entry.type === "third");
+
+  const assignThirds = () => {
+    const assignment: Record<string, typeof topThirds[number]> = {};
+
+    const solve = (slotIdx: number, usedGroups: Set<string>): boolean => {
+      if (slotIdx >= thirdSlots.length) return true;
+      const slot = thirdSlots[slotIdx];
+      const candidates = topThirds.filter(third => (slot.allowed as readonly string[]).includes(third.group) && !usedGroups.has(third.group));
+
+      for (const candidate of candidates) {
+        assignment[slot.slot] = candidate;
+        usedGroups.add(candidate.group);
+        if (solve(slotIdx + 1, usedGroups)) return true;
+        usedGroups.delete(candidate.group);
+        delete assignment[slot.slot];
+      }
+
+      return false;
+    };
+
+    if (topThirds.length >= thirdSlots.length && solve(0, new Set())) {
+      return assignment;
     }
-    return null;
+
+    const usedGroups = new Set<string>();
+    thirdSlots.forEach(slot => {
+      const candidate = topThirds.find(third => (slot.allowed as readonly string[]).includes(third.group) && !usedGroups.has(third.group));
+      if (candidate) {
+        assignment[slot.slot] = candidate;
+        usedGroups.add(candidate.group);
+      }
+    });
+    return assignment;
   };
 
-  // Define Round of 32 participants (R32-1 to R32-16) with proper local variable narrowing
-  const getR32Teams = (matchIdx: number): { t1: Team & { source: string }; t2: Team & { source: string } } => {
-    switch (matchIdx) {
-      case 1: {
-        const wA = getGroupWinner("A");
-        const t7 = getGroupThird(7);
-        return {
-          t1: wA ? { ...wA, source: "1º Grupo A" } : { id: "w-A", name: "1º Grupo A", flag: "placeholder", fifaRank: 99, source: "1º Grupo A" },
-          t2: t7 ? { ...t7, source: "8º Mejor 3º" } : { id: "t-7", name: "8º Mejor 3º", flag: "placeholder", fifaRank: 99, source: "8º Mejor 3º" }
-        };
-      }
-      case 2: {
-        const rB = getGroupRunnerUp("B");
-        const rF = getGroupRunnerUp("F");
-        return {
-          t1: rB ? { ...rB, source: "2º Grupo B" } : { id: "r-B", name: "2º Grupo B", flag: "placeholder", fifaRank: 99, source: "2º Grupo B" },
-          t2: rF ? { ...rF, source: "2º Grupo F" } : { id: "r-F", name: "2º Grupo F", flag: "placeholder", fifaRank: 99, source: "2º Grupo F" }
-        };
-      }
-      case 3: {
-        const wC = getGroupWinner("C");
-        const t6 = getGroupThird(6);
-        return {
-          t1: wC ? { ...wC, source: "1º Grupo C" } : { id: "w-C", name: "1º Grupo C", flag: "placeholder", fifaRank: 99, source: "1º Grupo C" },
-          t2: t6 ? { ...t6, source: "7º Mejor 3º" } : { id: "t-6", name: "7º Mejor 3º", flag: "placeholder", fifaRank: 99, source: "7º Mejor 3º" }
-        };
-      }
-      case 4: {
-        const rD = getGroupRunnerUp("D");
-        const rH = getGroupRunnerUp("H");
-        return {
-          t1: rD ? { ...rD, source: "2º Grupo D" } : { id: "r-D", name: "2º Grupo D", flag: "placeholder", fifaRank: 99, source: "2º Grupo D" },
-          t2: rH ? { ...rH, source: "2º Grupo H" } : { id: "r-H", name: "2º Grupo H", flag: "placeholder", fifaRank: 99, source: "2º Grupo H" }
-        };
-      }
-      case 5: {
-        const wE = getGroupWinner("E");
-        const t5 = getGroupThird(5);
-        return {
-          t1: wE ? { ...wE, source: "1º Grupo E" } : { id: "w-E", name: "1º Grupo E", flag: "placeholder", fifaRank: 99, source: "1º Grupo E" },
-          t2: t5 ? { ...t5, source: "6º Mejor 3º" } : { id: "t-5", name: "6º Mejor 3º", flag: "placeholder", fifaRank: 99, source: "6º Mejor 3º" }
-        };
-      }
-      case 6: {
-        const rA = getGroupRunnerUp("A");
-        const rC = getGroupRunnerUp("C");
-        return {
-          t1: rA ? { ...rA, source: "2º Grupo A" } : { id: "r-A", name: "2º Grupo A", flag: "placeholder", fifaRank: 99, source: "2º Grupo A" },
-          t2: rC ? { ...rC, source: "2º Grupo C" } : { id: "r-C", name: "2º Grupo C", flag: "placeholder", fifaRank: 99, source: "2º Grupo C" }
-        };
-      }
-      case 7: {
-        const wG = getGroupWinner("G");
-        const t4 = getGroupThird(4);
-        return {
-          t1: wG ? { ...wG, source: "1º Grupo G" } : { id: "w-G", name: "1º Grupo G", flag: "placeholder", fifaRank: 99, source: "1º Grupo G" },
-          t2: t4 ? { ...t4, source: "5º Mejor 3º" } : { id: "t-4", name: "5º Mejor 3º", flag: "placeholder", fifaRank: 99, source: "5º Mejor 3º" }
-        };
-      }
-      case 8: {
-        const rI = getGroupRunnerUp("I");
-        const rK = getGroupRunnerUp("K");
-        return {
-          t1: rI ? { ...rI, source: "2º Grupo I" } : { id: "r-I", name: "2º Grupo I", flag: "placeholder", fifaRank: 99, source: "2º Grupo I" },
-          t2: rK ? { ...rK, source: "2º Grupo K" } : { id: "r-K", name: "2º Grupo K", flag: "placeholder", fifaRank: 99, source: "2º Grupo K" }
-        };
-      }
-      case 9: {
-        const wB = getGroupWinner("B");
-        const t3 = getGroupThird(3);
-        return {
-          t1: wB ? { ...wB, source: "1º Grupo B" } : { id: "w-B", name: "1º Grupo B", flag: "placeholder", fifaRank: 99, source: "1º Grupo B" },
-          t2: t3 ? { ...t3, source: "4º Mejor 3º" } : { id: "t-3", name: "4º Mejor 3º", flag: "placeholder", fifaRank: 99, source: "4º Mejor 3º" }
-        };
-      }
-      case 10: {
-        const rE = getGroupRunnerUp("E");
-        const rG = getGroupRunnerUp("G");
-        return {
-          t1: rE ? { ...rE, source: "2º Grupo E" } : { id: "r-E", name: "2º Grupo E", flag: "placeholder", fifaRank: 99, source: "2º Grupo E" },
-          t2: rG ? { ...rG, source: "2º Grupo G" } : { id: "r-G", name: "2º Grupo G", flag: "placeholder", fifaRank: 99, source: "2º Grupo G" }
-        };
-      }
-      case 11: {
-        const wD = getGroupWinner("D");
-        const t2 = getGroupThird(2);
-        return {
-          t1: wD ? { ...wD, source: "1º Grupo D" } : { id: "w-D", name: "1º Grupo D", flag: "placeholder", fifaRank: 99, source: "1º Grupo D" },
-          t2: t2 ? { ...t2, source: "3º Mejor 3º" } : { id: "t-2", name: "3º Mejor 3º", flag: "placeholder", fifaRank: 99, source: "3º Mejor 3º" }
-        };
-      }
-      case 12: {
-        const rJ = getGroupRunnerUp("J");
-        const rL = getGroupRunnerUp("L");
-        return {
-          t1: rJ ? { ...rJ, source: "2º Grupo J" } : { id: "r-J", name: "2º Grupo J", flag: "placeholder", fifaRank: 99, source: "2º Grupo J" },
-          t2: rL ? { ...rL, source: "2º Grupo L" } : { id: "r-L", name: "2º Grupo L", flag: "placeholder", fifaRank: 99, source: "2º Grupo L" }
-        };
-      }
-      case 13: {
-        const wF = getGroupWinner("F");
-        const t1 = getGroupThird(1);
-        return {
-          t1: wF ? { ...wF, source: "1º Grupo F" } : { id: "w-F", name: "1º Grupo F", flag: "placeholder", fifaRank: 99, source: "1º Grupo F" },
-          t2: t1 ? { ...t1, source: "2º Mejor 3º" } : { id: "t-1", name: "2º Mejor 3º", flag: "placeholder", fifaRank: 99, source: "2º Mejor 3º" }
-        };
-      }
-      case 14: {
-        const wJ = getGroupWinner("J");
-        const rI = getGroupRunnerUp("I");
-        return {
-          t1: wJ ? { ...wJ, source: "1º Grupo J" } : { id: "w-J", name: "1º Grupo J", flag: "placeholder", fifaRank: 99, source: "1º Grupo J" },
-          t2: rI ? { ...rI, source: "2º Grupo I" } : { id: "r-I", name: "2º Grupo I", flag: "placeholder", fifaRank: 99, source: "2º Grupo I" }
-        };
-      }
-      case 15: {
-        const wH = getGroupWinner("H");
-        const t0 = getGroupThird(0);
-        return {
-          t1: wH ? { ...wH, source: "1º Grupo H" } : { id: "w-H", name: "1º Grupo H", flag: "placeholder", fifaRank: 99, source: "1º Grupo H" },
-          t2: t0 ? { ...t0, source: "1º Mejor 3º" } : { id: "t-0", name: "1º Mejor 3º", flag: "placeholder", fifaRank: 99, source: "1º Mejor 3º" }
-        };
-      }
-      case 16: {
-        const wI = getGroupWinner("I");
-        const rJ = getGroupRunnerUp("J");
-        return {
-          t1: wI ? { ...wI, source: "1º Grupo I" } : { id: "w-I", name: "1º Grupo I", flag: "placeholder", fifaRank: 99, source: "1º Grupo I" },
-          t2: rJ ? { ...rJ, source: "2º Grupo J" } : { id: "r-J", name: "2º Grupo J", flag: "placeholder", fifaRank: 99, source: "2º Grupo J" }
-        };
-      }
-      default:
-        return {
-          t1: { id: "err", name: "Error", flag: "placeholder", fifaRank: 99, source: "" },
-          t2: { id: "err", name: "Error", flag: "placeholder", fifaRank: 99, source: "" }
-        };
+  const thirdAssignments = assignThirds();
+
+  const resolveSeed = (seed: typeof R32_BRACKET[number]["home" | "away"]): TeamWithSource => {
+    if (seed.type === "winner") {
+      return winners[seed.group]
+        ? { ...winners[seed.group], source: `1º Grupo ${seed.group}` }
+        : placeholderTeam(`w-${seed.group}`, `1º Grupo ${seed.group}`);
     }
+
+    if (seed.type === "runner") {
+      return runnersUp[seed.group]
+        ? { ...runnersUp[seed.group], source: `2º Grupo ${seed.group}` }
+        : placeholderTeam(`r-${seed.group}`, `2º Grupo ${seed.group}`);
+    }
+
+    const third = thirdAssignments[seed.slot];
+    return third
+      ? { ...third.team, source: `3º Grupo ${third.group}` }
+      : placeholderTeam(`t-${seed.slot}`, `3º Grupo ${seed.allowed.join("/")}`, `3º de ${seed.allowed.join("/")}`);
+  };
+
+  const getR32Teams = (matchIdx: number): { t1: TeamWithSource; t2: TeamWithSource; matchNo?: number } => {
+    const match = R32_BRACKET[matchIdx - 1];
+    if (!match) {
+      return {
+        t1: placeholderTeam("err-1", "Error"),
+        t2: placeholderTeam("err-2", "Error"),
+      };
+    }
+
+    return {
+      t1: resolveSeed(match.home),
+      t2: resolveSeed(match.away),
+      matchNo: match.matchNo,
+    };
   };
 
   // Round of 16 (R16-1 to R16-8)
   const getR16Teams = (matchIdx: number) => {
-    const p1 = koWinners[`R32-${2 * matchIdx - 1}`];
-    const p2 = koWinners[`R32-${2 * matchIdx}`];
+    const pairing = R16_PAIRINGS[matchIdx - 1];
+    const leftMatch = pairing?.[0];
+    const rightMatch = pairing?.[1];
+    const p1 = leftMatch ? koWinners[`R32-${leftMatch}`] : undefined;
+    const p2 = rightMatch ? koWinners[`R32-${rightMatch}`] : undefined;
     return {
-      t1: p1 || { id: `r16-p1-${matchIdx}`, name: `Ganador 16avo ${2 * matchIdx - 1}`, flag: "placeholder", fifaRank: 99, source: "Fase Anterior" },
-      t2: p2 || { id: `r16-p2-${matchIdx}`, name: `Ganador 16avo ${2 * matchIdx}`, flag: "placeholder", fifaRank: 99, source: "Fase Anterior" }
+      t1: p1 || { id: `r16-p1-${matchIdx}`, name: `Ganador Llave ${leftMatch ?? "?"}`, flag: "placeholder", fifaRank: 99, source: "Fase Anterior" },
+      t2: p2 || { id: `r16-p2-${matchIdx}`, name: `Ganador Llave ${rightMatch ?? "?"}`, flag: "placeholder", fifaRank: 99, source: "Fase Anterior" }
     };
   };
 
@@ -268,6 +242,12 @@ export default function BracketView({
     const isT1Winner = koWinners[matchId]?.id === t1.id;
     const isT2Winner = koWinners[matchId]?.id === t2.id;
     const isCompleted = isT1Winner || isT2Winner;
+    const detail = koMatchDetails[matchId];
+    const draft = scoreDrafts[matchId] || {
+      home: detail ? String(detail.homeGoals) : "",
+      away: detail ? String(detail.awayGoals) : "",
+      chungo: detail?.chungoWinner || false,
+    };
     
     const isT1Placeholder = t1.flag === "placeholder";
     const isT2Placeholder = t2.flag === "placeholder";
@@ -276,10 +256,17 @@ export default function BracketView({
     const isT2Hovered = hoveredTeam === t2.id;
     const isCardHovered = isT1Hovered || isT2Hovered;
 
+    const t1Condition = teamConditions[t1.id];
+    const t2Condition = teamConditions[t2.id];
+
     return (
-      <div 
+      <motion.div 
         key={matchId} 
         className="matchup-card"
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
+        whileHover={{ y: -3 }}
         style={{
           borderColor: isCardHovered ? "var(--primary)" : undefined,
           boxShadow: isCardHovered ? "0 0 12px rgba(99,102,241,0.2)" : undefined
@@ -300,6 +287,68 @@ export default function BracketView({
             <span>{desc}</span>
           </div>
         </div>
+
+        {!readOnly && !isT1Placeholder && !isT2Placeholder && (
+          <div className="matchup-score-editor">
+            <div className="matchup-score-row">
+              <input
+                type="number"
+                min="0"
+                inputMode="numeric"
+                className="matchup-score-input"
+                value={draft.home}
+                onChange={(e) =>
+                  setScoreDrafts(prev => ({
+                    ...prev,
+                    [matchId]: { ...draft, home: e.target.value },
+                  }))
+                }
+                aria-label={`Goles de ${t1.name}`}
+              />
+              <span className="matchup-score-sep">-</span>
+              <input
+                type="number"
+                min="0"
+                inputMode="numeric"
+                className="matchup-score-input"
+                value={draft.away}
+                onChange={(e) =>
+                  setScoreDrafts(prev => ({
+                    ...prev,
+                    [matchId]: { ...draft, away: e.target.value },
+                  }))
+                }
+                aria-label={`Goles de ${t2.name}`}
+              />
+              <button
+                type="button"
+                className={`btn ${draft.chungo ? "btn-primary" : "btn-secondary"}`}
+                style={{ minHeight: "34px", padding: "0 0.7rem" }}
+                onClick={() =>
+                  setScoreDrafts(prev => ({
+                    ...prev,
+                    [matchId]: { ...draft, chungo: !draft.chungo },
+                  }))
+                }
+              >
+                Chungo
+              </button>
+            </div>
+            <button
+              type="button"
+              className="btn btn-primary"
+              style={{ width: "100%", minHeight: "36px" }}
+              onClick={() => {
+                const homeGoals = Number(draft.home);
+                const awayGoals = Number(draft.away);
+                if (Number.isNaN(homeGoals) || Number.isNaN(awayGoals)) return;
+                onSetKoScore(matchId, t1, t2, homeGoals, awayGoals, draft.chungo);
+              }}
+            >
+              Aplicar resultado
+            </button>
+          </div>
+        )}
         
         {/* Team 1 */}
         <div 
@@ -323,11 +372,18 @@ export default function BracketView({
               <span className="matchup-team-source truncate">{t1.source || "Fase Anterior"}</span>
             </div>
           </div>
-          {!isT1Placeholder && (
-            <span className="font-mono text-center" style={{ fontSize: "0.65rem", padding: "0.1rem 0.3rem", borderRadius: "3px", background: "rgba(255,255,255,0.05)", color: "var(--text-muted)" }}>
-              #{t1.fifaRank}
-            </span>
-          )}
+          <div className="flex items-center gap-1">
+            {t1Condition && (
+              <span className="badge badge-danger" title={t1Condition.note}>
+                <Sparkles className="w-3 h-3" /> Chungo x{t1Condition.level}
+              </span>
+            )}
+            {!isT1Placeholder && (
+              <span className="font-mono text-center" style={{ fontSize: "0.65rem", padding: "0.1rem 0.3rem", borderRadius: "3px", background: "rgba(255,255,255,0.05)", color: "var(--text-muted)" }}>
+                #{t1.fifaRank}
+              </span>
+            )}
+          </div>
         </div>
 
         {/* Team 2 */}
@@ -352,12 +408,39 @@ export default function BracketView({
               <span className="matchup-team-source truncate">{t2.source || "Fase Anterior"}</span>
             </div>
           </div>
-          {!isT2Placeholder && (
-            <span className="font-mono text-center" style={{ fontSize: "0.65rem", padding: "0.1rem 0.3rem", borderRadius: "3px", background: "rgba(255,255,255,0.05)", color: "var(--text-muted)" }}>
-              #{t2.fifaRank}
-            </span>
-          )}
+          <div className="flex items-center gap-1">
+            {t2Condition && (
+              <span className="badge badge-danger" title={t2Condition.note}>
+                <Sparkles className="w-3 h-3" /> Chungo x{t2Condition.level}
+              </span>
+            )}
+            {!isT2Placeholder && (
+              <span className="font-mono text-center" style={{ fontSize: "0.65rem", padding: "0.1rem 0.3rem", borderRadius: "3px", background: "rgba(255,255,255,0.05)", color: "var(--text-muted)" }}>
+                #{t2.fifaRank}
+              </span>
+            )}
+          </div>
         </div>
+        {detail && (
+          <div className="flex flex-col gap-1" style={{ marginTop: "0.35rem" }}>
+            <div className="badge" style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.06)", color: "#fff", width: "fit-content" }}>
+              {detail.homeGoals}-{detail.awayGoals}
+              {detail.chungoWinner && <span style={{ color: "var(--warning)" }}> | Chungo</span>}
+            </div>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "0.35rem" }}>
+              {detail.events.map((event, index) => (
+                <span
+                  key={`${event.playerId}-${index}`}
+                  className="comparison-pill"
+                  style={{ background: "rgba(255,255,255,0.04)", borderColor: "rgba(255,255,255,0.08)", color: "var(--text-primary)" }}
+                >
+                  {event.playerName}
+                  {event.assistName ? ` a: ${event.assistName}` : ""}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
         {compareData && (() => {
           const otherWinnerId = compareData.predictions?.koWinners?.[matchId];
           if (otherWinnerId && otherWinnerId !== koWinners[matchId]?.id) {
@@ -372,7 +455,7 @@ export default function BracketView({
           }
           return null;
         })()}
-      </div>
+      </motion.div>
     );
   };
 
@@ -395,9 +478,6 @@ export default function BracketView({
             <Flame className="w-5 h-5 text-indigo-400 animate-pulse" />
             El Cuadro de Eliminación Directa
           </h2>
-          <p style={{ fontSize: "0.8rem", color: "var(--text-secondary)", marginTop: "0.3rem" }}>
-            Se termina el margen de error. Hacé clic sobre la selección que creas que ganará cada duelo para avanzarla a la siguiente ronda. De dieciseisavos a la gran final: vos decidís quién escribe la historia.
-          </p>
         </div>
       )}
 
@@ -457,14 +537,14 @@ export default function BracketView({
           Array.from({ length: 16 }).map((_, idx) => {
             const mIdx = idx + 1;
             const teams = getR32Teams(mIdx);
-            return renderMatchup(`R32-${mIdx}`, `16avo ${mIdx}`, "Cruces Generales", teams.t1, teams.t2);
+            return renderMatchup(`R32-${mIdx}`, `16avo ${mIdx}`, `Partido FIFA ${teams.matchNo ?? mIdx}`, teams.t1, teams.t2);
           })}
 
         {activeRound === "r16" &&
           Array.from({ length: 8 }).map((_, idx) => {
             const mIdx = idx + 1;
             const teams = getR16Teams(mIdx);
-            return renderMatchup(`R16-${mIdx}`, `Octavos ${mIdx}`, "Ganadores 16avos", teams.t1, teams.t2);
+            return renderMatchup(`R16-${mIdx}`, `Octavos ${mIdx}`, "Ganadores de llaves FIFA", teams.t1, teams.t2);
           })}
 
         {activeRound === "qf" &&

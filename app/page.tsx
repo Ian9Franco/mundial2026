@@ -10,11 +10,20 @@ import {
   computeGroupStandings,
   getBestThirds,
   simulateGroupMatch,
-  simulateKnockoutMatch,
   getTeamPower,
   historicalMap,
   getTeamFlagUrl
 } from "../data/teams";
+import {
+  buildTeamConditions,
+  getAssistLeader,
+  getGoldenBootLeader,
+  getGoldenGloveLeader,
+  getMvpLeader,
+  generateKnockoutMatchDetail,
+  getConditionPenalty,
+  KnockoutMatchDetail,
+} from "../data/players";
 import GroupCard from "../components/GroupCard";
 import equiposData from "../data/equipos.json";
 import BestThirdsTable from "../components/BestThirdsTable";
@@ -54,6 +63,7 @@ export default function Home() {
   const [gdTweaks, setGdTweaks] = useState<Record<string, number>>({});
   const [gfTweaks, setGfTweaks] = useState<Record<string, number>>({});
   const [koWinners, setKoWinners] = useState<Record<string, Team>>({});
+  const [koMatchDetails, setKoMatchDetails] = useState<Record<string, KnockoutMatchDetail>>({});
 
   // UI state
   const [activeTab, setActiveTab] = useState<"groups" | "thirds" | "bracket" | "stats" | "community">("groups");
@@ -69,6 +79,7 @@ export default function Home() {
   const [allPredictions, setAllPredictions] = useState<any[]>([]);
   const [selectedCompareUser, setSelectedCompareUser] = useState("");
   const [viewingUserBracket, setViewingUserBracket] = useState<any | null>(null);
+  const [collapsedGroups, setCollapsedGroups] = useState<Record<string, boolean>>({});
   const [isBracketSimulated, setIsBracketSimulated] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [saveMessage, setSaveMessage] = useState<{ text: string; type: "success" | "error" } | null>(null);
@@ -149,6 +160,38 @@ export default function Home() {
     setCropImageSrc(null);
   };
 
+  const applyStoredPrediction = (profile: { username?: string; avatar?: string | null; predictions?: any }) => {
+    if (profile.username) {
+      setUsername(profile.username);
+      localStorage.setItem("wc_username", profile.username);
+    }
+    setAvatar(profile.avatar || "");
+
+    const predictions = profile.predictions;
+    if (!predictions) return;
+
+    if (predictions.matches) {
+      setMatches(prev => {
+        const updated = { ...prev };
+        Object.keys(predictions.matches).forEach(mId => {
+          Object.keys(updated).forEach(gId => {
+            const match = updated[gId].find(m => m.id === mId);
+            if (match) match.result = predictions.matches[mId];
+          });
+        });
+        return updated;
+      });
+    }
+    setManualStandings(predictions.manualStandings || {});
+    setGdTweaks(predictions.gdTweaks || {});
+    setGfTweaks(predictions.gfTweaks || {});
+    setKoWinners(predictions.koWinners || {});
+    setKoMatchDetails(predictions.koMatchDetails || {});
+    if (predictions.isBracketSimulated !== undefined) {
+      setIsBracketSimulated(predictions.isBracketSimulated);
+    }
+  };
+
   // Auto-dismiss simulation commentary after 7 seconds
   useEffect(() => {
     if (simulationComment) {
@@ -159,27 +202,15 @@ export default function Home() {
     }
   }, [simulationComment]);
 
-  // Load cached username, fetch comparison data, and select random accent color theme
+  // Load cached username, fetch comparison data, and apply a stable product palette
   useEffect(() => {
-    // Shifting accent color theme mechanic
-    const themes = [
-      { name: "indigo", primary: "#6366f1", primaryRgb: "99, 102, 241", accent: "#8b5cf6", accentRgb: "139, 92, 246" },
-      { name: "amarillo", primary: "#fbbf24", primaryRgb: "251, 191, 36", accent: "#f59e0b", accentRgb: "245, 158, 11" },
-      { name: "rojo", primary: "#ef4444", primaryRgb: "239, 68, 68", accent: "#f87171", accentRgb: "248, 113, 113" },
-      { name: "verde", primary: "#10b981", primaryRgb: "16, 185, 129", accent: "#34d399", accentRgb: "52, 211, 153" },
-      { name: "naranja", primary: "#f97316", primaryRgb: "249, 115, 22", accent: "#fb923c", accentRgb: "251, 146, 60" },
-      { name: "blanco", primary: "#f3f4f6", primaryRgb: "243, 244, 246", accent: "#38bdf8", accentRgb: "56, 189, 248" },
-      { name: "rosado", primary: "#ec4899", primaryRgb: "236, 72, 153", accent: "#f472b6", accentRgb: "244, 114, 182" },
-      { name: "cian", primary: "#06b6d4", primaryRgb: "6, 182, 212", accent: "#22d3ee", accentRgb: "34, 211, 238" }
-    ];
-    const randomTheme = themes[Math.floor(Math.random() * themes.length)];
     const root = document.documentElement;
-    root.style.setProperty("--primary", randomTheme.primary);
-    root.style.setProperty("--primary-rgb", randomTheme.primaryRgb);
-    root.style.setProperty("--accent", randomTheme.accent);
-    root.style.setProperty("--accent-rgb", randomTheme.accentRgb);
-    root.style.setProperty("--border-color", `rgba(${randomTheme.primaryRgb}, 0.15)`);
-    root.style.setProperty("--border-glow", `rgba(${randomTheme.accentRgb}, 0.4)`);
+    root.style.setProperty("--primary", "#0a84ff");
+    root.style.setProperty("--primary-rgb", "10, 132, 255");
+    root.style.setProperty("--accent", "#30d158");
+    root.style.setProperty("--accent-rgb", "48, 209, 88");
+    root.style.setProperty("--border-color", "rgba(255, 255, 255, 0.08)");
+    root.style.setProperty("--border-glow", "rgba(10, 132, 255, 0.18)");
 
     let storedId = localStorage.getItem("wc_user_id");
     if (!storedId) {
@@ -197,30 +228,7 @@ export default function Home() {
           .maybeSingle();
 
         if (myData) {
-          setUsername(myData.username);
-          setAvatar(myData.avatar || "");
-          localStorage.setItem("wc_username", myData.username);
-          if (myData.predictions) {
-            if (myData.predictions.matches) {
-              setMatches(prev => {
-                const updated = { ...prev };
-                Object.keys(myData.predictions.matches).forEach(mId => {
-                  Object.keys(updated).forEach(gId => {
-                    const match = updated[gId].find(m => m.id === mId);
-                    if (match) match.result = myData.predictions.matches[mId];
-                  });
-                });
-                return updated;
-              });
-            }
-            if (myData.predictions.manualStandings) setManualStandings(myData.predictions.manualStandings);
-            if (myData.predictions.gdTweaks) setGdTweaks(myData.predictions.gdTweaks);
-            if (myData.predictions.gfTweaks) setGfTweaks(myData.predictions.gfTweaks);
-            if (myData.predictions.koWinners) setKoWinners(myData.predictions.koWinners);
-            if (myData.predictions.isBracketSimulated !== undefined) {
-              setIsBracketSimulated(myData.predictions.isBracketSimulated);
-            }
-          }
+          applyStoredPrediction(myData);
         } else {
           const cachedName = localStorage.getItem("wc_username");
           if (cachedName) {
@@ -242,7 +250,7 @@ export default function Home() {
     try {
       const { data, error } = await supabase
         .from("predictions")
-        .select("id, username, avatar, predictions, updated_at")
+        .select("id, username, avatar, predictions, updated_at, golden_boot_name, golden_boot_team_id, golden_boot_goals, golden_boot_assists, assist_king_name, assist_king_team_id, assist_king_goals, assist_king_assists, mvp_name, mvp_team_id, mvp_goals, mvp_assists, golden_glove_name, golden_glove_team_id, golden_glove_clean_sheets, golden_glove_goals_conceded")
         .order("updated_at", { ascending: false });
       if (error) {
         console.error("Error fetching predictions from Supabase:", error);
@@ -276,6 +284,11 @@ export default function Home() {
         acc[mId] = koWinners[mId];
         return acc;
       }, {} as Record<string, Team>),
+      koMatchDetails,
+      goldenBoot: computedGoldenBoot,
+      assistKing: computedAssistLeader,
+      mvp: computedMvp,
+      goldenGlove: computedGoldenGlove,
       isBracketSimulated
     };
 
@@ -287,6 +300,22 @@ export default function Home() {
             id: userId,
             username, 
             avatar: avatar || null,
+            golden_boot_name: computedGoldenBoot?.playerName || null,
+            golden_boot_team_id: computedGoldenBoot?.teamId || null,
+            golden_boot_goals: computedGoldenBoot?.goals || 0,
+            golden_boot_assists: computedGoldenBoot?.assists || 0,
+            assist_king_name: computedAssistLeader?.playerName || null,
+            assist_king_team_id: computedAssistLeader?.teamId || null,
+            assist_king_goals: computedAssistLeader?.goals || 0,
+            assist_king_assists: computedAssistLeader?.assists || 0,
+            mvp_name: computedMvp?.playerName || null,
+            mvp_team_id: computedMvp?.teamId || null,
+            mvp_goals: computedMvp?.goals || 0,
+            mvp_assists: computedMvp?.assists || 0,
+            golden_glove_name: computedGoldenGlove?.playerName || null,
+            golden_glove_team_id: computedGoldenGlove?.teamId || null,
+            golden_glove_clean_sheets: computedGoldenGlove?.cleanSheets || 0,
+            golden_glove_goals_conceded: computedGoldenGlove?.goalsConceded || 0,
             predictions: payload, 
             updated_at: new Date().toISOString() 
           }, 
@@ -311,6 +340,104 @@ export default function Home() {
     if (!selectedCompareUser) return null;
     return allPredictions.find(p => p.id === selectedCompareUser) || null;
   }, [allPredictions, selectedCompareUser]);
+
+  const orderedGroups = useMemo(() => {
+    return [...GROUPS].sort((a, b) => {
+      const aComplete = Boolean(manualStandings[a.id]) || matches[a.id].every(m => m.isOfficial || m.result !== null);
+      const bComplete = Boolean(manualStandings[b.id]) || matches[b.id].every(m => m.isOfficial || m.result !== null);
+      if (aComplete === bComplete) return a.id.localeCompare(b.id);
+      return aComplete ? 1 : -1;
+    });
+  }, [manualStandings, matches]);
+
+  const handleToggleGroupCollapsed = (groupId: string) => {
+    setCollapsedGroups(prev => {
+      const isComplete = Boolean(manualStandings[groupId]) || matches[groupId].every(m => m.isOfficial || m.result !== null);
+      const current = prev[groupId] ?? isComplete;
+      return { ...prev, [groupId]: !current };
+    });
+  };
+
+  const teamConditions = useMemo(() => buildTeamConditions(koMatchDetails), [koMatchDetails]);
+  const computedGoldenBoot = useMemo(() => getGoldenBootLeader(koMatchDetails), [koMatchDetails]);
+  const computedAssistLeader = useMemo(() => getAssistLeader(koMatchDetails), [koMatchDetails]);
+  const computedMvp = useMemo(() => getMvpLeader(koMatchDetails, koWinners["F-1"]?.id || null), [koMatchDetails, koWinners]);
+  const computedGoldenGlove = useMemo(() => getGoldenGloveLeader(koMatchDetails), [koMatchDetails]);
+
+  const r16Pairings = useMemo(
+    () =>
+      ({
+        "R16-1": ["R32-1", "R32-3"] as [string, string],
+        "R16-2": ["R32-2", "R32-5"] as [string, string],
+        "R16-3": ["R32-4", "R32-6"] as [string, string],
+        "R16-4": ["R32-7", "R32-8"] as [string, string],
+        "R16-5": ["R32-11", "R32-12"] as [string, string],
+        "R16-6": ["R32-9", "R32-10"] as [string, string],
+        "R16-7": ["R32-14", "R32-16"] as [string, string],
+        "R16-8": ["R32-13", "R32-15"] as [string, string],
+      }),
+    []
+  );
+
+  const downstreamMap = useMemo(
+    () => ({
+      ...r16Pairings,
+      "QF-1": ["R16-1", "R16-2"],
+      "QF-2": ["R16-3", "R16-4"],
+      "QF-3": ["R16-5", "R16-6"],
+      "QF-4": ["R16-7", "R16-8"],
+      "SF-1": ["QF-1", "QF-2"],
+      "SF-2": ["QF-3", "QF-4"],
+      "F-1": ["SF-1", "SF-2"],
+    } as Record<string, [string, string]>),
+    [r16Pairings]
+  );
+
+  const pruneKnockoutState = (
+    winners: Record<string, Team>,
+    details: Record<string, KnockoutMatchDetail>
+  ) => {
+    const nextWinners = { ...winners };
+    const nextDetails = { ...details };
+
+    Object.entries(downstreamMap).forEach(([matchId, [leftId, rightId]]) => {
+      const left = nextWinners[leftId];
+      const right = nextWinners[rightId];
+      const currentWinner = nextWinners[matchId];
+      const currentDetail = nextDetails[matchId];
+      const validIds = [left?.id, right?.id].filter(Boolean);
+
+      if (currentWinner && !validIds.includes(currentWinner.id)) {
+        delete nextWinners[matchId];
+        delete nextDetails[matchId];
+      } else if (currentDetail && !validIds.includes(currentDetail.winnerId)) {
+        delete nextWinners[matchId];
+        delete nextDetails[matchId];
+      }
+    });
+
+    const sf1 = nextWinners["SF-1"];
+    const sf2 = nextWinners["SF-2"];
+    const tpDetail = nextDetails["TP-1"];
+    const tpWinner = nextWinners["TP-1"];
+    const qf1 = nextWinners["QF-1"];
+    const qf2 = nextWinners["QF-2"];
+    const qf3 = nextWinners["QF-3"];
+    const qf4 = nextWinners["QF-4"];
+    const sf1Loser = sf1 ? (sf1.id === qf1?.id ? qf2 : qf1) : undefined;
+    const sf2Loser = sf2 ? (sf2.id === qf3?.id ? qf4 : qf3) : undefined;
+    const tpValidIds = [sf1Loser?.id, sf2Loser?.id].filter(Boolean);
+
+    if (tpWinner && !tpValidIds.includes(tpWinner.id)) {
+      delete nextWinners["TP-1"];
+      delete nextDetails["TP-1"];
+    } else if (tpDetail && !tpValidIds.includes(tpDetail.winnerId)) {
+      delete nextWinners["TP-1"];
+      delete nextDetails["TP-1"];
+    }
+
+    return { nextWinners, nextDetails };
+  };
 
   const teamStatsList = useMemo(() => {
     const rawEquipos = equiposData.equipos || [];
@@ -501,6 +628,7 @@ export default function Home() {
     });
     // Invalidate knockout bracket downstream when group stages change
     setKoWinners({});
+    setKoMatchDetails({});
     setIsBracketSimulated(false);
   };
 
@@ -526,6 +654,7 @@ export default function Home() {
       }
     });
     setKoWinners({});
+    setKoMatchDetails({});
     setIsBracketSimulated(false);
   };
 
@@ -559,6 +688,7 @@ export default function Home() {
         [groupId]: newOrder
       }));
       setKoWinners({});
+      setKoMatchDetails({});
       setIsBracketSimulated(false);
     }
   };
@@ -570,6 +700,7 @@ export default function Home() {
       [teamId]: (prev[teamId] || 0) + delta
     }));
     setKoWinners({});
+    setKoMatchDetails({});
     setIsBracketSimulated(false);
   };
 
@@ -580,6 +711,7 @@ export default function Home() {
       [teamId]: (prev[teamId] || 0) + delta
     }));
     setKoWinners({});
+    setKoMatchDetails({});
     setIsBracketSimulated(false);
   };
 
@@ -598,6 +730,7 @@ export default function Home() {
     setGdTweaks({});
     setGfTweaks({});
     setKoWinners({});
+    setKoMatchDetails({});
     setIsBracketSimulated(false);
   };
 
@@ -608,6 +741,7 @@ export default function Home() {
     setGdTweaks({});
     setGfTweaks({});
     setKoWinners({});
+    setKoMatchDetails({});
     setIsBracketSimulated(false);
   };
 
@@ -615,64 +749,80 @@ export default function Home() {
   const handleSelectKoWinner = (matchId: string, winner: Team, loser: Team) => {
     triggerSimulationComment(winner, loser, winner.id, true);
     setIsBracketSimulated(false);
-    setKoWinners(prev => {
-      const next = { ...prev, [matchId]: winner };
-      
-      // Cascade-invalidate downstream matches if winner of parent changed
-      // Round of 16 validation
-      for (let i = 1; i <= 8; i++) {
-        const p1 = next[`R32-${2 * i - 1}`];
-        const p2 = next[`R32-${2 * i}`];
-        const w = next[`R16-${i}`];
-        if (w && w.id !== p1?.id && w.id !== p2?.id) {
-          delete next[`R16-${i}`];
-        }
-      }
-      
-      // Quarterfinals validation
-      for (let i = 1; i <= 4; i++) {
-        const p1 = next[`R16-${2 * i - 1}`];
-        const p2 = next[`R16-${2 * i}`];
-        const w = next[`QF-${i}`];
-        if (w && w.id !== p1?.id && w.id !== p2?.id) {
-          delete next[`QF-${i}`];
-        }
-      }
-      
-      // Semifinals validation
-      for (let i = 1; i <= 2; i++) {
-        const p1 = next[`QF-${2 * i - 1}`];
-        const p2 = next[`QF-${2 * i}`];
-        const w = next[`SF-${i}`];
-        if (w && w.id !== p1?.id && w.id !== p2?.id) {
-          delete next[`SF-${i}`];
-        }
-      }
-      
-      // Final & Third Place validation
-      const sf1 = next[`SF-1`];
-      const sf2 = next[`SF-2`];
-      
-      const finalWinner = next[`F-1`];
-      if (finalWinner && finalWinner.id !== sf1?.id && finalWinner.id !== sf2?.id) {
-        delete next[`F-1`];
-      }
-      
-      const tpWinner = next[`TP-1`];
-      if (tpWinner) {
-        const sf1Part1 = next[`QF-1`];
-        const sf1Part2 = next[`QF-2`];
-        const sf2Part1 = next[`QF-3`];
-        const sf2Part2 = next[`QF-4`];
-        const sf1Loser = sf1 ? (sf1.id === sf1Part1?.id ? sf1Part2 : sf1Part1) : null;
-        const sf2Loser = sf2 ? (sf2.id === sf2Part1?.id ? sf2Part2 : sf2Part1) : null;
-        if (tpWinner.id !== sf1Loser?.id && tpWinner.id !== sf2Loser?.id) {
-          delete next[`TP-1`];
-        }
-      }
+    const pruned = pruneKnockoutState(
+      { ...koWinners, [matchId]: winner },
+      Object.fromEntries(Object.entries(koMatchDetails).filter(([id]) => id !== matchId))
+    );
+    setKoWinners(pruned.nextWinners);
+    setKoMatchDetails(pruned.nextDetails);
+  };
 
-      return next;
-    });
+  const handleSetKoScore = (
+    matchId: string,
+    homeTeam: Team,
+    awayTeam: Team,
+    homeGoals: number,
+    awayGoals: number,
+    chungoWinner: boolean
+  ) => {
+    if (homeGoals === awayGoals) {
+      alert("En cruces no puede haber empate. Elegí un ganador.");
+      return;
+    }
+
+    const winner = homeGoals > awayGoals ? homeTeam : awayTeam;
+    const loser = homeGoals > awayGoals ? awayTeam : homeTeam;
+    const detail = generateKnockoutMatchDetail(
+      homeTeam,
+      awayTeam,
+      homeGoals,
+      awayGoals,
+      chungoWinner,
+      koMatchDetails
+    );
+
+    triggerSimulationComment(winner, loser, winner.id, true);
+    setIsBracketSimulated(false);
+    const pruned = pruneKnockoutState(
+      { ...koWinners, [matchId]: winner },
+      { ...koMatchDetails, [matchId]: detail }
+    );
+    setKoWinners(pruned.nextWinners);
+    setKoMatchDetails(pruned.nextDetails);
+  };
+
+  const simulateKnockoutFixtureMatch = (
+    homeTeam: Team,
+    awayTeam: Team,
+    currentDetails: Record<string, KnockoutMatchDetail>
+  ) => {
+    const homePenalty = getConditionPenalty(homeTeam.id, currentDetails) * 140;
+    const awayPenalty = getConditionPenalty(awayTeam.id, currentDetails) * 140;
+    const homePower = getTeamPower(homeTeam) - homePenalty;
+    const awayPower = getTeamPower(awayTeam) - awayPenalty;
+    const homeWinChance = Math.max(0.1, Math.min(0.9, 0.5 + (homePower - awayPower) / 1000));
+    const homeWins = Math.random() < homeWinChance;
+    const diff = Math.abs(homePower - awayPower);
+    const baseWinnerGoals = diff > 180 ? 3 : diff > 70 ? 2 : 1;
+    const extraWinnerGoal = Math.random() < 0.35 ? 1 : 0;
+    const loserGoals = Math.random() < 0.38 ? 1 : 0;
+    const homeGoals = homeWins ? baseWinnerGoals + extraWinnerGoal : loserGoals;
+    const awayGoals = homeWins ? loserGoals : baseWinnerGoals + extraWinnerGoal;
+    const normalizedHomeGoals = homeGoals === awayGoals ? homeGoals + 1 : homeGoals;
+    const normalizedAwayGoals = homeGoals === awayGoals ? awayGoals : awayGoals;
+    const chungoWinner = Math.random() < 0.18;
+    const detail = generateKnockoutMatchDetail(
+      homeTeam,
+      awayTeam,
+      normalizedHomeGoals,
+      normalizedAwayGoals,
+      chungoWinner,
+      currentDetails
+    );
+    return {
+      winner: detail.winnerId === homeTeam.id ? homeTeam : awayTeam,
+      detail,
+    };
   };
 
   // Action: Simulate all remaining/blank matches using FIFA points & form (including Knockout Bracket!)
@@ -691,6 +841,7 @@ export default function Home() {
     setManualStandings({});
     setGdTweaks({});
     setGfTweaks({});
+    setKoMatchDetails({});
 
     // Now, let's simulate the entire knockout stage step-by-step using FIFA ratings
     // Compute qualifiers first
@@ -705,76 +856,88 @@ export default function Home() {
       }
     });
 
-    const thirdsList = getBestThirds(GROUPS, simulatedMatches, {}, {}, {}).slice(0, 8);
+    const thirds = getBestThirds(GROUPS, simulatedMatches, {}, {}, {}).slice(0, 8);
+    const thirdSlots = [
+      { slot: "M74", allowed: ["A", "B", "C", "D", "F"] },
+      { slot: "M77", allowed: ["C", "D", "F", "G", "H"] },
+      { slot: "M79", allowed: ["C", "E", "F", "H", "I"] },
+      { slot: "M80", allowed: ["E", "H", "I", "J", "K"] },
+      { slot: "M81", allowed: ["B", "E", "F", "I", "J"] },
+      { slot: "M82", allowed: ["A", "E", "H", "I", "J"] },
+      { slot: "M85", allowed: ["E", "F", "G", "I", "J"] },
+      { slot: "M87", allowed: ["D", "E", "I", "J", "L"] },
+    ];
+    const thirdAssignments: Record<string, Team | undefined> = {};
+    const usedGroups = new Set<string>();
+    thirdSlots.forEach(slot => {
+      const candidate = thirds.find(third => slot.allowed.includes(third.group) && !usedGroups.has(third.group));
+      if (candidate) {
+        thirdAssignments[slot.slot] = candidate.team;
+        usedGroups.add(candidate.group);
+      }
+    });
 
     const getW = (gid: string) => winnersObj[gid];
     const getR = (gid: string) => runnersUpObj[gid];
-    const getT = (rankIdx: number) => thirdsList[rankIdx]?.team;
+    const getT = (slot: string) => thirdAssignments[slot];
 
     const simulatedKo: Record<string, Team> = {};
-    const pickLoser = (winner: Team, t1: Team, t2: Team): Team => winner.id === t1.id ? t2 : t1;
+    const simulatedDetails: Record<string, KnockoutMatchDetail> = {};
+    const placeholder = (id: string, name: string): Team => ({ id, name, flag: "mx", fifaRank: 99 });
+    const r32Matches: Record<string, [Team, Team]> = {
+      "R32-1": [getR("A") || placeholder("a2", "2A"), getR("B") || placeholder("b2", "2B")],
+      "R32-2": [getW("E") || placeholder("e1", "1E"), getT("M74") || placeholder("t74", "3M74")],
+      "R32-3": [getW("F") || placeholder("f1", "1F"), getR("C") || placeholder("c2", "2C")],
+      "R32-4": [getW("C") || placeholder("c1", "1C"), getR("F") || placeholder("f2", "2F")],
+      "R32-5": [getW("I") || placeholder("i1", "1I"), getT("M77") || placeholder("t77", "3M77")],
+      "R32-6": [getR("E") || placeholder("e2", "2E"), getR("I") || placeholder("i2", "2I")],
+      "R32-7": [getW("A") || placeholder("a1", "1A"), getT("M79") || placeholder("t79", "3M79")],
+      "R32-8": [getW("L") || placeholder("l1", "1L"), getT("M80") || placeholder("t80", "3M80")],
+      "R32-9": [getW("D") || placeholder("d1", "1D"), getT("M81") || placeholder("t81", "3M81")],
+      "R32-10": [getW("G") || placeholder("g1", "1G"), getT("M82") || placeholder("t82", "3M82")],
+      "R32-11": [getR("K") || placeholder("k2", "2K"), getR("L") || placeholder("l2", "2L")],
+      "R32-12": [getW("H") || placeholder("h1", "1H"), getR("J") || placeholder("j2", "2J")],
+      "R32-13": [getW("B") || placeholder("b1", "1B"), getT("M85") || placeholder("t85", "3M85")],
+      "R32-14": [getW("J") || placeholder("j1", "1J"), getR("H") || placeholder("h2", "2H")],
+      "R32-15": [getW("K") || placeholder("k1", "1K"), getT("M87") || placeholder("t87", "3M87")],
+      "R32-16": [getR("D") || placeholder("d2", "2D"), getR("G") || placeholder("g2", "2G")],
+    };
 
-    // R32 Pairings
-    const r32Matches: [Team, Team][] = [
-      [getW("A"), getT(7)],
-      [getR("B"), getR("F")],
-      [getW("C"), getT(6)],
-      [getR("D"), getR("H")],
-      [getW("E"), getT(5)],
-      [getR("A"), getR("C")],
-      [getW("G"), getT(4)],
-      [getR("I"), getR("K")],
-      [getW("B"), getT(3)],
-      [getR("E"), getR("G")],
-      [getW("D"), getT(2)],
-      [getR("J"), getR("L")],
-      [getW("F"), getT(1)],
-      [getW("J"), getR("I")],
-      [getW("H"), getT(0)],
-      [getW("I"), getR("J")],
-    ].map(([t1, t2]) => {
-      const team1 = t1 || { id: "f-1", name: "Equipo A", flag: "mx", fifaRank: 99 };
-      const team2 = t2 || { id: "f-2", name: "Equipo B", flag: "br", fifaRank: 99 };
-      return [team1, team2];
+    Object.entries(r32Matches).forEach(([matchId, [homeTeam, awayTeam]]) => {
+      const result = simulateKnockoutFixtureMatch(homeTeam, awayTeam, simulatedDetails);
+      simulatedKo[matchId] = result.winner;
+      simulatedDetails[matchId] = result.detail;
     });
 
-    // Run R32
-    for (let i = 1; i <= 16; i++) {
-      const [t1, t2] = r32Matches[i - 1];
-      simulatedKo[`R32-${i}`] = simulateKnockoutMatch(t1, t2);
-    }
+    Object.entries(r16Pairings).forEach(([matchId, [leftId, rightId]]) => {
+      const result = simulateKnockoutFixtureMatch(simulatedKo[leftId], simulatedKo[rightId], simulatedDetails);
+      simulatedKo[matchId] = result.winner;
+      simulatedDetails[matchId] = result.detail;
+    });
 
-    // Run R16
-    for (let i = 1; i <= 8; i++) {
-      const t1 = simulatedKo[`R32-${2 * i - 1}`];
-      const t2 = simulatedKo[`R32-${2 * i}`];
-      simulatedKo[`R16-${i}`] = simulateKnockoutMatch(t1, t2);
-    }
+    [["QF-1", "R16-1", "R16-2"], ["QF-2", "R16-3", "R16-4"], ["QF-3", "R16-5", "R16-6"], ["QF-4", "R16-7", "R16-8"]].forEach(([matchId, leftId, rightId]) => {
+      const result = simulateKnockoutFixtureMatch(simulatedKo[leftId], simulatedKo[rightId], simulatedDetails);
+      simulatedKo[matchId] = result.winner;
+      simulatedDetails[matchId] = result.detail;
+    });
 
-    // Run QF
-    for (let i = 1; i <= 4; i++) {
-      const t1 = simulatedKo[`R16-${2 * i - 1}`];
-      const t2 = simulatedKo[`R16-${2 * i}`];
-      simulatedKo[`QF-${i}`] = simulateKnockoutMatch(t1, t2);
-    }
+    [["SF-1", "QF-1", "QF-2"], ["SF-2", "QF-3", "QF-4"]].forEach(([matchId, leftId, rightId]) => {
+      const result = simulateKnockoutFixtureMatch(simulatedKo[leftId], simulatedKo[rightId], simulatedDetails);
+      simulatedKo[matchId] = result.winner;
+      simulatedDetails[matchId] = result.detail;
+    });
 
-    // Run SF
-    for (let i = 1; i <= 2; i++) {
-      const t1 = simulatedKo[`QF-${2 * i - 1}`];
-      const t2 = simulatedKo[`QF-${2 * i}`];
-      simulatedKo[`SF-${i}`] = simulateKnockoutMatch(t1, t2);
-    }
-
-    // Run TP & Final
-    const sf1Winner = simulatedKo[`SF-1`];
-    const sf2Winner = simulatedKo[`SF-2`];
-    const sf1Loser = pickLoser(sf1Winner, simulatedKo[`QF-1`], simulatedKo[`QF-2`]);
-    const sf2Loser = pickLoser(sf2Winner, simulatedKo[`QF-3`], simulatedKo[`QF-4`]);
-
-    simulatedKo[`TP-1`] = simulateKnockoutMatch(sf1Loser, sf2Loser);
-    simulatedKo[`F-1`] = simulateKnockoutMatch(sf1Winner, sf2Winner);
+    const sf1Loser = simulatedDetails["SF-1"].loserId === simulatedKo["QF-1"].id ? simulatedKo["QF-1"] : simulatedKo["QF-2"];
+    const sf2Loser = simulatedDetails["SF-2"].loserId === simulatedKo["QF-3"].id ? simulatedKo["QF-3"] : simulatedKo["QF-4"];
+    const tpResult = simulateKnockoutFixtureMatch(sf1Loser, sf2Loser, simulatedDetails);
+    simulatedKo["TP-1"] = tpResult.winner;
+    simulatedDetails["TP-1"] = tpResult.detail;
+    const finalResult = simulateKnockoutFixtureMatch(simulatedKo["SF-1"], simulatedKo["SF-2"], simulatedDetails);
+    simulatedKo["F-1"] = finalResult.winner;
+    simulatedDetails["F-1"] = finalResult.detail;
 
     setKoWinners(simulatedKo);
+    setKoMatchDetails(simulatedDetails);
     setIsBracketSimulated(true);
   };
 
@@ -1105,26 +1268,32 @@ export default function Home() {
       {/* Main View Area */}
       {activeTab === "groups" && (
         <div className="grid-groups">
-          {GROUPS.map(group => (
-            <GroupCard
-              key={group.id}
-              group={group}
-              groupMatches={matches[group.id]}
-              manualOrder={manualStandings[group.id] || null}
-              gdTweaks={gdTweaks}
-              gfTweaks={gfTweaks}
-              hoveredTeam={hoveredTeam}
-              setHoveredTeam={setHoveredTeam}
-              onMatchResultChange={handleMatchResultChange}
-              onSwapTeams={handleSwapTeams}
-              onToggleMode={handleToggleMode}
-              onTweakGd={handleTweakGd}
-              onTweakGf={handleTweakGf}
-              searchQuery={searchQuery}
-              compareData={compareData}
-              qualifiedThirdTeamIds={bestThirdsIds}
-            />
-          ))}
+          {orderedGroups.map(group => {
+            const isComplete = Boolean(manualStandings[group.id]) || matches[group.id].every(m => m.isOfficial || m.result !== null);
+            const isCollapsed = collapsedGroups[group.id] ?? isComplete;
+            return (
+              <GroupCard
+                key={group.id}
+                group={group}
+                groupMatches={matches[group.id]}
+                manualOrder={manualStandings[group.id] || null}
+                gdTweaks={gdTweaks}
+                gfTweaks={gfTweaks}
+                collapsed={isCollapsed}
+                hoveredTeam={hoveredTeam}
+                setHoveredTeam={setHoveredTeam}
+                onToggleCollapsed={handleToggleGroupCollapsed}
+                onMatchResultChange={handleMatchResultChange}
+                onSwapTeams={handleSwapTeams}
+                onToggleMode={handleToggleMode}
+                onTweakGd={handleTweakGd}
+                onTweakGf={handleTweakGf}
+                searchQuery={searchQuery}
+                compareData={compareData}
+                qualifiedThirdTeamIds={bestThirdsIds}
+              />
+            );
+          })}
         </div>
       )}
 
@@ -1149,7 +1318,10 @@ export default function Home() {
           hoveredTeam={hoveredTeam}
           setHoveredTeam={setHoveredTeam}
           koWinners={koWinners}
+          koMatchDetails={koMatchDetails}
+          teamConditions={teamConditions}
           onSelectKoWinner={handleSelectKoWinner}
+          onSetKoScore={handleSetKoScore}
           compareData={compareData}
         />
       )}
@@ -1247,6 +1419,18 @@ export default function Home() {
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: "1rem" }}>
               {allPredictions.map(p => {
                 const champion = p.predictions?.koWinners?.['F-1'];
+                const goldenBootName = p.golden_boot_name as string | null;
+                const goldenBootGoals = p.golden_boot_goals as number | null;
+                const goldenBootAssists = p.golden_boot_assists as number | null;
+                const assistKingName = p.assist_king_name as string | null;
+                const assistKingGoals = p.assist_king_goals as number | null;
+                const assistKingAssists = p.assist_king_assists as number | null;
+                const mvpName = p.mvp_name as string | null;
+                const mvpGoals = p.mvp_goals as number | null;
+                const mvpAssists = p.mvp_assists as number | null;
+                const goldenGloveName = p.golden_glove_name as string | null;
+                const goldenGloveCleanSheets = p.golden_glove_clean_sheets as number | null;
+                const goldenGloveGoalsConceded = p.golden_glove_goals_conceded as number | null;
                 const playedCount = p.predictions?.matches 
                   ? Object.values(p.predictions.matches).filter(res => res !== null).length 
                   : 0;
@@ -1324,6 +1508,56 @@ export default function Home() {
                           <span className="font-semibold text-amber-400 flex items-center gap-1.5" style={{ fontSize: "0.85rem" }}>
                             <img src={getTeamFlagUrl(champion.flag)} className="flag-img" style={{ border: "1px solid rgba(255,255,255,0.15)", flexShrink: 0 }} />
                             {champion.name}
+                          </span>
+                        ) : (
+                          <span style={{ color: "var(--text-muted)", fontStyle: "italic" }}>Sin definir</span>
+                        )}
+                      </div>
+                      <div className="flex justify-between items-center" style={{ minHeight: "26px" }}>
+                        <span style={{ color: "var(--text-secondary)", fontWeight: "500" }}>Goleador:</span>
+                        {goldenBootName ? (
+                          <span className="font-semibold text-white" style={{ fontSize: "0.85rem", textAlign: "right" }}>
+                            {goldenBootName}
+                            <span style={{ color: "var(--primary)" }}>{` ${goldenBootGoals || 0}G`}</span>
+                            {!!goldenBootAssists && <span style={{ color: "var(--text-secondary)" }}>{` ${goldenBootAssists}A`}</span>}
+                          </span>
+                        ) : (
+                          <span style={{ color: "var(--text-muted)", fontStyle: "italic" }}>Sin definir</span>
+                        )}
+                      </div>
+                      <div className="flex justify-between items-center" style={{ minHeight: "26px" }}>
+                        <span style={{ color: "var(--text-secondary)", fontWeight: "500" }}>Asistidor:</span>
+                        {assistKingName ? (
+                          <span className="font-semibold text-white" style={{ fontSize: "0.85rem", textAlign: "right" }}>
+                            {assistKingName}
+                            <span style={{ color: "var(--accent)" }}>{` ${assistKingAssists || 0}A`}</span>
+                            {!!assistKingGoals && <span style={{ color: "var(--text-secondary)" }}>{` ${assistKingGoals}G`}</span>}
+                          </span>
+                        ) : (
+                          <span style={{ color: "var(--text-muted)", fontStyle: "italic" }}>Sin definir</span>
+                        )}
+                      </div>
+                      <div className="flex justify-between items-center" style={{ minHeight: "26px" }}>
+                        <span style={{ color: "var(--text-secondary)", fontWeight: "500" }}>MVP:</span>
+                        {mvpName ? (
+                          <span className="font-semibold text-white" style={{ fontSize: "0.85rem", textAlign: "right" }}>
+                            {mvpName}
+                            <span style={{ color: "#fbbf24" }}>{` ${mvpGoals || 0}G`}</span>
+                            {!!mvpAssists && <span style={{ color: "var(--text-secondary)" }}>{` ${mvpAssists}A`}</span>}
+                          </span>
+                        ) : (
+                          <span style={{ color: "var(--text-muted)", fontStyle: "italic" }}>Sin definir</span>
+                        )}
+                      </div>
+                      <div className="flex justify-between items-center" style={{ minHeight: "26px" }}>
+                        <span style={{ color: "var(--text-secondary)", fontWeight: "500" }}>Guante de Oro:</span>
+                        {goldenGloveName ? (
+                          <span className="font-semibold text-white" style={{ fontSize: "0.85rem", textAlign: "right" }}>
+                            {goldenGloveName}
+                            <span style={{ color: "var(--primary)" }}>{` ${goldenGloveCleanSheets || 0} CS`}</span>
+                            {goldenGloveGoalsConceded !== null && goldenGloveGoalsConceded !== undefined && (
+                              <span style={{ color: "var(--text-secondary)" }}>{` ${goldenGloveGoalsConceded} GC`}</span>
+                            )}
                           </span>
                         ) : (
                           <span style={{ color: "var(--text-muted)", fontStyle: "italic" }}>Sin definir</span>
@@ -1439,12 +1673,17 @@ export default function Home() {
 
               const { data: nameCheck } = await supabase
                 .from("predictions")
-                .select("id")
+                .select("id, username, avatar, predictions")
                 .eq("username", input)
                 .maybeSingle();
 
               if (nameCheck && nameCheck.id !== userId) {
-                alert("Este apodo ya está en uso. Elegí otro.");
+                localStorage.setItem("wc_user_id", nameCheck.id);
+                localStorage.setItem("wc_username", nameCheck.username);
+                setUserId(nameCheck.id);
+                applyStoredPrediction(nameCheck);
+                setShowLoginModal(false);
+                loadPredictions();
                 return;
               }
 
@@ -1458,7 +1697,23 @@ export default function Home() {
                     id: userId,
                     username: input,
                     avatar: avatar || null,
-                    predictions: { matches: {}, manualStandings: {}, gdTweaks: {}, gfTweaks: {}, koWinners: {} },
+                    golden_boot_name: null,
+                    golden_boot_team_id: null,
+                    golden_boot_goals: 0,
+                    golden_boot_assists: 0,
+                    assist_king_name: null,
+                    assist_king_team_id: null,
+                    assist_king_goals: 0,
+                    assist_king_assists: 0,
+                    mvp_name: null,
+                    mvp_team_id: null,
+                    mvp_goals: 0,
+                    mvp_assists: 0,
+                    golden_glove_name: null,
+                    golden_glove_team_id: null,
+                    golden_glove_clean_sheets: 0,
+                    golden_glove_goals_conceded: 0,
+                    predictions: { matches: {}, manualStandings: {}, gdTweaks: {}, gfTweaks: {}, koWinners: {}, koMatchDetails: {} },
                     updated_at: new Date().toISOString()
                   });
               } catch (err) {
@@ -1595,7 +1850,12 @@ export default function Home() {
                   koWinners: Object.keys(koWinners).reduce((acc, mId) => {
                     acc[mId] = koWinners[mId];
                     return acc;
-                  }, {} as Record<string, Team>)
+                  }, {} as Record<string, Team>),
+                  koMatchDetails,
+                  goldenBoot: computedGoldenBoot,
+                  assistKing: computedAssistLeader,
+                  mvp: computedMvp,
+                  goldenGlove: computedGoldenGlove
                 };
 
                 const { error } = await supabase
@@ -1604,6 +1864,22 @@ export default function Home() {
                     id: userId,
                     username: newName,
                     avatar: avatar || null,
+                    golden_boot_name: computedGoldenBoot?.playerName || null,
+                    golden_boot_team_id: computedGoldenBoot?.teamId || null,
+                    golden_boot_goals: computedGoldenBoot?.goals || 0,
+                    golden_boot_assists: computedGoldenBoot?.assists || 0,
+                    assist_king_name: computedAssistLeader?.playerName || null,
+                    assist_king_team_id: computedAssistLeader?.teamId || null,
+                    assist_king_goals: computedAssistLeader?.goals || 0,
+                    assist_king_assists: computedAssistLeader?.assists || 0,
+                    mvp_name: computedMvp?.playerName || null,
+                    mvp_team_id: computedMvp?.teamId || null,
+                    mvp_goals: computedMvp?.goals || 0,
+                    mvp_assists: computedMvp?.assists || 0,
+                    golden_glove_name: computedGoldenGlove?.playerName || null,
+                    golden_glove_team_id: computedGoldenGlove?.teamId || null,
+                    golden_glove_clean_sheets: computedGoldenGlove?.cleanSheets || 0,
+                    golden_glove_goals_conceded: computedGoldenGlove?.goalsConceded || 0,
                     predictions: payload,
                     updated_at: new Date().toISOString()
                   });
@@ -1907,7 +2183,10 @@ export default function Home() {
               hoveredTeam={hoveredTeam}
               setHoveredTeam={setHoveredTeam}
               koWinners={viewingUserBracket.predictions?.koWinners || {}}
+              koMatchDetails={viewingUserBracket.predictions?.koMatchDetails || {}}
+              teamConditions={buildTeamConditions(viewingUserBracket.predictions?.koMatchDetails || {})}
               onSelectKoWinner={() => {}} // Read-only, no-op
+              onSetKoScore={() => {}}
               readOnly={true}
             />
           </div>

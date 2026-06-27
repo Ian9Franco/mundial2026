@@ -1,7 +1,9 @@
 "use client";
 
 import React from "react";
+import { motion } from "framer-motion";
 import { Group, Match, TeamStats, computeGroupStandings, getTeamFlagUrl } from "../data/teams";
+import { getTopPlayersForTeam } from "../data/players";
 import { ArrowUp, ArrowDown, Sliders, Zap, RotateCcw, Plus, Minus, CheckCircle, Clock, Award, XCircle, Users } from "lucide-react";
 
 interface GroupCardProps {
@@ -10,8 +12,10 @@ interface GroupCardProps {
   manualOrder: string[] | null;
   gdTweaks: Record<string, number>;
   gfTweaks: Record<string, number>;
+  collapsed?: boolean;
   hoveredTeam: string | null;
   setHoveredTeam: (teamId: string | null) => void;
+  onToggleCollapsed?: (groupId: string) => void;
   onMatchResultChange: (matchId: string, result: "H" | "A" | "D" | null) => void;
   onSwapTeams: (groupId: string, index: number, direction: "up" | "down") => void;
   onToggleMode: (groupId: string) => void;
@@ -28,8 +32,10 @@ export default function GroupCard({
   manualOrder,
   gdTweaks,
   gfTweaks,
+  collapsed = false,
   hoveredTeam,
   setHoveredTeam,
+  onToggleCollapsed,
   onMatchResultChange,
   onSwapTeams,
   onToggleMode,
@@ -64,8 +70,11 @@ export default function GroupCard({
     : false;
 
   return (
-    <div
+    <motion.section
       className="glass-panel"
+      initial={{ opacity: 0, y: 18 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
       style={{
         animation: "fadeInUp 0.4s ease-out",
         borderColor: matchesSearch ? "var(--primary)" : undefined,
@@ -73,7 +82,11 @@ export default function GroupCard({
       }}
     >
       {/* Group Header */}
-      <div className="flex items-center justify-between gap-2" style={{ borderBottom: "1px solid rgba(255,255,255,0.05)", paddingBottom: "0.5rem", marginBottom: "0.75rem" }}>
+      <div
+        className="flex items-center justify-between gap-2"
+        style={{ borderBottom: collapsed ? "none" : "1px solid rgba(255,255,255,0.05)", paddingBottom: collapsed ? 0 : "0.5rem", marginBottom: collapsed ? 0 : "0.75rem", cursor: "pointer" }}
+        onClick={() => onToggleCollapsed?.(group.id)}
+      >
         <h3 className="semibold flex items-center gap-2" style={{ fontSize: "1.1rem", color: "#fff" }}>
           <span style={{ width: "8px", height: "8px", borderRadius: "50%", background: "var(--primary)", display: "inline-block" }}></span>
           {group.name}
@@ -89,7 +102,10 @@ export default function GroupCard({
             </span>
           )}
           <button
-            onClick={() => onToggleMode(group.id)}
+            onClick={(e) => {
+              e.stopPropagation();
+              onToggleMode(group.id);
+            }}
             className="btn btn-secondary"
             style={{ 
               height: "26px", 
@@ -108,6 +124,8 @@ export default function GroupCard({
         </div>
       </div>
 
+      {!collapsed && (
+        <>
       {/* Standings Table */}
       <div className="standings-table-container">
         <table className="standings-table">
@@ -175,25 +193,25 @@ export default function GroupCard({
                       {isGroupComplete && (
                         index === 0 ? (
                           <span className="badge badge-success" style={{ fontSize: "0.6rem", padding: "0.15rem 0.35rem", marginLeft: "0.5rem", display: "inline-flex", alignItems: "center", gap: "2px" }}>
-                            <Award className="w-2.5 h-2.5" /> 1º Clasificado
+                            <Award className="w-2.5 h-2.5" /> Directo
                           </span>
                         ) : index === 1 ? (
                           <span className="badge" style={{ fontSize: "0.6rem", padding: "0.15rem 0.35rem", marginLeft: "0.5rem", backgroundColor: "rgba(45, 212, 191, 0.1)", borderColor: "rgba(45, 212, 191, 0.3)", color: "#2dd4bf", display: "inline-flex", alignItems: "center", gap: "2px" }}>
-                            <Award className="w-2.5 h-2.5" /> 2º Clasificado
+                            <Award className="w-2.5 h-2.5" /> Directo
                           </span>
                         ) : index === 2 ? (
                           qualifiedThirdTeamIds?.includes(stat.team.id) ? (
                             <span className="badge badge-success" style={{ fontSize: "0.6rem", padding: "0.15rem 0.35rem", marginLeft: "0.5rem", display: "inline-flex", alignItems: "center", gap: "2px" }}>
-                              <CheckCircle className="w-2.5 h-2.5" /> 3º Clasificado
+                              <CheckCircle className="w-2.5 h-2.5" /> Mejor 3º
                             </span>
                           ) : (
                             <span className="badge badge-danger" style={{ fontSize: "0.6rem", padding: "0.15rem 0.35rem", marginLeft: "0.5rem", display: "inline-flex", alignItems: "center", gap: "2px" }}>
-                              <XCircle className="w-2.5 h-2.5" /> 3º Eliminado
+                              <XCircle className="w-2.5 h-2.5" /> Fuera
                             </span>
                           )
                         ) : (
                           <span className="badge badge-danger" style={{ fontSize: "0.6rem", padding: "0.15rem 0.35rem", marginLeft: "0.5rem", display: "inline-flex", alignItems: "center", gap: "2px" }}>
-                            <XCircle className="w-2.5 h-2.5" /> Eliminado
+                            <XCircle className="w-2.5 h-2.5" /> Fuera
                           </span>
                         )
                       )}
@@ -320,9 +338,11 @@ export default function GroupCard({
               const hasPlayed = isOfficial || match.result !== null;
 
               return (
-                <div
+                <motion.div
                   key={match.id}
                   className={`match-item ${homeHovered || awayHovered ? "hover-highlight" : ""}`}
+                  whileHover={{ y: -1, scale: 1.01 }}
+                  transition={{ duration: 0.18 }}
                 >
                   <div className="match-meta-row">
                     <span>{match.id.replace("-", " - P")}</span>
@@ -409,7 +429,7 @@ export default function GroupCard({
                     }
                     return null;
                   })()}
-                </div>
+                </motion.div>
               );
             })}
           </div>
@@ -435,6 +455,48 @@ export default function GroupCard({
           </button>
         </div>
       )}
-    </div>
+
+      {!collapsed && (
+        <div className="fixture-section" style={{ marginTop: "0.9rem" }}>
+          <div className="fixture-title">Top 5 por seleccion</div>
+          <div className="flex flex-col gap-2">
+            {group.teams.map(team => {
+              const players = getTopPlayersForTeam(team.id);
+              return (
+                <div key={team.id} className="match-item" style={{ padding: "0.65rem 0.75rem" }}>
+                  <div className="flex items-center gap-2" style={{ marginBottom: "0.45rem" }}>
+                    <img src={getTeamFlagUrl(team.flag)} alt={team.name} className="flag-img" />
+                    <span className="semibold" style={{ fontSize: "0.78rem" }}>{team.name}</span>
+                  </div>
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: "0.4rem" }}>
+                    {players.map(player => (
+                      <span
+                        key={player.id}
+                        className="badge"
+                        style={{
+                          background: "rgba(255,255,255,0.04)",
+                          border: "1px solid rgba(255,255,255,0.06)",
+                          color: "var(--text-primary)",
+                        }}
+                        title={`Ataque ${player.attack}${player.goals || player.assists ? ` | Mundial: ${player.goals}G ${player.assists}A` : ""}`}
+                      >
+                        {player.name}
+                        {(player.goals > 0 || player.assists > 0) && (
+                          <span style={{ color: "var(--primary)" }}>
+                            {` ${player.goals}G/${player.assists}A`}
+                          </span>
+                        )}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+        </>
+      )}
+    </motion.section>
   );
 }
