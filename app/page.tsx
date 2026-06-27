@@ -1258,15 +1258,15 @@ export default function Home() {
                 return (
                   <div 
                     key={p.id || p.username} 
-                    className="glass-panel" 
+                    className={`glass-panel community-card ${isMe ? 'is-me-card' : ''}`}
                     style={{ 
-                      padding: "1rem", 
-                      border: isMe ? "1px solid var(--primary)" : "1px solid rgba(255,255,255,0.05)",
-                      background: isMe ? "rgba(99, 102, 241, 0.05)" : "rgba(255,255,255,0.02)",
+                      padding: "1.25rem", 
+                      border: isMe ? "1px solid rgba(99, 102, 241, 0.4)" : "1px solid rgba(255,255,255,0.05)",
+                      background: isMe ? "linear-gradient(135deg, rgba(99, 102, 241, 0.08) 0%, rgba(139, 92, 246, 0.03) 100%)" : "linear-gradient(135deg, rgba(255, 255, 255, 0.02) 0%, rgba(255, 255, 255, 0.01) 100%)",
                       position: "relative",
                       display: "flex",
                       flexDirection: "column",
-                      gap: "0.75rem",
+                      gap: "1rem",
                       justifyContent: "space-between"
                     }}
                   >
@@ -1276,19 +1276,20 @@ export default function Home() {
                         <img 
                           src={p.avatar} 
                           style={{ 
-                            width: "44px", 
-                            height: "44px", 
+                            width: "56px", 
+                            height: "56px", 
                             borderRadius: "50%", 
                             objectFit: "cover", 
                             border: "1px solid rgba(255,255,255,0.15)",
+                            boxShadow: "0 0 10px rgba(255,255,255,0.05)",
                             flexShrink: 0 
                           }} 
                         />
                       ) : (
                         <div 
                           style={{ 
-                            width: "44px", 
-                            height: "44px", 
+                            width: "56px", 
+                            height: "56px", 
                             borderRadius: "50%", 
                             background: "rgba(255,255,255,0.05)", 
                             border: "1px solid rgba(255,255,255,0.1)",
@@ -1298,45 +1299,45 @@ export default function Home() {
                             flexShrink: 0 
                           }}
                         >
-                          <User style={{ width: "20px", height: "20px", color: "var(--text-secondary)" }} />
+                          <User style={{ width: "26px", height: "26px", color: "var(--text-secondary)" }} />
                         </div>
                       )}
-                      <div style={{ display: "flex", flexDirection: "column" }}>
-                        <span className="font-semibold text-white" style={{ display: "inline-flex", alignItems: "center", gap: "4px" }}>
-                          {p.username} {isMe && <span className="badge" style={{ fontSize: "0.65rem", padding: "2px 6px", background: "rgba(99, 102, 241, 0.2)", borderColor: "var(--primary)", color: "#a5b4fc" }}>Tú</span>}
+                      <div style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
+                        <span className="font-semibold text-white" style={{ display: "inline-flex", alignItems: "center", gap: "4px", fontSize: "0.95rem" }}>
+                          {p.username} {isMe && <span className="badge" style={{ fontSize: "0.65rem", padding: "2px 6px", background: "rgba(99, 102, 241, 0.25)", borderColor: "var(--primary)", color: "#a5b4fc", border: "1px solid" }}>Tú</span>}
                         </span>
-                        <span style={{ fontSize: "0.65rem", color: "var(--text-secondary)" }}>
+                        <span style={{ fontSize: "0.7rem", color: "var(--text-secondary)" }}>
                           Act: {new Date(p.updated_at).toLocaleDateString()} {new Date(p.updated_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                         </span>
                       </div>
                     </div>
 
                     {/* Stats & prediction info */}
-                    <div className="flex flex-col gap-1.5" style={{ fontSize: "0.75rem", padding: "0.5rem 0", borderTop: "1px solid rgba(255,255,255,0.05)", borderBottom: "1px solid rgba(255,255,255,0.05)" }}>
-                      <div className="flex justify-between">
-                        <span style={{ color: "var(--text-muted)" }}>Fase de Grupos:</span>
-                        <span className="font-semibold text-white">{playedCount} / {totalCount} ({pct}%)</span>
+                    <div className="flex flex-col gap-2.5" style={{ fontSize: "0.8rem", padding: "0.75rem 0", borderTop: "1px solid rgba(255,255,255,0.06)", borderBottom: "1px solid rgba(255,255,255,0.06)", margin: "0.15rem 0" }}>
+                      <div className="flex justify-between items-center" style={{ minHeight: "24px" }}>
+                        <span style={{ color: "var(--text-secondary)", fontWeight: "500" }}>Fase de Grupos:</span>
+                        <span className="font-semibold text-white" style={{ fontSize: "0.85rem" }}>{playedCount} / {totalCount} ({pct}%)</span>
                       </div>
-                      <div className="flex justify-between items-center">
-                        <span style={{ color: "var(--text-muted)" }}>Campeón Predicho:</span>
+                      <div className="flex justify-between items-center" style={{ minHeight: "24px" }}>
+                        <span style={{ color: "var(--text-secondary)", fontWeight: "500" }}>Campeón Predicho:</span>
                         {champion ? (
-                          <span className="font-semibold text-amber-400 flex items-center gap-1">
-                            <img src={getTeamFlagUrl(champion.flag)} className="w-4 h-3.5 object-cover rounded-sm" />
+                          <span className="font-semibold text-amber-400 flex items-center gap-1.5" style={{ fontSize: "0.85rem" }}>
+                            <img src={getTeamFlagUrl(champion.flag)} className="w-4.5 h-3.5 object-cover rounded-sm" style={{ border: "1px solid rgba(255,255,255,0.1)", flexShrink: 0 }} />
                             {champion.name}
                           </span>
                         ) : (
-                          <span style={{ color: "var(--text-secondary)", fontStyle: "italic" }}>Sin definir</span>
+                          <span style={{ color: "var(--text-muted)", fontStyle: "italic" }}>Sin definir</span>
                         )}
                       </div>
-                      <div className="flex justify-between items-center">
-                        <span style={{ color: "var(--text-muted)" }}>Método de Cruces:</span>
+                      <div className="flex justify-between items-center" style={{ minHeight: "28px" }}>
+                        <span style={{ color: "var(--text-secondary)", fontWeight: "500" }}>Método de Cruces:</span>
                         {p.predictions?.isBracketSimulated ? (
-                          <span className="badge flex items-center gap-1" style={{ fontSize: "0.6rem", padding: "1px 6px", background: "rgba(99, 102, 241, 0.15)", borderColor: "rgba(99, 102, 241, 0.3)", color: "#a5b4fc", border: "1px solid" }}>
-                            <Zap className="w-2.5 h-2.5" /> Simulador
+                          <span className="badge flex items-center gap-1" style={{ fontSize: "0.68rem", padding: "3px 8px", background: "rgba(99, 102, 241, 0.15)", borderColor: "rgba(99, 102, 241, 0.4)", color: "#a5b4fc", border: "1px solid", borderRadius: "20px" }}>
+                            <Zap className="w-3 h-3 text-indigo-300" style={{ flexShrink: 0 }} /> Simulador
                           </span>
                         ) : (
-                          <span className="badge flex items-center gap-1" style={{ fontSize: "0.6rem", padding: "1px 6px", background: "rgba(245, 158, 11, 0.15)", borderColor: "rgba(245, 158, 11, 0.3)", color: "#fcd34d", border: "1px solid" }}>
-                            <User className="w-2.5 h-2.5" /> Manual
+                          <span className="badge flex items-center gap-1" style={{ fontSize: "0.68rem", padding: "3px 8px", background: "rgba(245, 158, 11, 0.15)", borderColor: "rgba(245, 158, 11, 0.4)", color: "#fcd34d", border: "1px solid", borderRadius: "20px" }}>
+                            <User className="w-3 h-3 text-amber-300" style={{ flexShrink: 0 }} /> Manual
                           </span>
                         )}
                       </div>
