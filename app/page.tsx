@@ -804,119 +804,131 @@ export default function Home() {
 
       {/* Control bar / Search / Navigation */}
       <div className="nav-section">
-        {/* Navigation Tabs */}
-        <div className="tab-nav">
-          <button
-            onClick={() => setActiveTab("groups")}
-            className={`tab-btn ${activeTab === "groups" ? "tab-btn-active" : ""}`}
-          >
-            <LayoutGrid style={{ width: "14px", height: "14px" }} />
-            Grupos
-          </button>
-          <button
-            onClick={() => setActiveTab("thirds")}
-            className={`tab-btn ${activeTab === "thirds" ? "tab-btn-active" : ""}`}
-          >
-            <Award style={{ width: "14px", height: "14px" }} />
-            Mejores Terceros
-          </button>
-          <button
-            onClick={() => setActiveTab("bracket")}
-            className={`tab-btn ${activeTab === "bracket" ? "tab-btn-active" : ""}`}
-          >
-            <Flame style={{ width: "14px", height: "14px" }} />
-            Cruces (16avos)
-          </button>
-          <button
-            onClick={() => setActiveTab("stats")}
-            className={`tab-btn ${activeTab === "stats" ? "tab-btn-active" : ""}`}
-          >
-            <BarChart2 style={{ width: "14px", height: "14px" }} />
-            Historial FIFA
-          </button>
-          <button
-            onClick={() => setActiveTab("community")}
-            className={`tab-btn ${activeTab === "community" ? "tab-btn-active" : ""}`}
-          >
-            <Users style={{ width: "14px", height: "14px" }} />
-            Comunidad
-          </button>
+        {/* Row 1: Tabs */}
+        <div className="tab-row">
+          <div className="tab-nav">
+            <button
+              onClick={() => setActiveTab("groups")}
+              className={`tab-btn ${activeTab === "groups" ? "tab-btn-active" : ""}`}
+            >
+              <LayoutGrid style={{ width: "14px", height: "14px", flexShrink: 0 }} />
+              <span>Grupos</span>
+            </button>
+            <button
+              onClick={() => setActiveTab("thirds")}
+              className={`tab-btn ${activeTab === "thirds" ? "tab-btn-active" : ""}`}
+            >
+              <Award style={{ width: "14px", height: "14px", flexShrink: 0 }} />
+              <span>Terceros</span>
+            </button>
+            <button
+              onClick={() => setActiveTab("bracket")}
+              className={`tab-btn ${activeTab === "bracket" ? "tab-btn-active" : ""}`}
+            >
+              <Flame style={{ width: "14px", height: "14px", flexShrink: 0 }} />
+              <span>Cruces</span>
+            </button>
+            <button
+              onClick={() => setActiveTab("stats")}
+              className={`tab-btn ${activeTab === "stats" ? "tab-btn-active" : ""}`}
+            >
+              <BarChart2 style={{ width: "14px", height: "14px", flexShrink: 0 }} />
+              <span>Historial FIFA</span>
+            </button>
+            <button
+              onClick={() => setActiveTab("community")}
+              className={`tab-btn ${activeTab === "community" ? "tab-btn-active" : ""}`}
+            >
+              <Users style={{ width: "14px", height: "14px", flexShrink: 0 }} />
+              <span>Comunidad</span>
+            </button>
+          </div>
         </div>
 
-        {/* Global Controls */}
-        <div className="actions-wrapper">
-          {/* Search box (only relevant for groups) */}
-          {activeTab === "groups" && (
-            <div className="search-wrapper">
-              <Search className="search-icon" />
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={e => setSearchQuery(e.target.value)}
-                placeholder="Buscar equipo..."
-                className="search-input"
-              />
-            </div>
-          )}
+        {/* Row 2: Controls */}
+        <div className="controls-row">
+          {/* Inputs Group: Search & Compare */}
+          <div className="inputs-group">
+            {/* Search box (only relevant for groups) */}
+            {activeTab === "groups" ? (
+              <div className="search-wrapper">
+                <Search className="search-icon" />
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={e => setSearchQuery(e.target.value)}
+                  placeholder="Buscar equipo..."
+                  className="search-input"
+                />
+              </div>
+            ) : (
+              /* Invisible placeholder to maintain layout alignment if needed, or null */
+              null
+            )}
 
-          {/* Comparar dropdown */}
-          <select
-            value={selectedCompareUser}
-            onChange={(e) => setSelectedCompareUser(e.target.value)}
-            className="user-select-dropdown"
-            title="Seleccionar un usuario para comparar fixture"
-          >
-            <option value="">Comparar con...</option>
-            {allPredictions
-              .filter(p => p.id !== userId)
-              .map(p => (
-                <option key={p.id || p.username} value={p.id || p.username}>
-                  {p.username}
-                </option>
-              ))}
-          </select>
+            {/* Comparar dropdown */}
+            <select
+              value={selectedCompareUser}
+              onChange={(e) => setSelectedCompareUser(e.target.value)}
+              className="user-select-dropdown"
+              style={{ width: activeTab === "groups" ? undefined : "100%" }}
+              title="Seleccionar un usuario para comparar fixture"
+            >
+              <option value="">Comparar con...</option>
+              {allPredictions
+                .filter(p => p.id !== userId)
+                .map(p => (
+                  <option key={p.id || p.username} value={p.id || p.username}>
+                    {p.username}
+                  </option>
+                ))}
+            </select>
+          </div>
 
-          {/* Guardar button */}
-          <button
-            onClick={handleSavePrediction}
-            disabled={isSaving}
-            className="btn btn-primary"
-            style={{ 
-              background: "linear-gradient(135deg, #10b981, #059669)", 
-              borderColor: "#10b981", 
-              boxShadow: "0 0 10px rgba(16, 185, 129, 0.2)" 
-            }}
-            title="Guardar mi predicción en Supabase"
-          >
-            <span>{isSaving ? "Guardando..." : "Guardar Predicción"}</span>
-          </button>
+          {/* Buttons Group */}
+          <div className="buttons-group">
+            {/* Guardar button */}
+            <button
+              onClick={handleSavePrediction}
+              disabled={isSaving}
+              className="btn btn-primary"
+              style={{ 
+                background: "linear-gradient(135deg, #10b981, #059669)", 
+                borderColor: "#10b981", 
+                boxShadow: "0 0 10px rgba(16, 185, 129, 0.2)" 
+              }}
+              title="Guardar mi predicción en Supabase"
+            >
+              <span>{isSaving ? "Guardando..." : "Guardar"}</span>
+            </button>
 
-          <button
-            onClick={handlePreload}
-            className="btn btn-secondary"
-            title="Pre-cargar escenario con Suecia, Ecuador, Bosnia, Croacia en 3º lugar..."
-          >
-            <RefreshCw className="w-3.5 h-3.5" />
-            <span>Escenario</span>
-          </button>
-          
-          <button
-            onClick={handleSimulateAllRandom}
-            className="btn btn-primary"
-            title="Simular aleatoriamente todos los partidos del fixture y del bracket"
-          >
-            <Play className="w-3.5 h-3.5" />
-            <span>Simular Todo</span>
-          </button>
+            <button
+              onClick={handlePreload}
+              className="btn btn-secondary"
+              title="Pre-cargar escenario con Suecia, Ecuador, Bosnia, Croacia en 3º lugar..."
+            >
+              <RefreshCw className="w-3.5 h-3.5" style={{ flexShrink: 0 }} />
+              <span>Escenario</span>
+            </button>
+            
+            <button
+              onClick={handleSimulateAllRandom}
+              className="btn btn-primary"
+              title="Simular aleatoriamente todos los partidos del fixture y del bracket"
+            >
+              <Play className="w-3.5 h-3.5" style={{ flexShrink: 0 }} />
+              <span>Simular Todo</span>
+            </button>
 
-          <button
-            onClick={handleClearMatches}
-            className="btn btn-danger-outline"
-            title="Limpiar todos los partidos del fixture"
-          >
-            <Trash2 className="w-3.5 h-3.5" />
-            <span>Limpiar</span>
-          </button>
+            <button
+              onClick={handleClearMatches}
+              className="btn btn-danger-outline"
+              title="Limpiar todos los partidos del fixture"
+            >
+              <Trash2 className="w-3.5 h-3.5" style={{ flexShrink: 0 }} />
+              <span>Limpiar</span>
+            </button>
+          </div>
         </div>
       </div>
 
