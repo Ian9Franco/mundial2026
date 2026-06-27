@@ -3,8 +3,8 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Group, Match, Team, getBestThirds, computeGroupStandings, getTeamFlagUrl } from "../data/teams";
-import { KnockoutMatchDetail, TeamCondition } from "../data/players";
-import { Trophy, CheckCircle, Clock, Award, Globe, Users, Flame, Sparkles } from "lucide-react";
+import { ChungoType, KnockoutMatchDetail, KnockoutResultMode, TeamCondition } from "../data/players";
+import { Trophy, CheckCircle, Clock, Award, Globe, Users, Flame, ShieldAlert, Siren, Activity, HeartCrack } from "lucide-react";
 
 interface BracketViewProps {
   groups: Group[];
@@ -18,13 +18,37 @@ interface BracketViewProps {
   koMatchDetails: Record<string, KnockoutMatchDetail>;
   teamConditions: Record<string, TeamCondition>;
   onSelectKoWinner: (matchId: string, winner: Team, loser: Team) => void;
-  onSetKoScore: (matchId: string, homeTeam: Team, awayTeam: Team, homeGoals: number, awayGoals: number, chungoWinner: boolean) => void;
+  onSetKoScore: (
+    matchId: string,
+    homeTeam: Team,
+    awayTeam: Team,
+    homeGoals: number,
+    awayGoals: number,
+    resultMode: KnockoutResultMode,
+    chungoType: ChungoType
+  ) => void;
   compareData?: { username: string; predictions: any } | null;
   readOnly?: boolean;
 }
 
 type RoundTab = "r32" | "r16" | "qf" | "sf" | "final";
 type TeamWithSource = Team & { source: string };
+type ScoreDraft = { home: string; away: string; mode: KnockoutResultMode; chungoType: ChungoType };
+
+const CHUNGO_OPTIONS: Array<{
+  value: ChungoType;
+  label: string;
+  icon?: React.ComponentType<{ className?: string }>;
+}> = [
+  { value: "normal", label: "Limpio" },
+  { value: "patadas", label: "Patadas", icon: ShieldAlert },
+  { value: "ritmo", label: "Ritmo", icon: Activity },
+  { value: "roja", label: "Roja", icon: Siren },
+  { value: "lesion", label: "Lesión", icon: HeartCrack },
+];
+
+const getChungoOption = (type?: ChungoType) =>
+  CHUNGO_OPTIONS.find(option => option.value === type);
 
 const placeholderTeam = (id: string, name: string, source = name): TeamWithSource => ({
   id,
@@ -81,7 +105,7 @@ export default function BracketView({
   readOnly = false,
 }: BracketViewProps) {
   const [activeRound, setActiveRound] = useState<RoundTab>("r32");
-  const [scoreDrafts, setScoreDrafts] = useState<Record<string, { home: string; away: string; chungo: boolean }>>({});
+  const [scoreDrafts, setScoreDrafts] = useState<Record<string, ScoreDraft>>({});
 
   // Compute winners, runners-up, and best thirds from Group Stage
   const winners: Record<string, Team> = {};
@@ -246,7 +270,8 @@ export default function BracketView({
     const draft = scoreDrafts[matchId] || {
       home: detail ? String(detail.homeGoals) : "",
       away: detail ? String(detail.awayGoals) : "",
-      chungo: detail?.chungoWinner || false,
+      mode: detail?.resultMode || "regular",
+      chungoType: detail?.chungoType || "normal",
     };
     
     const isT1Placeholder = t1.flag === "placeholder";
@@ -258,6 +283,8 @@ export default function BracketView({
 
     const t1Condition = teamConditions[t1.id];
     const t2Condition = teamConditions[t2.id];
+    const T1ConditionIcon = t1Condition ? getChungoOption(t1Condition.type)?.icon : undefined;
+    const T2ConditionIcon = t2Condition ? getChungoOption(t2Condition.type)?.icon : undefined;
 
     return (
       <motion.div 
@@ -320,19 +347,45 @@ export default function BracketView({
                 }
                 aria-label={`Goles de ${t2.name}`}
               />
-              <button
-                type="button"
-                className={`btn ${draft.chungo ? "btn-primary" : "btn-secondary"}`}
-                style={{ minHeight: "34px", padding: "0 0.7rem" }}
-                onClick={() =>
-                  setScoreDrafts(prev => ({
-                    ...prev,
-                    [matchId]: { ...draft, chungo: !draft.chungo },
-                  }))
-                }
-              >
-                Chungo
-              </button>
+              <div className="matchup-mode-tabs">
+                {(["regular", "et", "pens"] as KnockoutResultMode[]).map(mode => (
+                  <button
+                    key={mode}
+                    type="button"
+                    className={`matchup-mode-chip ${draft.mode === mode ? "matchup-mode-chip-active" : ""}`}
+                    onClick={() =>
+                      setScoreDrafts(prev => ({
+                        ...prev,
+                        [matchId]: { ...draft, mode },
+                      }))
+                    }
+                  >
+                    {mode === "regular" ? "90'" : mode === "et" ? "ET" : "PEN"}
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div className="matchup-chungo-row">
+              {CHUNGO_OPTIONS.map(option => {
+                const Icon = option.icon;
+                return (
+                  <button
+                    key={option.value}
+                    type="button"
+                    className={`matchup-chungo-chip ${draft.chungoType === option.value ? "matchup-chungo-chip-active" : ""}`}
+                    onClick={() =>
+                      setScoreDrafts(prev => ({
+                        ...prev,
+                        [matchId]: { ...draft, chungoType: option.value },
+                      }))
+                    }
+                    title={option.label}
+                  >
+                    {Icon ? <Icon className="w-3 h-3" /> : null}
+                    <span>{option.label}</span>
+                  </button>
+                );
+              })}
             </div>
             <button
               type="button"
@@ -342,7 +395,7 @@ export default function BracketView({
                 const homeGoals = Number(draft.home);
                 const awayGoals = Number(draft.away);
                 if (Number.isNaN(homeGoals) || Number.isNaN(awayGoals)) return;
-                onSetKoScore(matchId, t1, t2, homeGoals, awayGoals, draft.chungo);
+                onSetKoScore(matchId, t1, t2, homeGoals, awayGoals, draft.mode, draft.chungoType);
               }}
             >
               Aplicar resultado
@@ -375,7 +428,8 @@ export default function BracketView({
           <div className="flex items-center gap-1">
             {t1Condition && (
               <span className="badge badge-danger" title={t1Condition.note}>
-                <Sparkles className="w-3 h-3" /> Chungo x{t1Condition.level}
+                {T1ConditionIcon ? <T1ConditionIcon className="w-3 h-3" /> : null}
+                {t1Condition.label} x{t1Condition.level}
               </span>
             )}
             {!isT1Placeholder && (
@@ -411,7 +465,8 @@ export default function BracketView({
           <div className="flex items-center gap-1">
             {t2Condition && (
               <span className="badge badge-danger" title={t2Condition.note}>
-                <Sparkles className="w-3 h-3" /> Chungo x{t2Condition.level}
+                {T2ConditionIcon ? <T2ConditionIcon className="w-3 h-3" /> : null}
+                {t2Condition.label} x{t2Condition.level}
               </span>
             )}
             {!isT2Placeholder && (
@@ -425,7 +480,11 @@ export default function BracketView({
           <div className="flex flex-col gap-1" style={{ marginTop: "0.35rem" }}>
             <div className="badge" style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.06)", color: "#fff", width: "fit-content" }}>
               {detail.homeGoals}-{detail.awayGoals}
-              {detail.chungoWinner && <span style={{ color: "var(--warning)" }}> | Chungo</span>}
+              {detail.resultMode === "et" && <span style={{ color: "var(--accent)" }}> | ET</span>}
+              {detail.resultMode === "pens" && detail.penalties && (
+                <span style={{ color: "var(--accent)" }}>{` | Pen ${detail.penalties.home}-${detail.penalties.away}`}</span>
+              )}
+              {detail.chungoType && <span style={{ color: "var(--warning)" }}>{` | ${getChungoOption(detail.chungoType)?.label || "Chungo"}`}</span>}
             </div>
             <div style={{ display: "flex", flexWrap: "wrap", gap: "0.35rem" }}>
               {detail.events.map((event, index) => (
@@ -435,6 +494,7 @@ export default function BracketView({
                   style={{ background: "rgba(255,255,255,0.04)", borderColor: "rgba(255,255,255,0.08)", color: "var(--text-primary)" }}
                 >
                   {event.playerName}
+                  {event.phase === "et" ? " ET" : ""}
                   {event.assistName ? ` a: ${event.assistName}` : ""}
                 </span>
               ))}

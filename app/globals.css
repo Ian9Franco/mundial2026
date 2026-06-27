@@ -851,6 +851,7 @@ body::before {
   color: #fff;
   text-align: center;
   font-weight: 700;
+  font-size: 16px;
   outline: none;
 }
 
@@ -858,6 +859,45 @@ body::before {
   color: var(--text-secondary);
   text-align: center;
   font-weight: 700;
+}
+
+.matchup-mode-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.3rem;
+}
+
+.matchup-mode-chip,
+.matchup-chungo-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.28rem;
+  min-height: 34px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text-secondary);
+  font-size: 0.7rem;
+  font-weight: 700;
+  transition: all 0.18s ease;
+}
+
+.matchup-mode-chip-active,
+.matchup-chungo-chip-active {
+  background: rgba(var(--primary-rgb), 0.16);
+  border-color: rgba(var(--primary-rgb), 0.32);
+  color: #fff;
+}
+
+.matchup-chungo-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.matchup-chungo-chip {
+  padding: 0 0.65rem;
 }
 
 .matchup-team-row {
@@ -1182,6 +1222,30 @@ body::before {
 
   .champion-podium {
     padding: 2rem 1.2rem;
+  }
+
+  .matchup-score-row {
+    grid-template-columns: 1fr 16px 1fr;
+  }
+
+  .matchup-mode-tabs {
+    grid-column: 1 / -1;
+  }
+
+  .matchup-chungo-row {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding-bottom: 0.1rem;
+    scrollbar-width: none;
+  }
+
+  .matchup-chungo-row::-webkit-scrollbar {
+    display: none;
+  }
+
+  .matchup-chungo-chip {
+    flex: 0 0 auto;
+    min-width: max-content;
   }
 }
 

@@ -16,6 +16,7 @@ import {
 } from "../data/teams";
 import {
   buildTeamConditions,
+  ChungoType,
   getAssistLeader,
   getGoldenBootLeader,
   getGoldenGloveLeader,
@@ -23,6 +24,7 @@ import {
   generateKnockoutMatchDetail,
   getConditionPenalty,
   KnockoutMatchDetail,
+  KnockoutResultMode,
 } from "../data/players";
 import GroupCard from "../components/GroupCard";
 import equiposData from "../data/equipos.json";
@@ -57,6 +59,18 @@ import {
 } from "lucide-react";
 
 export default function Home() {
+  const accentPalettes = useMemo(
+    () => [
+      { primary: "#0a84ff", primaryRgb: "10, 132, 255", accent: "#30d158", accentRgb: "48, 209, 88" },
+      { primary: "#5e5ce6", primaryRgb: "94, 92, 230", accent: "#ff9f0a", accentRgb: "255, 159, 10" },
+      { primary: "#00c7be", primaryRgb: "0, 199, 190", accent: "#ff375f", accentRgb: "255, 55, 95" },
+      { primary: "#64d2ff", primaryRgb: "100, 210, 255", accent: "#ffd60a", accentRgb: "255, 214, 10" },
+      { primary: "#bf5af2", primaryRgb: "191, 90, 242", accent: "#32d74b", accentRgb: "50, 215, 75" },
+      { primary: "#ff453a", primaryRgb: "255, 69, 58", accent: "#5ac8fa", accentRgb: "90, 200, 250" },
+    ],
+    []
+  );
+
   // Simulator states
   const [matches, setMatches] = useState<Record<string, Match[]>>(() => getPreloadedMatches());
   const [manualStandings, setManualStandings] = useState<Record<string, string[] | null>>({});
@@ -202,15 +216,16 @@ export default function Home() {
     }
   }, [simulationComment]);
 
-  // Load cached username, fetch comparison data, and apply a stable product palette
+  // Load cached username, fetch comparison data, and rotate the product accent on each load.
   useEffect(() => {
     const root = document.documentElement;
-    root.style.setProperty("--primary", "#0a84ff");
-    root.style.setProperty("--primary-rgb", "10, 132, 255");
-    root.style.setProperty("--accent", "#30d158");
-    root.style.setProperty("--accent-rgb", "48, 209, 88");
+    const palette = accentPalettes[Math.floor(Math.random() * accentPalettes.length)];
+    root.style.setProperty("--primary", palette.primary);
+    root.style.setProperty("--primary-rgb", palette.primaryRgb);
+    root.style.setProperty("--accent", palette.accent);
+    root.style.setProperty("--accent-rgb", palette.accentRgb);
     root.style.setProperty("--border-color", "rgba(255, 255, 255, 0.08)");
-    root.style.setProperty("--border-glow", "rgba(10, 132, 255, 0.18)");
+    root.style.setProperty("--border-glow", `rgba(${palette.primaryRgb}, 0.18)`);
 
     let storedId = localStorage.getItem("wc_user_id");
     if (!storedId) {
@@ -244,7 +259,7 @@ export default function Home() {
 
     initProfile(storedId);
     loadPredictions();
-  }, []);
+  }, [accentPalettes]);
 
   const loadPredictions = async () => {
     try {
@@ -763,28 +778,40 @@ export default function Home() {
     awayTeam: Team,
     homeGoals: number,
     awayGoals: number,
-    chungoWinner: boolean
+    resultMode: KnockoutResultMode,
+    chungoType: ChungoType
   ) => {
-    if (homeGoals === awayGoals) {
-      alert("En cruces no puede haber empate. Elegí un ganador.");
+    if (resultMode === "regular" && homeGoals === awayGoals) {
+      alert("Si querés empate, definilo por penales o usá un marcador final de prórroga.");
       return;
     }
 
-    const winner = homeGoals > awayGoals ? homeTeam : awayTeam;
-    const loser = homeGoals > awayGoals ? awayTeam : homeTeam;
+    if (resultMode === "et" && homeGoals === awayGoals) {
+      alert("En prórroga el marcador final tiene que tener ganador.");
+      return;
+    }
+
+    if (resultMode === "pens" && homeGoals !== awayGoals) {
+      alert("En penales, cargá el empate del partido y el sistema define la tanda.");
+      return;
+    }
+
     const detail = generateKnockoutMatchDetail(
       homeTeam,
       awayTeam,
       homeGoals,
       awayGoals,
-      chungoWinner,
+      resultMode,
+      chungoType,
       koMatchDetails
     );
+    const decidedWinner = detail.winnerId === homeTeam.id ? homeTeam : awayTeam;
+    const decidedLoser = detail.winnerId === homeTeam.id ? awayTeam : homeTeam;
 
-    triggerSimulationComment(winner, loser, winner.id, true);
+    triggerSimulationComment(decidedWinner, decidedLoser, decidedWinner.id, true);
     setIsBracketSimulated(false);
     const pruned = pruneKnockoutState(
-      { ...koWinners, [matchId]: winner },
+      { ...koWinners, [matchId]: decidedWinner },
       { ...koMatchDetails, [matchId]: detail }
     );
     setKoWinners(pruned.nextWinners);
@@ -796,27 +823,62 @@ export default function Home() {
     awayTeam: Team,
     currentDetails: Record<string, KnockoutMatchDetail>
   ) => {
-    const homePenalty = getConditionPenalty(homeTeam.id, currentDetails) * 140;
-    const awayPenalty = getConditionPenalty(awayTeam.id, currentDetails) * 140;
+    const homePenalty = getConditionPenalty(homeTeam.id, currentDetails) * 115;
+    const awayPenalty = getConditionPenalty(awayTeam.id, currentDetails) * 115;
     const homePower = getTeamPower(homeTeam) - homePenalty;
     const awayPower = getTeamPower(awayTeam) - awayPenalty;
     const homeWinChance = Math.max(0.1, Math.min(0.9, 0.5 + (homePower - awayPower) / 1000));
-    const homeWins = Math.random() < homeWinChance;
     const diff = Math.abs(homePower - awayPower);
-    const baseWinnerGoals = diff > 180 ? 3 : diff > 70 ? 2 : 1;
-    const extraWinnerGoal = Math.random() < 0.35 ? 1 : 0;
-    const loserGoals = Math.random() < 0.38 ? 1 : 0;
-    const homeGoals = homeWins ? baseWinnerGoals + extraWinnerGoal : loserGoals;
-    const awayGoals = homeWins ? loserGoals : baseWinnerGoals + extraWinnerGoal;
-    const normalizedHomeGoals = homeGoals === awayGoals ? homeGoals + 1 : homeGoals;
-    const normalizedAwayGoals = homeGoals === awayGoals ? awayGoals : awayGoals;
-    const chungoWinner = Math.random() < 0.18;
+    const drawChance = Math.max(0.12, Math.min(0.34, 0.28 - diff / 1400));
+    const isDrawAfter90 = Math.random() < drawChance;
+    let homeGoals = 0;
+    let awayGoals = 0;
+    let resultMode: KnockoutResultMode = "regular";
+
+    if (isDrawAfter90) {
+      const tieBase = Math.random() < 0.35 ? 0 : Math.random() < 0.72 ? 1 : 2;
+      const penDecider = Math.random() < 0.38;
+      if (penDecider) {
+        homeGoals = tieBase;
+        awayGoals = tieBase;
+        resultMode = "pens";
+      } else {
+        const homeWinsEt = Math.random() < homeWinChance;
+        homeGoals = tieBase + (homeWinsEt ? 1 : 0);
+        awayGoals = tieBase + (homeWinsEt ? 0 : 1);
+        resultMode = "et";
+      }
+    } else {
+      const homeWins = Math.random() < homeWinChance;
+      const baseWinnerGoals = diff > 180 ? 3 : diff > 70 ? 2 : 1;
+      const extraWinnerGoal = Math.random() < 0.35 ? 1 : 0;
+      const loserGoals = Math.random() < 0.38 ? 1 : 0;
+      homeGoals = homeWins ? baseWinnerGoals + extraWinnerGoal : loserGoals;
+      awayGoals = homeWins ? loserGoals : baseWinnerGoals + extraWinnerGoal;
+      if (homeGoals === awayGoals) {
+        if (homeWins) homeGoals += 1;
+        else awayGoals += 1;
+      }
+    }
+
+    const chungoRoll = Math.random();
+    const chungoType: ChungoType =
+      chungoRoll < 0.12
+        ? "patadas"
+        : chungoRoll < 0.2
+          ? "ritmo"
+          : chungoRoll < 0.25
+            ? "roja"
+            : chungoRoll < 0.29
+              ? "lesion"
+              : "normal";
     const detail = generateKnockoutMatchDetail(
       homeTeam,
       awayTeam,
-      normalizedHomeGoals,
-      normalizedAwayGoals,
-      chungoWinner,
+      homeGoals,
+      awayGoals,
+      resultMode,
+      chungoType,
       currentDetails
     );
     return {
@@ -990,7 +1052,7 @@ export default function Home() {
       <header className="app-header">
         <div className="flex items-center justify-between gap-2 w-full">
           <div className="title-badge" style={{ margin: 0, display: "inline-flex", alignItems: "center", gap: "6px" }}>
-            <Trophy className="w-3.5 h-3.5 text-yellow-500" /> Fixture Interactivo 2026
+            <Trophy className="w-3.5 h-3.5 text-yellow-500" /> Wachin
           </div>
           {username && (
             <div 

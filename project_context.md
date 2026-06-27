@@ -38,7 +38,9 @@ Ruta del proyecto:
 - En cruces se puede:
   - elegir ganador manualmente
   - cargar marcador manual tipo `2-1`, `6-3`, etc.
-  - marcar el partido como `Chungo`
+  - definir si se resolvió en `90'`, `ET` o `PEN`
+  - permitir empate si se define por penales
+  - marcar distintos tipos de partido `Chungo`
 
 ### Eventos de cruces
 
@@ -46,15 +48,42 @@ Ruta del proyecto:
   - goleadores
   - asistidores
 - El reparto usa:
-  - top 5 jugadores por equipo
+  - top 5 jugadores de campo por equipo
   - peso por calidad del jugador
   - forma actual del torneo para varios nombres fuertes
 
+### Jugadores por selección
+
+- Cada selección expone `6` jugadores destacados:
+  - `5` jugadores de campo
+  - `1` arquero fijo en sexto lugar
+- El arquero nunca entra al algoritmo de goleadores o asistidores.
+- El arquero sí pesa en:
+  - `Guante de Oro`
+  - tandas de penales
+
 ### Estado "Chungo"
 
-- Si un partido se marca como `Chungo`, el ganador arrastra una penalización al siguiente cruce.
-- Esa penalización reduce sus chances en simulaciones posteriores.
-- Visualmente se muestra una marca `Chungo xN`.
+- Hay tipos distintos:
+  - `Patadas`
+  - `Ritmo`
+  - `Roja`
+  - `Lesión`
+- El ganador arrastra penalizaciones acumulativas al siguiente cruce.
+- Las penalizaciones afectan ataque, defensa y/o stamina según el tipo.
+- Visualmente se muestra la marca del tipo y su acumulado.
+
+### Empates, prórroga y penales
+
+- En cruces ahora existe:
+  - victoria en `90'`
+  - victoria en `ET`
+  - empate en el partido y definición por `PEN`
+- En penales:
+  - el usuario no elige goleadores
+  - la tanda se simula según calidad de pateadores y arquero rival
+- En prórroga:
+  - el marcador cargado es el final del partido tras 120 minutos
 
 ### Comunidad
 
@@ -77,13 +106,14 @@ Ruta del proyecto:
 
 Se hizo una pasada grande hacia un estilo más limpio tipo Apple Sports:
 
-- paleta estable azul/verde
+- paleta dinámica por carga, dentro de un set curado
 - mejor jerarquía visual
 - menos texto redundante
 - cards más limpias
 - mobile bastante más adaptado
 - grupos completos colapsados
 - motion con Framer Motion
+- inputs de marcador sin zoom molesto en mobile
 
 ## Archivos clave
 
@@ -111,7 +141,7 @@ Se hizo una pasada grande hacia un estilo más limpio tipo Apple Sports:
 - [components/GroupCard.tsx](D:\.CodeProjects\fixture\components\GroupCard.tsx)
   - tabla del grupo
   - partidos del grupo
-  - top 5 por selección
+  - top 5 + arquero por selección
   - colapso de grupos completos
 
 - [components/BestThirdsTable.tsx](D:\.CodeProjects\fixture\components\BestThirdsTable.tsx)
@@ -120,8 +150,10 @@ Se hizo una pasada grande hacia un estilo más limpio tipo Apple Sports:
 - [components/BracketView.tsx](D:\.CodeProjects\fixture\components\BracketView.tsx)
   - cuadro eliminatorio
   - score manual
-  - botón `Chungo`
+  - selector `90' / ET / PEN`
+  - selector de tipos `Chungo`
   - detalle de eventos de gol/asistencia
+  - detalle de penales
 
 ### Datos
 
@@ -132,11 +164,12 @@ Se hizo una pasada grande hacia un estilo más limpio tipo Apple Sports:
   - simulación base de grupos
 
 - [data/players.ts](D:\.CodeProjects\fixture\data\players.ts)
-  - top 5 jugadores por selección
+  - top 5 jugadores de campo + arquero por selección
   - forma actual del torneo para algunos jugadores
   - generación de goleadores y asistencias
   - cálculo de premios individuales
   - cálculo de `Chungo`
+  - simulación de tandas de penales
 
 ## Premios individuales implementados
 
@@ -238,12 +271,16 @@ Compila correctamente después de:
 - eventos de gol/asistencia
 - chungo
 - premios individuales
+- empate / ET / penales
+- arquero como 6to jugador
+- accent dinámico por carga
 
 ## Cosas a tener en cuenta
 
 - El modelo de reparto de goles/asistencias es heurístico, no estadístico real.
 - La tabla actual del torneo usada como semilla en jugadores está hardcodeada parcialmente en `data/players.ts`.
 - El `Guante de Oro` es una aproximación razonable para el simulador.
+- Las tandas de penales son heurísticas: usan calidad de pateadores y arquero, no una base histórica real.
 - Hay warnings/lint viejos en el repo que no se limpiaron todos; el build de producción sí está pasando.
 - La UI mejoró bastante en mobile, pero todavía se puede pulir más la pestaña Comunidad y la de Stats.
 
@@ -256,4 +293,3 @@ Compila correctamente después de:
 - Crear dataset más realista y completo de jugadores por selección.
 - Agregar visualización tipo timeline de goles en cada cruce.
 - Agregar tarjetas de jugador con goles/asistencias acumuladas del torneo.
-

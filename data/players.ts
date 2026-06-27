@@ -1,5 +1,9 @@
 import { Team } from "./teams";
 
+export type PlayerRole = "outfield" | "goalkeeper";
+export type KnockoutResultMode = "regular" | "et" | "pens";
+export type ChungoType = "normal" | "patadas" | "ritmo" | "roja" | "lesion";
+
 export interface KeyPlayer {
   id: string;
   name: string;
@@ -7,6 +11,8 @@ export interface KeyPlayer {
   attack: number;
   goals: number;
   assists: number;
+  role: PlayerRole;
+  goalkeeping?: number;
 }
 
 export interface KnockoutGoalEvent {
@@ -15,6 +21,7 @@ export interface KnockoutGoalEvent {
   playerName: string;
   assistId?: string;
   assistName?: string;
+  phase?: "regular" | "et";
 }
 
 export interface KnockoutMatchDetail {
@@ -24,7 +31,12 @@ export interface KnockoutMatchDetail {
   awayGoals: number;
   winnerId: string;
   loserId: string;
-  chungoWinner: boolean;
+  resultMode: KnockoutResultMode;
+  penalties?: {
+    home: number;
+    away: number;
+  };
+  chungoType?: Exclude<ChungoType, "normal">;
   chungoNote?: string;
   events: KnockoutGoalEvent[];
 }
@@ -32,6 +44,11 @@ export interface KnockoutMatchDetail {
 export interface TeamCondition {
   level: number;
   note: string;
+  type: Exclude<ChungoType, "normal">;
+  label: string;
+  attackPenalty: number;
+  defensePenalty: number;
+  staminaPenalty: number;
 }
 
 export interface GoldenBootLeader {
@@ -128,13 +145,6 @@ const CURRENT_TOURNAMENT_FORM: Record<string, { goals: number; assists: number }
   "egy-mohamed-salah": { goals: 2, assists: 1 },
 };
 
-const CHUNGO_NOTES = [
-  "Llega tocado por una lesion.",
-  "Carga una suspension parcial.",
-  "Arrastra molestias y menos ritmo.",
-  "Queda condicionado por una expulsion previa.",
-];
-
 const GOALKEEPERS: Record<string, { id: string; name: string }> = {
   mex: { id: "mex-luis-malagon", name: "Luis Malagon" },
   rsa: { id: "rsa-ronwen-williams", name: "Ronwen Williams" },
@@ -186,6 +196,60 @@ const GOALKEEPERS: Record<string, { id: string; name: string }> = {
   pan: { id: "pan-orlando-mosquera", name: "Orlando Mosquera" },
 };
 
+const GOALKEEPER_RATINGS: Record<string, number> = {
+  arg: 94,
+  bra: 92,
+  fra: 91,
+  ger: 90,
+  mar: 92,
+  ned: 89,
+  por: 91,
+  eng: 89,
+  esp: 89,
+  sui: 90,
+  sen: 88,
+  jpn: 86,
+  usa: 84,
+  uru: 86,
+  mex: 84,
+  cro: 88,
+};
+
+const CHUNGO_LIBRARY: Record<Exclude<ChungoType, "normal">, Omit<TeamCondition, "level">> = {
+  patadas: {
+    type: "patadas",
+    label: "Patadas",
+    note: "Partido picante: golpes, amarillas y piernas cansadas.",
+    attackPenalty: 0.38,
+    defensePenalty: 0.28,
+    staminaPenalty: 0.44,
+  },
+  ritmo: {
+    type: "ritmo",
+    label: "Ritmo",
+    note: "Ida y vuelta total: el que avanza llega con menos piernas.",
+    attackPenalty: 0.24,
+    defensePenalty: 0.18,
+    staminaPenalty: 0.58,
+  },
+  roja: {
+    type: "roja",
+    label: "Roja",
+    note: "Se lleva una suspensión pesada para el próximo cruce.",
+    attackPenalty: 0.72,
+    defensePenalty: 0.64,
+    staminaPenalty: 0.22,
+  },
+  lesion: {
+    type: "lesion",
+    label: "Lesión",
+    note: "Sale tocado un jugador clave y el plantel pierde filo.",
+    attackPenalty: 0.84,
+    defensePenalty: 0.35,
+    staminaPenalty: 0.26,
+  },
+};
+
 const slugify = (value: string) =>
   value
     .toLowerCase()
@@ -194,20 +258,48 @@ const slugify = (value: string) =>
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "");
 
+const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, value));
+
+const getKeeperRating = (teamId: string) => GOALKEEPER_RATINGS[teamId] || 82;
+
+const buildOutfieldPlayer = (teamId: string, name: string, attack: number): KeyPlayer => {
+  const id = `${teamId}-${slugify(name)}`;
+  const form = CURRENT_TOURNAMENT_FORM[id] || { goals: 0, assists: 0 };
+  return {
+    id,
+    name,
+    teamId,
+    attack,
+    goals: form.goals,
+    assists: form.assists,
+    role: "outfield",
+  };
+};
+
+const buildGoalkeeper = (teamId: string): KeyPlayer | null => {
+  const keeper = GOALKEEPERS[teamId];
+  if (!keeper) return null;
+  return {
+    id: keeper.id,
+    name: keeper.name,
+    teamId,
+    attack: 12,
+    goals: 0,
+    assists: 0,
+    role: "goalkeeper",
+    goalkeeping: getKeeperRating(teamId),
+  };
+};
+
+export const getOutfieldPlayersForTeam = (teamId: string): KeyPlayer[] =>
+  (BASE_PLAYERS[teamId] || []).map(([name, attack]) => buildOutfieldPlayer(teamId, name, attack));
+
+export const getGoalkeeperForTeam = (teamId: string): KeyPlayer | null => buildGoalkeeper(teamId);
+
 export const getTopPlayersForTeam = (teamId: string): KeyPlayer[] => {
-  const basePlayers = BASE_PLAYERS[teamId] || [];
-  return basePlayers.map(([name, attack]) => {
-    const id = `${teamId}-${slugify(name)}`;
-    const form = CURRENT_TOURNAMENT_FORM[id] || { goals: 0, assists: 0 };
-    return {
-      id,
-      name,
-      teamId,
-      attack,
-      goals: form.goals,
-      assists: form.assists,
-    };
-  });
+  const outfield = getOutfieldPlayersForTeam(teamId);
+  const goalkeeper = buildGoalkeeper(teamId);
+  return goalkeeper ? [...outfield, goalkeeper] : outfield;
 };
 
 const randomWeightedPick = <T,>(items: T[], getWeight: (item: T) => number): T => {
@@ -295,9 +387,9 @@ export const getMvpLeader = (
       const teamId = value.teamId || "";
       const topPlayers = getTopPlayersForTeam(teamId);
       const player = topPlayers.find(item => item.id === playerId);
-      const attack = player?.attack || 75;
+      const playerImpact = player?.role === "goalkeeper" ? (player.goalkeeping || 82) : player?.attack || 75;
       const championBonus = championTeamId && championTeamId === teamId ? 6 : 0;
-      const score = value.goals * 5 + value.assists * 3 + attack * 0.12 + championBonus;
+      const score = value.goals * 5 + value.assists * 3 + playerImpact * 0.12 + championBonus;
       return {
         playerId,
         playerName,
@@ -331,27 +423,27 @@ export const getGoldenGloveLeader = (
   const keeperStats: Record<string, GoldenGloveLeader> = {};
 
   Object.values(knockoutDetails).forEach(detail => {
-    const home = keeperStats[detail.winnerId] || (GOALKEEPERS[detail.winnerId]
+    const home = keeperStats[detail.homeTeamId] || (GOALKEEPERS[detail.homeTeamId]
       ? {
-          playerId: GOALKEEPERS[detail.winnerId].id,
-          playerName: GOALKEEPERS[detail.winnerId].name,
-          teamId: detail.winnerId,
+          playerId: GOALKEEPERS[detail.homeTeamId].id,
+          playerName: GOALKEEPERS[detail.homeTeamId].name,
+          teamId: detail.homeTeamId,
           cleanSheets: 0,
           goalsConceded: 0,
         }
       : undefined);
-    const away = keeperStats[detail.loserId] || (GOALKEEPERS[detail.loserId]
+    const away = keeperStats[detail.awayTeamId] || (GOALKEEPERS[detail.awayTeamId]
       ? {
-          playerId: GOALKEEPERS[detail.loserId].id,
-          playerName: GOALKEEPERS[detail.loserId].name,
-          teamId: detail.loserId,
+          playerId: GOALKEEPERS[detail.awayTeamId].id,
+          playerName: GOALKEEPERS[detail.awayTeamId].name,
+          teamId: detail.awayTeamId,
           cleanSheets: 0,
           goalsConceded: 0,
         }
       : undefined);
 
-    if (home) keeperStats[detail.winnerId] = home;
-    if (away) keeperStats[detail.loserId] = away;
+    if (home) keeperStats[detail.homeTeamId] = home;
+    if (away) keeperStats[detail.awayTeamId] = away;
   });
 
   Object.values(knockoutDetails).forEach(detail => {
@@ -380,11 +472,17 @@ export const buildTeamConditions = (
 ) => {
   const conditions: Record<string, TeamCondition> = {};
   Object.values(knockoutDetails).forEach(detail => {
-    if (!detail.chungoWinner) return;
-    const current = conditions[detail.winnerId] || { level: 0, note: detail.chungoNote || CHUNGO_NOTES[0] };
+    if (!detail.chungoType) return;
+    const effect = CHUNGO_LIBRARY[detail.chungoType];
+    const current = conditions[detail.winnerId];
     conditions[detail.winnerId] = {
-      level: current.level + 1,
-      note: detail.chungoNote || current.note,
+      type: effect.type,
+      label: effect.label,
+      level: (current?.level || 0) + 1,
+      note: effect.note,
+      attackPenalty: (current?.attackPenalty || 0) + effect.attackPenalty,
+      defensePenalty: (current?.defensePenalty || 0) + effect.defensePenalty,
+      staminaPenalty: (current?.staminaPenalty || 0) + effect.staminaPenalty,
     };
   });
   return conditions;
@@ -413,9 +511,10 @@ const getPlayerAssistWeight = (
 const pickGoalEventsForTeam = (
   teamId: string,
   goalCount: number,
-  tournamentStats: Record<string, { goals: number; assists: number }>
+  tournamentStats: Record<string, { goals: number; assists: number }>,
+  phase: "regular" | "et" = "regular"
 ): KnockoutGoalEvent[] => {
-  const players = getTopPlayersForTeam(teamId);
+  const players = getOutfieldPlayersForTeam(teamId);
   if (players.length === 0) return [];
 
   const events: KnockoutGoalEvent[] = [];
@@ -436,6 +535,7 @@ const pickGoalEventsForTeam = (
       playerName: scorer.name,
       assistId: assistant?.id,
       assistName: assistant?.name,
+      phase,
     });
 
     tournamentStats[scorer.id] = tournamentStats[scorer.id] || { goals: 0, assists: 0 };
@@ -449,19 +549,141 @@ const pickGoalEventsForTeam = (
   return events;
 };
 
+const buildMatchEvents = (
+  homeTeamId: string,
+  awayTeamId: string,
+  homeGoals: number,
+  awayGoals: number,
+  resultMode: KnockoutResultMode,
+  tournamentStats: Record<string, { goals: number; assists: number }>
+) => {
+  if (resultMode === "regular" || resultMode === "pens") {
+    return [
+      ...pickGoalEventsForTeam(homeTeamId, homeGoals, tournamentStats, "regular"),
+      ...pickGoalEventsForTeam(awayTeamId, awayGoals, tournamentStats, "regular"),
+    ];
+  }
+
+  const commonGoals = Math.min(homeGoals, awayGoals);
+  const homeEtGoals = homeGoals - commonGoals;
+  const awayEtGoals = awayGoals - commonGoals;
+
+  return [
+    ...pickGoalEventsForTeam(homeTeamId, commonGoals, tournamentStats, "regular"),
+    ...pickGoalEventsForTeam(awayTeamId, commonGoals, tournamentStats, "regular"),
+    ...pickGoalEventsForTeam(homeTeamId, homeEtGoals, tournamentStats, "et"),
+    ...pickGoalEventsForTeam(awayTeamId, awayEtGoals, tournamentStats, "et"),
+  ];
+};
+
+const getPenaltyShooterWeight = (
+  player: KeyPlayer,
+  tournamentStats: Record<string, { goals: number; assists: number }>
+) => {
+  const live = tournamentStats[player.id] || { goals: 0, assists: 0 };
+  const pressureBoost = (player.goals + live.goals) * 7 + (player.assists + live.assists) * 2.5;
+  return player.attack * 1.3 + pressureBoost;
+};
+
+const getPenaltyConversionChance = (
+  shooter: KeyPlayer,
+  opponentKeeperRating: number,
+  opponentCondition?: TeamCondition
+) => {
+  const defensiveDrag = (opponentCondition?.defensePenalty || 0) * 2.5;
+  return clamp(
+    0.62 + shooter.attack / 260 - opponentKeeperRating / 420 + defensiveDrag / 20,
+    0.46,
+    0.9
+  );
+};
+
+const simulatePenaltyShootout = (
+  homeTeamId: string,
+  awayTeamId: string,
+  tournamentStats: Record<string, { goals: number; assists: number }>,
+  conditions: Record<string, TeamCondition>
+) => {
+  const homeShooters = getOutfieldPlayersForTeam(homeTeamId);
+  const awayShooters = getOutfieldPlayersForTeam(awayTeamId);
+  const homeKeeperRating = getKeeperRating(homeTeamId);
+  const awayKeeperRating = getKeeperRating(awayTeamId);
+
+  let home = 0;
+  let away = 0;
+
+  for (let round = 0; round < 5; round += 1) {
+    const homeShooter = randomWeightedPick(homeShooters, player => getPenaltyShooterWeight(player, tournamentStats));
+    const awayShooter = randomWeightedPick(awayShooters, player => getPenaltyShooterWeight(player, tournamentStats));
+
+    if (Math.random() < getPenaltyConversionChance(homeShooter, awayKeeperRating, conditions[awayTeamId])) home += 1;
+    if (Math.random() < getPenaltyConversionChance(awayShooter, homeKeeperRating, conditions[homeTeamId])) away += 1;
+
+    const roundsLeft = 4 - round;
+    if (home > away + roundsLeft) break;
+    if (away > home + roundsLeft) break;
+  }
+
+  let suddenDeath = 0;
+  while (home === away && suddenDeath < 8) {
+    suddenDeath += 1;
+    const homeShooter = randomWeightedPick(homeShooters, player => getPenaltyShooterWeight(player, tournamentStats));
+    const awayShooter = randomWeightedPick(awayShooters, player => getPenaltyShooterWeight(player, tournamentStats));
+    const homeScored = Math.random() < getPenaltyConversionChance(homeShooter, awayKeeperRating, conditions[awayTeamId]);
+    const awayScored = Math.random() < getPenaltyConversionChance(awayShooter, homeKeeperRating, conditions[homeTeamId]);
+    if (homeScored) home += 1;
+    if (awayScored) away += 1;
+  }
+
+  if (home === away) {
+    if (Math.random() < 0.5) home += 1;
+    else away += 1;
+  }
+
+  return {
+    home,
+    away,
+    winnerId: home > away ? homeTeamId : awayTeamId,
+  };
+};
+
+const getChungoEffect = (chungoType: ChungoType) =>
+  chungoType === "normal" ? undefined : CHUNGO_LIBRARY[chungoType];
+
 export const generateKnockoutMatchDetail = (
   homeTeam: Team,
   awayTeam: Team,
   homeGoals: number,
   awayGoals: number,
-  chungoWinner: boolean,
+  resultMode: KnockoutResultMode,
+  chungoType: ChungoType,
   existingDetails: Record<string, KnockoutMatchDetail>
 ): KnockoutMatchDetail => {
   const tournamentStats = buildTournamentPlayerTotals(existingDetails);
-  const winner = homeGoals > awayGoals ? homeTeam : awayTeam;
-  const loser = homeGoals > awayGoals ? awayTeam : homeTeam;
-  const homeEvents = pickGoalEventsForTeam(homeTeam.id, homeGoals, tournamentStats);
-  const awayEvents = pickGoalEventsForTeam(awayTeam.id, awayGoals, tournamentStats);
+  const conditions = buildTeamConditions(existingDetails);
+  let winner: Team;
+  let loser: Team;
+  let penalties: KnockoutMatchDetail["penalties"];
+
+  if (resultMode === "pens") {
+    const shootout = simulatePenaltyShootout(homeTeam.id, awayTeam.id, tournamentStats, conditions);
+    penalties = { home: shootout.home, away: shootout.away };
+    winner = shootout.winnerId === homeTeam.id ? homeTeam : awayTeam;
+    loser = shootout.winnerId === homeTeam.id ? awayTeam : homeTeam;
+  } else {
+    winner = homeGoals > awayGoals ? homeTeam : awayTeam;
+    loser = homeGoals > awayGoals ? awayTeam : homeTeam;
+  }
+
+  const events = buildMatchEvents(
+    homeTeam.id,
+    awayTeam.id,
+    homeGoals,
+    awayGoals,
+    resultMode,
+    tournamentStats
+  );
+  const chungoEffect = getChungoEffect(chungoType);
 
   return {
     homeTeamId: homeTeam.id,
@@ -470,9 +692,11 @@ export const generateKnockoutMatchDetail = (
     awayGoals,
     winnerId: winner.id,
     loserId: loser.id,
-    chungoWinner,
-    chungoNote: chungoWinner ? CHUNGO_NOTES[Math.floor(Math.random() * CHUNGO_NOTES.length)] : undefined,
-    events: [...homeEvents, ...awayEvents],
+    resultMode,
+    penalties,
+    chungoType: chungoEffect?.type,
+    chungoNote: chungoEffect?.note,
+    events,
   };
 };
 
@@ -481,5 +705,7 @@ export const getConditionPenalty = (
   knockoutDetails: Record<string, KnockoutMatchDetail>
 ) => {
   const conditions = buildTeamConditions(knockoutDetails);
-  return conditions[teamId]?.level || 0;
+  const current = conditions[teamId];
+  if (!current) return 0;
+  return current.attackPenalty + current.defensePenalty * 0.85 + current.staminaPenalty * 0.7 + current.level * 0.3;
 };

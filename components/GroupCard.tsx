@@ -458,7 +458,7 @@ export default function GroupCard({
 
       {!collapsed && (
         <div className="fixture-section" style={{ marginTop: "0.9rem" }}>
-          <div className="fixture-title">Top 5 por seleccion</div>
+          <div className="fixture-title">Top 5 + arquero</div>
           <div className="flex flex-col gap-2">
             {group.teams.map(team => {
               const players = getTopPlayersForTeam(team.id);
@@ -478,10 +478,17 @@ export default function GroupCard({
                           border: "1px solid rgba(255,255,255,0.06)",
                           color: "var(--text-primary)",
                         }}
-                        title={`Ataque ${player.attack}${player.goals || player.assists ? ` | Mundial: ${player.goals}G ${player.assists}A` : ""}`}
+                        title={
+                          player.role === "goalkeeper"
+                            ? `Arquero ${player.goalkeeping || 82}`
+                            : `Ataque ${player.attack}${player.goals || player.assists ? ` | Mundial: ${player.goals}G ${player.assists}A` : ""}`
+                        }
                       >
                         {player.name}
-                        {(player.goals > 0 || player.assists > 0) && (
+                        {player.role === "goalkeeper" && (
+                          <span style={{ color: "var(--accent)" }}> ARQ</span>
+                        )}
+                        {player.role !== "goalkeeper" && (player.goals > 0 || player.assists > 0) && (
                           <span style={{ color: "var(--primary)" }}>
                             {` ${player.goals}G/${player.assists}A`}
                           </span>
