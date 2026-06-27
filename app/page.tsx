@@ -1276,60 +1276,60 @@ export default function Home() {
                         <img 
                           src={p.avatar} 
                           style={{ 
-                            width: "56px", 
-                            height: "56px", 
+                            width: "72px", 
+                            height: "72px", 
                             borderRadius: "50%", 
                             objectFit: "cover", 
-                            border: "1px solid rgba(255,255,255,0.15)",
-                            boxShadow: "0 0 10px rgba(255,255,255,0.05)",
+                            border: "2px solid rgba(255,255,255,0.15)",
+                            boxShadow: "0 0 12px rgba(255,255,255,0.08)",
                             flexShrink: 0 
                           }} 
                         />
                       ) : (
                         <div 
                           style={{ 
-                            width: "56px", 
-                            height: "56px", 
+                            width: "72px", 
+                            height: "72px", 
                             borderRadius: "50%", 
                             background: "rgba(255,255,255,0.05)", 
-                            border: "1px solid rgba(255,255,255,0.1)",
+                            border: "2px solid rgba(255,255,255,0.1)",
                             display: "flex", 
                             alignItems: "center", 
                             justifyContent: "center",
                             flexShrink: 0 
                           }}
                         >
-                          <User style={{ width: "26px", height: "26px", color: "var(--text-secondary)" }} />
+                          <User style={{ width: "32px", height: "32px", color: "var(--text-secondary)" }} />
                         </div>
                       )}
                       <div style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
-                        <span className="font-semibold text-white" style={{ display: "inline-flex", alignItems: "center", gap: "4px", fontSize: "0.95rem" }}>
+                        <span className="font-semibold text-white" style={{ display: "inline-flex", alignItems: "center", gap: "4px", fontSize: "1.05rem" }}>
                           {p.username} {isMe && <span className="badge" style={{ fontSize: "0.65rem", padding: "2px 6px", background: "rgba(99, 102, 241, 0.25)", borderColor: "var(--primary)", color: "#a5b4fc", border: "1px solid" }}>Tú</span>}
                         </span>
-                        <span style={{ fontSize: "0.7rem", color: "var(--text-secondary)" }}>
+                        <span style={{ fontSize: "0.72rem", color: "var(--text-secondary)" }}>
                           Act: {new Date(p.updated_at).toLocaleDateString()} {new Date(p.updated_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                         </span>
                       </div>
                     </div>
 
                     {/* Stats & prediction info */}
-                    <div className="flex flex-col gap-2.5" style={{ fontSize: "0.8rem", padding: "0.75rem 0", borderTop: "1px solid rgba(255,255,255,0.06)", borderBottom: "1px solid rgba(255,255,255,0.06)", margin: "0.15rem 0" }}>
-                      <div className="flex justify-between items-center" style={{ minHeight: "24px" }}>
+                    <div className="flex flex-col gap-3" style={{ fontSize: "0.82rem", padding: "0.75rem 0", borderTop: "1px solid rgba(255,255,255,0.06)", borderBottom: "1px solid rgba(255,255,255,0.06)", margin: "0.15rem 0" }}>
+                      <div className="flex justify-between items-center" style={{ minHeight: "26px" }}>
                         <span style={{ color: "var(--text-secondary)", fontWeight: "500" }}>Fase de Grupos:</span>
                         <span className="font-semibold text-white" style={{ fontSize: "0.85rem" }}>{playedCount} / {totalCount} ({pct}%)</span>
                       </div>
-                      <div className="flex justify-between items-center" style={{ minHeight: "24px" }}>
+                      <div className="flex justify-between items-center" style={{ minHeight: "26px" }}>
                         <span style={{ color: "var(--text-secondary)", fontWeight: "500" }}>Campeón Predicho:</span>
                         {champion ? (
                           <span className="font-semibold text-amber-400 flex items-center gap-1.5" style={{ fontSize: "0.85rem" }}>
-                            <img src={getTeamFlagUrl(champion.flag)} className="w-4.5 h-3.5 object-cover rounded-sm" style={{ border: "1px solid rgba(255,255,255,0.1)", flexShrink: 0 }} />
+                            <img src={getTeamFlagUrl(champion.flag)} className="flag-img" style={{ border: "1px solid rgba(255,255,255,0.15)", flexShrink: 0 }} />
                             {champion.name}
                           </span>
                         ) : (
                           <span style={{ color: "var(--text-muted)", fontStyle: "italic" }}>Sin definir</span>
                         )}
                       </div>
-                      <div className="flex justify-between items-center" style={{ minHeight: "28px" }}>
+                      <div className="flex justify-between items-center" style={{ minHeight: "30px" }}>
                         <span style={{ color: "var(--text-secondary)", fontWeight: "500" }}>Método de Cruces:</span>
                         {p.predictions?.isBracketSimulated ? (
                           <span className="badge flex items-center gap-1" style={{ fontSize: "0.68rem", padding: "3px 8px", background: "rgba(99, 102, 241, 0.15)", borderColor: "rgba(99, 102, 241, 0.4)", color: "#a5b4fc", border: "1px solid", borderRadius: "20px" }}>
