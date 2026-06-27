@@ -360,9 +360,10 @@ export default function Home() {
 
     if (isDraw) {
       const drawComments = [
-        `Empate táctico entre ${teamA.name} y ${teamB.name}. Ambos técnicos decidieron replegar líneas al final.`,
-        `Tablas: ${teamA.name} (#${teamA.fifaRank}) y ${teamB.name} (#${teamB.fifaRank}) dividen honores.`,
-        `¡Punto inteligente! La paridad táctica se impuso en el terreno de juego.`
+        `Che wachin, metiste un empate cantado. Mucho respeto y poco fútbol acá entre ${teamA.name} y ${teamB.name}.`,
+        `¿Empate, wachin? Se nota que te dio miedo arriesgar por alguno en el ${teamA.name} vs ${teamB.name}.`,
+        `Tablas, wachin. Un puntito para cada uno en el clásico ${teamA.name} - ${teamB.name} y a rezar a la iglesia.`,
+        `Qué pecho frío ese empate, wachin. Ponelo a ganar a alguno del partido ${teamA.name} - ${teamB.name}, no seas cagón.`
       ];
       const randomDraw = drawComments[Math.floor(Math.random() * drawComments.length)];
       setSimulationComment({ text: randomDraw, type: "info" });
@@ -371,52 +372,116 @@ export default function Home() {
 
     if (!winner || !loser) return;
 
-    // Historical facts
-    const historicalFacts: Record<string, string> = {
-      arg: "Argentina es el vigente campeón del mundo (2022) y bicampeón de América (2021, 2024). Lideran con Messi.",
-      fra: "Francia llegó a la final en las últimas 2 ediciones del Mundial (Campeón 2018, Subcampeón 2022).",
-      ger: "Alemania posee 4 estrellas mundiales y una mística de competición implacable.",
-      bra: "Brasil es el único pentacampeón del mundo y su fútbol samba siempre infunde respeto.",
-      esp: "España es el actual campeón de la Eurocopa 2024 y despliega un fútbol asociativo brillante.",
-      mar: "Marruecos hizo historia al ser semifinalista en la Copa Mundial de la FIFA Qatar 2022.",
-      eng: "Inglaterra llegó a las finales de la Euro 2020 y 2024, buscando la gloria mundial desde 1966.",
-      cro: "Croacia fue subcampeón mundial en 2018 y tercer puesto en 2022 con Modric en el mediocampo.",
-      uru: "Uruguay posee 2 copas del mundo (1930, 1950) y siempre destaca por su inquebrantable garra charrúa."
-    };
+    const wId = winner.id.toLowerCase();
+    const lId = loser.id.toLowerCase();
 
-    const rankDiff = winner.fifaRank - loser.fifaRank; // positive means winner is lower ranked
-
-    if (rankDiff > 25) {
-      const histText = historicalFacts[loser.id.toLowerCase()];
-      if (histText) {
-        setSimulationComment({
-          text: `¿Seguro? ${loser.name} es muy fuerte: ${histText} Eliminar a un favorito (#${loser.fifaRank}) frente a ${winner.name} (#${winner.fifaRank}) sería un tremendo batacazo.`,
-          type: "warning"
-        });
-      } else {
-        setSimulationComment({
-          text: `¡Batacazo histórico! ${winner.name} (#${winner.fifaRank}) sorprende venciendo al favorito ${loser.name} (#${loser.fifaRank}) contra todos los pronósticos.`,
-          type: "warning"
-        });
-      }
-    } else if (rankDiff > 10) {
+    // Custom classic matchups
+    if (wId === "arg" && lId === "bra") {
       setSimulationComment({
-        text: `¡Sorpresa en el fixture! ${winner.name} (#${winner.fifaRank}) supera a un mejor posicionado ${loser.name} (#${loser.fifaRank}).`,
+        text: "¡Hermoso, wachin! Le ganamos a Brasil. ¡El clásico es nuestro y que la sigan mamando!",
+        type: "success"
+      });
+      return;
+    }
+    if (wId === "bra" && lId === "arg") {
+      setSimulationComment({
+        text: "¡Pará, wachin! ¿Cómo vas a poner a ganar a Brasil contra nosotros? ¡Te falta patria!",
+        type: "warning"
+      });
+      return;
+    }
+    if (wId === "arg" && lId === "ger") {
+      setSimulationComment({
+        text: "¡Revancha de 2014, wachin! Le ganamos la final a los alemanes. ¡Vamo' arriba!",
+        type: "success"
+      });
+      return;
+    }
+    if (wId === "ger" && lId === "bra") {
+      setSimulationComment({
+        text: "¡Fua, wachin! ¿Otro 7-1? Los alemanes son la pesadilla histórica de Brasil.",
         type: "info"
       });
-    } else {
-      const histText = historicalFacts[winner.id.toLowerCase()];
-      if (histText) {
-        setSimulationComment({
-          text: `Predicción lógica. ${winner.name} impone condiciones sobre ${loser.name}. ${histText}`,
-          type: "success"
-        });
-      } else {
-        setSimulationComment({
-          text: `Resultado esperado. El favorito ${winner.name} (#${winner.fifaRank}) derrota a ${loser.name} (#${loser.fifaRank}) basándose en jerarquía.`,
-          type: "success"
-        });
-      }
+      return;
+    }
+    if (wId === "arg" && lId === "fra") {
+      setSimulationComment({
+        text: "¡Como en Qatar, wachin! Los atendimos de nuevo a los franceses. ¿Trajiste los parlantes?",
+        type: "success"
+      });
+      return;
+    }
+    if (wId === "fra" && lId === "arg") {
+      setSimulationComment({
+        text: "No, wachin, no me hagas acordar de Mbappé. Dolor país absoluto.",
+        type: "warning"
+      });
+      return;
+    }
+
+    const rankDiff = winner.fifaRank - loser.fifaRank; // positive means winner has worse rank (underdog)
+
+    // Giant killer / Miracle (rankDiff > 30)
+    if (rankDiff > 30) {
+      const miracleComments = [
+        `¿Qué tomaste, wachin? ¿Cómo va a ganar ${winner.name} (#${winner.fifaRank}) contra ${loser.name} (#${loser.fifaRank})? ¡Es el delirio místico del año!`,
+        `Pará la mano, wachin. ${winner.name} ganándole a ${loser.name} es más imposible que ver un chancho volar. Te fuiste al pasto.`,
+        `Sos un wachin delirante. ${winner.name} no le gana a ${loser.name} ni aunque jueguen con 12 arqueros. ¡Tremendo flash metiste!`,
+        `¡Dejá de jugar al revés, wachin! Eso no se lo cree nadie. ${winner.name} metiendo semejante batacazo ante la potencia mundial de ${loser.name}.`
+      ];
+      const comment = miracleComments[Math.floor(Math.random() * miracleComments.length)];
+      setSimulationComment({ text: comment, type: "warning" });
+    }
+    // Shock / Batacazo (rankDiff > 15)
+    else if (rankDiff > 15) {
+      const shockComments = [
+        `Epa, wachin, ¡qué batacazo metiste! ${winner.name} (#${winner.fifaRank}) dando el golpe de su vida contra ${loser.name} (#${loser.fifaRank}).`,
+        `Mirá que te tengo fe, wachin, pero poner a ganar a ${winner.name} sobre ${loser.name} es jugársela muy fuerte. ¡Sorpresón!`,
+        `La fe mueve montañas, wachin. Pusiste a ${winner.name} ganándole a la jerarquía de ${loser.name}. Rompiste todos los papeles.`,
+        `¡Qué loco lindo que sos, wachin! Se cae el estadio con este triunfo de ${winner.name} contra ${loser.name}.`
+      ];
+      const comment = shockComments[Math.floor(Math.random() * shockComments.length)];
+      setSimulationComment({ text: comment, type: "warning" });
+    }
+    // Underdog surprise (rankDiff > 6)
+    else if (rankDiff > 6) {
+      const underdogComments = [
+        `Ojo ahí, wachin, ganaron los menos pensados. ${winner.name} (#${winner.fifaRank}) le arruinó la tarde a ${loser.name} (#${loser.fifaRank}).`,
+        `Interesante jugada, wachin. ${winner.name} tiene con qué ganarle a ${loser.name} si se alinean los planetas.`,
+        `Le tiraste unos mangos al underdog, ¿no, wachin? ${winner.name} da la nota venciendo a ${loser.name}.`
+      ];
+      const comment = underdogComments[Math.floor(Math.random() * underdogComments.length)];
+      setSimulationComment({ text: comment, type: "info" });
+    }
+    // Peer match (rankDiff >= -6 && rankDiff <= 6)
+    else if (rankDiff >= -6 && rankDiff <= 6) {
+      const peerComments = [
+        `Partido re picante, wachin. Cualquiera de los dos podía ganar, pero te la jugaste por ${winner.name}.`,
+        `Duelo parejo, wachin. ${winner.name} y ${loser.name} se dan con todo, pero para vos festeja la banda de ${winner.name}.`,
+        `Acá no hay favoritos, wachin. ${winner.name} se lo lleva por pura garra contra ${loser.name}.`
+      ];
+      const comment = peerComments[Math.floor(Math.random() * peerComments.length)];
+      setSimulationComment({ text: comment, type: "info" });
+    }
+    // Expected Logic (rankDiff < -6 && rankDiff >= -20)
+    else if (rankDiff < -6 && rankDiff >= -20) {
+      const logicComments = [
+        `Predicción re lógica, wachin. ${winner.name} le tira la chapa encima a ${loser.name} y a cobrar.`,
+        `No te querés complicar la vida, ¿no, wachin? ${winner.name} es favorito y hace lo que tiene que hacer ante ${loser.name}.`,
+        `Resultado cantado, wachin. La jerarquía de ${winner.name} (#${winner.fifaRank}) es demasiada para ${loser.name} (#${loser.fifaRank}).`
+      ];
+      const comment = logicComments[Math.floor(Math.random() * logicComments.length)];
+      setSimulationComment({ text: comment, type: "success" });
+    }
+    // Giant stomping (rankDiff < -20)
+    else {
+      const stompComments = [
+        `Sos un wachin abusivo, ¿cómo vas a dudar acá? ${winner.name} (#${winner.fifaRank}) pasa por arriba a ${loser.name} (#${loser.fifaRank}) con los ojos cerrados.`,
+        `Trámite total, wachin. ${winner.name} le da un paseo histórico a ${loser.name}.`,
+        `Ni los parientes de ${loser.name} pensaban que ganaban, wachin. Paseo total de ${winner.name}.`
+      ];
+      const comment = stompComments[Math.floor(Math.random() * stompComments.length)];
+      setSimulationComment({ text: comment, type: "success" });
     }
   };
 
